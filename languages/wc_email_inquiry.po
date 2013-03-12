@@ -1,0 +1,657 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP e-Commerce Catalog Visibility Email inquiry PRO\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-03-12 10:40+0700\n"
+"PO-Revision-Date: 2013-03-12 10:40+0700\n"
+"Last-Translator: Nguyen Tuan <mr.nguyencongtuan@gmail.com>\n"
+"Language-Team: a3rev\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/classes/class-wc-email-inquiry-settings.php:52
+#: admin/classes/class-wc-email-inquiry-settings.php:579
+#: admin/classes/class-wc-email-inquiry-settings.php:580
+#: classes/class-wc-email-inquiry-hook.php:83
+#: classes/class-wc-email-inquiry-hook.php:173
+msgid "Click Here"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:55
+#: admin/classes/class-wc-email-inquiry-settings.php:61
+#: admin/classes/class-wc-email-inquiry-settings.php:603
+#: admin/classes/class-wc-email-inquiry-settings.php:604
+#: classes/class-wc-email-inquiry-hook.php:88
+#: classes/class-wc-email-inquiry-hook.php:168
+msgid "Product Enquiry"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:64
+#: admin/classes/class-wc-email-inquiry-settings.php:704
+#: admin/classes/class-wc-email-inquiry-settings.php:705
+#: classes/class-wc-email-inquiry-hook.php:187
+msgid "SEND"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:79
+msgid "Thanks for your inquiry - we'll be in touch with you as soon as possible!"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:123
+#: classes/class-wc-email-inquiry-metabox.php:16
+msgid "Email & Cart"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:188
+msgid "Success Message"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:192
+msgid "Message that user sees on page after form is submitted"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:210
+#: classes/class-wc-email-inquiry-metabox.php:98
+msgid "Rule: Hide Price"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:212
+#: admin/classes/class-wc-email-inquiry-settings.php:503
+#: admin/classes/class-wc-email-inquiry-settings.php:519
+#: classes/class-wc-email-inquiry-metabox.php:60
+#: classes/class-wc-email-inquiry-metabox.php:80
+#: classes/class-wc-email-inquiry-metabox.php:99
+msgid "Yes. Applies to all users who are not logged in."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:216
+#: admin/classes/class-wc-email-inquiry-settings.php:510
+#: admin/classes/class-wc-email-inquiry-settings.php:526
+#: classes/class-wc-email-inquiry-metabox.php:64
+#: classes/class-wc-email-inquiry-metabox.php:84
+#: classes/class-wc-email-inquiry-metabox.php:103
+msgid "Apply Rule to logged in roles"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:218
+#: admin/classes/class-wc-email-inquiry-settings.php:514
+#: admin/classes/class-wc-email-inquiry-settings.php:530
+#: classes/class-wc-email-inquiry-metabox.php:66
+#: classes/class-wc-email-inquiry-metabox.php:86
+#: classes/class-wc-email-inquiry-metabox.php:105
+msgid "Choose Roles"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:229
+msgid "Reset Products Options"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:231
+msgid "Check to reset ALL products that have custom Email & Cart settings to the Global Rules settings."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:235
+msgid "Email Inquiry Button / Hyperlink"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:238
+#: classes/class-wc-email-inquiry-metabox.php:127
+msgid "Button or Hyperlink Text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:241
+#: classes/class-wc-email-inquiry-metabox.php:129
+msgid "Button"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:242
+#: classes/class-wc-email-inquiry-metabox.php:129
+msgid "Link"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:247
+msgid "Relative Position"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:250
+msgid "Below (Default)"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:251
+msgid "Above"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:252
+msgid "Position relative to add to cart button location"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:257
+msgid "Padding"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:258
+msgid "Default padding is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:265
+#: classes/class-wc-email-inquiry-metabox.php:138
+msgid "Single Product Page only"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:268
+#: classes/class-wc-email-inquiry-metabox.php:139
+msgid "Yes"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:269
+#: classes/class-wc-email-inquiry-metabox.php:139
+msgid "No"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:270
+msgid "Default =  Yes. Button / Link text shows on single products pages as well as products list view, grid view, category and tag pages."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:278
+msgid "Email Sender"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:279
+msgid "The following options affect the sender (email address and name) used in WooCommerce Product Email Inquiries."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:282
+msgid "\"From\" Name"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:288
+msgid "\"From\" Email Address"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:294
+msgid "Send Copy to Sender"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:296
+msgid "Checked adds opt in/out option to the bottom of the email inquiry form."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:336
+msgid "Visibility Options"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:337
+msgid "Email Options"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:338
+msgid "Email Button/Link Style"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:339
+msgid "Email Pop-Up Style"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:482
+msgid "Select Size"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:487
+msgid "Normal"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:488
+msgid "Italic"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:489
+msgid "Bold"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:490
+msgid "Bold/Italic"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:496
+msgid "Global Visibility Settings"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:498
+msgid "Set Rules that apply to all site visitors. Use 'Apply Rules to Roles'  to control what users can see and access when they log into their account. PRO version users can over-ride these settings on a per product basis."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:502
+#: classes/class-wc-email-inquiry-metabox.php:59
+msgid "Rule: Hide 'Add to Cart'"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:518
+#: classes/class-wc-email-inquiry-metabox.php:78
+msgid "Rule: Show Email Inquiry Button"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:537
+msgid "Email Delivery"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:543
+#: classes/class-wc-email-inquiry-metabox.php:117
+msgid "Inquiry Email goes to"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:544
+msgid "&lt;empty&gt; defaults to WordPress admin email address"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:552
+msgid "CC"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:553
+msgid "&lt;empty&gt; defaults to 'no copy sent' or add an email address"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:561
+msgid "Customize Hyperlink text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:567
+msgid "Text before"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:568
+msgid "&lt;empty&gt; for default 'no text' or add text to prepent link text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:574
+msgid "Hyperlink text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:575
+msgid "&lt;empty&gt; for default 'Click Here' or your own text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:583
+msgid "Trailing text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:584
+msgid "&lt;empty&gt; for default 'no text' or add text to trail linked text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:592
+msgid "Customize Email Inquiry Button"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:598
+#: classes/class-wc-email-inquiry-metabox.php:133
+msgid "Button Title"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:599
+msgid "&lt;empty&gt; for default 'Product Enquiry' or enter text"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:608
+#: admin/classes/class-wc-email-inquiry-settings.php:715
+msgid "Button Background Colour"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:609
+#: admin/classes/class-wc-email-inquiry-settings.php:716
+msgid "Button colour. Default <code>#EE2B2B</code>."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:617
+#: admin/classes/class-wc-email-inquiry-settings.php:724
+msgid "Button Border"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:618
+#: admin/classes/class-wc-email-inquiry-settings.php:725
+msgid "Border colour. Default <code>#EE2B2B</code>."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:626
+#: admin/classes/class-wc-email-inquiry-settings.php:733
+msgid "Border Rounded"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:632
+#: admin/classes/class-wc-email-inquiry-settings.php:739
+msgid "Button Font Size"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:633
+#: admin/classes/class-wc-email-inquiry-settings.php:740
+msgid "&lt;empty&gt; to use theme style"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:641
+#: admin/classes/class-wc-email-inquiry-settings.php:748
+msgid "Button Font style"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:642
+#: admin/classes/class-wc-email-inquiry-settings.php:749
+msgid "Default <code>Bold</code>."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:652
+#: admin/classes/class-wc-email-inquiry-settings.php:759
+msgid "Button Font Colour"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:653
+#: admin/classes/class-wc-email-inquiry-settings.php:760
+msgid "Default <code>#FFFFFF</code>."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:661
+msgid "CSS Class"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:662
+#: admin/classes/class-wc-email-inquiry-settings.php:769
+msgid "Enter your own button CSS class"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:670
+msgid "Customize Email Pop-up"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:676
+msgid "Email popup tool"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:677
+msgid "PrettyPhoto is WooCommerce default pop up tool. Some bespoke themes use Fancybox or ColorBox."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:685
+msgid "PrettyPhoto"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:686
+msgid "Fancybox"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:687
+msgid "ColorBox"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:692
+msgid "Header title"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:693
+msgid "&lt;empty&gt; and the form title will be the Button title"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:699
+msgid "Send Button Title"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:700
+msgid "&lt;empty&gt; for default SEND"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:768
+msgid "Button CSS Class"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:775
+#: admin/classes/class-wc-email-inquiry-settings.php:782
+msgid "Form CSS Class"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:776
+#: admin/classes/class-wc-email-inquiry-settings.php:783
+msgid "&lt;empty&gt; for default or enter custom form CSS"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:829
+msgid "Rounded Corners"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:829
+#: admin/classes/class-wc-email-inquiry-settings.php:830
+msgid "Default"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:830
+msgid "Rounded Value"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:832
+msgid "Square Corners"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:852
+msgid "Upgrade to Email Inquiry & Cart Options Pro"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:853
+msgid "<strong>NOTE:</strong> Settings inside the Yellow border are Pro Version advanced Features and are not activated. Visit the"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:853
+msgid "a3rev site"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:853
+msgid "if you wish to upgrade to activate these features"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:856
+msgid "Activate Rule: Hide Product Prices."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:857
+msgid "Activate Email and Cart Product Page Meta."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:858
+msgid "Enables setting up a mixed 'add to cart' and product brochure store."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:859
+msgid "Activate WYSIWYG Email Inquiry button creator."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:860
+msgid "Activate WYSIWYG pop-up form creator."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:861
+msgid "Activate hyperlinked text instead of a Button."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:862
+msgid "Activate Email Inquiry products grid view store listings."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:863
+msgid "Activate Send a copy to myself feature."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:864
+msgid "Activate email 'From Name' and 'From Email Address'"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:865
+msgid "Activate lifetime same day priority support"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:868
+msgid "Discount Upgrade Coupon"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:869
+msgid "Click here to visit the a3rev site"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:869
+msgid "to see current upgrade Discount Coupons available exclusively to a3rev Lite Version plugin users."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:870
+msgid "Plugin Documentation"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:871
+msgid "All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:871
+msgid "Visit the a3rev wiki."
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:872
+msgid "More a3rev Quality Plugins"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:873
+msgid "Below is a list of the a3rev plugins that are available for free download from wordpress.org"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:874
+msgid "WooCommerce Plugins"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:877
+msgid "WooCommerce Dynamic Products Gallery"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:878
+msgid "WooCommerce Predictive Search"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:879
+msgid "WooCommerce Compare Products"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:880
+msgid "WooCommerce Widget Product Slideshow"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:883
+msgid "WordPress Plugins"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:886
+msgid "WordPress Email Template"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:887
+msgid "Page View Count"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:890
+msgid "Help spread the Word about this plugin"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:891
+msgid "Things you can do to help others find this plugin"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:893
+msgid "Rate this plugin 5"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:893
+msgid "on WordPress.org"
+msgstr ""
+
+#: admin/classes/class-wc-email-inquiry-settings.php:894
+msgid "Mark the plugin as a fourite"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:106
+msgid "Email inquiry for"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:114
+#: classes/class-wc-email-inquiry-hook.php:199
+msgid "Name"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:120
+#: classes/class-wc-email-inquiry-hook.php:202
+msgid "Email Address"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:126
+#: classes/class-wc-email-inquiry-hook.php:205
+msgid "Phone"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:131
+msgid "Product Name"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:136
+#: classes/class-wc-email-inquiry-hook.php:211
+msgid "Message"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:165
+msgid "Sorry, this product don't enable email inquiry."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-hook.php:208
+msgid "Subject"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-hook.php:455
+msgid "Please enter your Name"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-hook.php:459
+msgid "Please enter valid Email address"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-hook.php:463
+msgid "Please enter your Phone"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-hook.php:541
+msgid "Documentation"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-hook.php:542
+msgid "Support"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-metabox.php:46
+msgid "Upgrade to"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-metabox.php:46
+msgid "Pro Version"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-metabox.php:46
+msgid "to activate"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-metabox.php:50
+msgid "Reset Product Options"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-metabox.php:52
+msgid "Check to reset this product setting to the Global Settings"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-metabox.php:56
+msgid "Customize setting for this product"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-metabox.php:122
+msgid "Copy to"
+msgstr ""
+
