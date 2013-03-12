@@ -7,7 +7,7 @@ Stable tag: 1.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Turn your WooCommerce store into an online brochure for visitors. Give logged in users shopping cart functionality. Add a one click Product Email Inquiry pop-up form to any product.
+Turn WooCommerce products into a brochure page. Give logged in users add to cart functionality. Add Email Inquiry pop-up form to any product.
   
 == Description ==
 
