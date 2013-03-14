@@ -221,7 +221,7 @@ class WC_Email_Inquiry_Settings {
 					foreach($roles as $key => $value) {
 				?>
                     <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
-                <? } } ?>
+                <?php } } ?>
                 </select>
 			</td>
 		</tr>

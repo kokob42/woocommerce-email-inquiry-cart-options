@@ -2,7 +2,7 @@
 /*
 Plugin Name: WooCommerce Email Inquiry & Cart Options LITE
 Description: Transform your entire WooCommerce products catalog or any individual product into an online brochure with Product Email Inquiry button and pop-up email form. Add product email inquiry functionality to any product either with WooCommerce functionality or hide that functionality and the page becomes a brochure.
-Version: 1.0.0
+Version: 1.0.1
 Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
