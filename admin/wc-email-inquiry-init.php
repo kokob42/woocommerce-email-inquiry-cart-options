@@ -1,6 +1,6 @@
 <?php
 function wc_email_inquiry_install(){
-	update_option('a3rev_wc_email_inquiry_version', '1.0.1');
+	update_option('a3rev_wc_email_inquiry_version', '1.0.2');
 	WC_Email_Inquiry_Settings::set_settings_default(true, true);
 }
 
@@ -60,7 +60,7 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 	// Add meta boxes to product page
 	add_action( 'admin_menu', array('WC_Email_Inquiry_MetaBox', 'add_meta_boxes') );
 
-	update_option('a3rev_wc_email_inquiry_version', '1.0.1');
+	update_option('a3rev_wc_email_inquiry_version', '1.0.2');
 	
 	global $wc_email_inquiry_settimgs;
 	$wc_email_inquiry_settimgs = new WC_Email_Inquiry_Settings();

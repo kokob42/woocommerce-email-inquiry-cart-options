@@ -865,8 +865,6 @@ class WC_Email_Inquiry_Settings {
 		$html .= '<li>10. '.__("Activate lifetime same day priority support", 'wc_email_inquiry').'</li>';
 		$html .= '</ul>';
 		$html .= '</p>';
-		$html .= '<h3>'.__('Discount Upgrade Coupon', 'wc_email_inquiry').':</h3>';
-		$html .= '<p><a href="http://a3rev.com/current-discount-coupon-codes/" target="_blank">'.__('Click here to visit the a3rev site', 'wc_email_inquiry').'</a> '.__('to see current upgrade Discount Coupons available exclusively to a3rev Lite Version plugin users.', 'wc_email_inquiry').'</p>';
 		$html .= '<h3>'.__('Plugin Documentation', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>'.__('All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request', 'wc_email_inquiry').'. <a href="http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/" target="_blank">'.__('Visit the a3rev wiki.', 'wc_email_inquiry').'</a></p>';
 		$html .= '<h3>'.__('More a3rev Quality Plugins', 'wc_email_inquiry').'</h3>';
@@ -890,8 +888,8 @@ class WC_Email_Inquiry_Settings {
 		$html .= '<h3>'.__('Help spread the Word about this plugin', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>'.__("Things you can do to help others find this plugin", 'wc_email_inquiry');
 		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-predictive-search/" target="_blank">'.__('Rate this plugin 5', 'wc_email_inquiry').' <img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/stars.png" align="top" /> '.__('on WordPress.org', 'wc_email_inquiry').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-predictive-search/" target="_blank">'.__('Mark the plugin as a fourite', 'wc_email_inquiry').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-email-inquiry-cart-options/" target="_blank">'.__('Rate this plugin 5', 'wc_email_inquiry').' <img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/stars.png" align="top" /> '.__('on WordPress.org', 'wc_email_inquiry').'</a></li>';
+		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-email-inquiry-cart-options/" target="_blank">'.__('Mark the plugin as a fourite', 'wc_email_inquiry').'</a></li>';
 		$html .= '</ul>';
 		$html .= '</p>';
 		$html .= '</div>';

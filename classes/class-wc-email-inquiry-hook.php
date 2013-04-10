@@ -74,7 +74,7 @@ class WC_Email_Inquiry_Hook_Filter{
 	}
 	
 	function add_email_inquiry_button($product_id) {
-		
+		global $post;
 		$wc_email_inquiry_button_type = esc_attr(get_option('wc_email_inquiry_button_type'));
 		
 		$wc_email_inquiry_text_before = esc_attr(get_option('wc_email_inquiry_text_before'));
@@ -383,7 +383,7 @@ class WC_Email_Inquiry_Hook_Filter{
 			wp_enqueue_script( 'colorbox_script', WC_EMAIL_INQUIRY_JS_URL . '/colorbox/jquery.colorbox'.$suffix.'.js', array(), false, true );
 		} elseif ($wc_email_inquiry_popup_type == 'fb') {
 			wp_enqueue_style( 'woocommerce_fancybox_styles', WC_EMAIL_INQUIRY_JS_URL . '/fancybox/fancybox.css' );
-			wp_enqueue_script( 'fancybox', WC_EMAIL_INQUIRY_JS_URL . '/fancybox/fancybox.min.js', array(), false, true );
+			wp_enqueue_script( 'fancybox', WC_EMAIL_INQUIRY_JS_URL . '/fancybox/fancybox'.$suffix.'.js', array(), false, true );
 		} else {
 			if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
 				wp_enqueue_style( 'woocommerce_prettyPhoto_css', WC_EMAIL_INQUIRY_JS_URL . '/prettyPhoto/prettyPhoto.css');
@@ -403,7 +403,7 @@ class WC_Email_Inquiry_Hook_Filter{
 <script type="text/javascript">
 (function($){
 	$(function(){
-		var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+		var ajax_url = "<?php echo ( ( is_ssl() || force_ssl_admin() || force_ssl_login() ) ? str_replace( 'http:', 'https:', admin_url( 'admin-ajax.php' ) ) : str_replace( 'https:', 'http:', admin_url( 'admin-ajax.php' ) ) ); ?>";
 		$(".wc_email_inquiry_buton").live("click", function(){
 			var product_id = $(this).attr("product_id");
 			var product_name = $(this).attr("product_name");
@@ -423,6 +423,7 @@ class WC_Email_Inquiry_Hook_Filter{
 		<?php } elseif ($wc_email_inquiry_popup_type == 'fb') { ?> 
 			$.fancybox({
 				href: ajax_url+"?action=wc_email_inquiry_popup&product_id="+product_id+"&security=<?php echo $wc_email_inquiry_popup; ?>",
+				padding: 20,
 				maxWidth: 600,
 				maxHeight: 400,
 				openEffect	: "none",
