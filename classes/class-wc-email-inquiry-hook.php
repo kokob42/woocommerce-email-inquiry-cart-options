@@ -9,22 +9,27 @@
  * details_before_hide_add_to_cart_button()
  * details_after_hide_add_to_cart_button()
  * add_email_inquiry_button()
- * shop_add_email_inquiry_button_above()
- * shop_add_email_inquiry_button_below()
  * details_add_email_inquiry_button_above()
  * details_add_email_inquiry_button_below()
  * wc_email_inquiry_popup()
  * wc_email_inquiry_action()
  * add_style_header()
+ * include_customized_style()
  * footer_print_scripts()
  * script_contact_popup()
+ * admin_header_script()
  * admin_footer_scripts()
- * wp_admin_footer_scripts()
  * plugin_extra_links()
  */
-class WC_Email_Inquiry_Hook_Filter{
+class WC_Email_Inquiry_Hook_Filter
+{
 	
-	function shop_before_hide_add_to_cart_button($template_name, $template_path, $located) {
+	public static function add_admin_menu() {
+		$woo_page = 'woocommerce';
+		$admin_page = add_submenu_page( $woo_page , __( 'Email & Cart Options', 'wc_email_inquiry' ), __( 'Email & Cart Options', 'wc_email_inquiry' ), 'manage_options', 'email-cart-options', 'woo_email_cart_options_dashboard' );
+	}
+	
+	public static function shop_before_hide_add_to_cart_button($template_name, $template_path, $located) {
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
@@ -35,7 +40,7 @@ class WC_Email_Inquiry_Hook_Filter{
 		}
 	}
 	
-	function shop_after_hide_add_to_cart_button($template_name, $template_path, $located) {
+	public static function shop_after_hide_add_to_cart_button($template_name, $template_path, $located) {
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
@@ -46,7 +51,7 @@ class WC_Email_Inquiry_Hook_Filter{
 		}
 	}
 	
-	function details_before_hide_add_to_cart_button() {
+	public static function details_before_hide_add_to_cart_button() {
 		global $post, $product;
 		$product_id = $product->id;
 		
@@ -54,7 +59,7 @@ class WC_Email_Inquiry_Hook_Filter{
 			ob_start();
 	}
 	
-	function details_after_hide_add_to_cart_button() {
+	public static function details_after_hide_add_to_cart_button() {
 		global $post, $product;
 		$product_id = $product->id;
 		
@@ -73,69 +78,46 @@ class WC_Email_Inquiry_Hook_Filter{
 		}
 	}
 	
-	function add_email_inquiry_button($product_id) {
+	public static function add_email_inquiry_button($product_id) {
 		global $post;
-		$wc_email_inquiry_button_type = esc_attr(get_option('wc_email_inquiry_button_type'));
+		global $wc_email_inquiry_global_settings;
+		global $wc_email_inquiry_customize_email_button;
+		$wc_email_inquiry_settings_custom = get_post_meta( $product_id, '_wc_email_inquiry_settings_custom', true);
 		
-		$wc_email_inquiry_text_before = esc_attr(get_option('wc_email_inquiry_text_before'));
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_button_type'])) $wc_email_inquiry_button_type = $wc_email_inquiry_global_settings['inquiry_button_type'];
+		else $wc_email_inquiry_button_type = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_button_type']);
 		
-		$wc_email_inquiry_hyperlink_text = esc_attr(get_option('wc_email_inquiry_hyperlink_text'));
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_text_before'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_text_before'])) == '') $wc_email_inquiry_text_before = $wc_email_inquiry_customize_email_button['inquiry_text_before'];
+		else $wc_email_inquiry_text_before = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_text_before']);
+		
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_hyperlink_text'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_hyperlink_text'])) == '') $wc_email_inquiry_hyperlink_text = $wc_email_inquiry_customize_email_button['inquiry_hyperlink_text'];
+		else $wc_email_inquiry_hyperlink_text = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_hyperlink_text']);
 		if (trim($wc_email_inquiry_hyperlink_text) == '') $wc_email_inquiry_hyperlink_text = __('Click Here', 'wc_email_inquiry');
 		
-		$wc_email_inquiry_trailing_text = esc_attr(get_option('wc_email_inquiry_trailing_text'));
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_trailing_text'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_trailing_text'])) == '') $wc_email_inquiry_trailing_text = $wc_email_inquiry_customize_email_button['inquiry_trailing_text'];
+		else $wc_email_inquiry_trailing_text = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_trailing_text']);
 		
-		$wc_email_inquiry_button_title = esc_attr(get_option('wc_email_inquiry_button_title'));
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_button_title'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_button_title'])) == '') $wc_email_inquiry_button_title = $wc_email_inquiry_customize_email_button['inquiry_button_title'];
+		else $wc_email_inquiry_button_title = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_button_title']);
 		if (trim($wc_email_inquiry_button_title) == '') $wc_email_inquiry_button_title = __('Product Enquiry', 'wc_email_inquiry');
 		
-		$wc_email_inquiry_button_position = esc_attr(get_option('wc_email_inquiry_button_position'));
+		$wc_email_inquiry_button_position = $wc_email_inquiry_global_settings['inquiry_button_position'];
 		
 		$wc_email_inquiry_button_class = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_button_class'))) != '') $wc_email_inquiry_button_class = esc_attr(get_option('wc_email_inquiry_button_class'));
+		if ( trim(esc_attr(get_option('wc_email_inquiry_button_class'))) != '') $wc_email_inquiry_button_class = $wc_email_inquiry_customize_email_button['inquiry_button_class'];
 		
-		$button_link = '';
-		if (trim($wc_email_inquiry_text_before) != '') $button_link .= '<span class="wc_email_inquiry_text_before wc_email_inquiry_text_before_'.$product_id.'">'.trim($wc_email_inquiry_text_before).'</span> ';
-		$button_link .= '<a class="wc_email_inquiry_hyperlink_text wc_email_inquiry_hyperlink_text_'.$product_id.' wc_email_inquiry_buton" id="wc_email_inquiry_button_'.$product_id.'" product_name="'.addslashes($post->post_title).'" product_id="'.$product_id.'">'.$wc_email_inquiry_hyperlink_text.'</a>';
-		if (trim($wc_email_inquiry_trailing_text) != '') $button_link .= ' <span class="wc_email_inquiry_trailing_text wc_email_inquiry_trailing_text_'.$product_id.'">'.trim($wc_email_inquiry_trailing_text).'</span>';
-		
-		$button_button = '<a class="wc_email_inquiry_button_button wc_email_inquiry_email_button wc_email_inquiry_button_'.$product_id.' wc_email_inquiry_buton '.$wc_email_inquiry_button_class.'" id="wc_email_inquiry_button_'.$product_id.'" product_name="'.addslashes(get_the_title($product_id) ).'" product_id="'.$product_id.'"><span>'.$wc_email_inquiry_button_title.'</span></a>';
+		$button_button = '<a class="wc_email_inquiry_email_button wc_email_inquiry_button_'.$product_id.' wc_email_inquiry_button '.$wc_email_inquiry_button_class.'" id="wc_email_inquiry_button_'.$product_id.'" product_name="'.addslashes(get_the_title($product_id) ).'" product_id="'.$product_id.'">'.$wc_email_inquiry_button_title.'</a>';
 
 			add_action('wp_footer', array('WC_Email_Inquiry_Hook_Filter', 'footer_print_scripts') );
 			$button_ouput = '<span class="wc_email_inquiry_button_container">';
-			if ($wc_email_inquiry_button_type == 'link') $button_ouput .= $button_link;
-			else $button_ouput .= $button_button;
+			$button_ouput .= $button_button;
 			
 			$button_ouput .= '</span>';
 			
 		return $button_ouput;
 	}
-	
-	function shop_add_email_inquiry_button_above($template_name, $template_path, $located) {
-		global $post;
-		global $product;
-		if ($template_name == 'loop/add-to-cart.php') {
-			$product_id = $product->id;
 			
-			$wc_email_inquiry_single_only = esc_attr(get_option('wc_email_inquiry_single_only'));
-			
-			if ( ($post->post_type == 'product' || $post->post_type == 'product_variation') && $wc_email_inquiry_single_only == 'no' && WC_Email_Inquiry_Functions::check_add_email_inquiry_button($product_id) ) {
-				echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button($product_id);
-			}
-		}
-	}
-	
-	function shop_add_email_inquiry_button_below() {
-		global $post;
-		global $product;
-		$product_id = $product->id;
-			
-		$wc_email_inquiry_single_only = esc_attr(get_option('wc_email_inquiry_single_only'));
-			
-		if ( ($post->post_type == 'product' || $post->post_type == 'product_variation') && $wc_email_inquiry_single_only == 'no' && WC_Email_Inquiry_Functions::check_add_email_inquiry_button($product_id) ) {
-			echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button($product_id);
-		}
-	}
-	
-	function details_add_email_inquiry_button_above() {
+	public static function details_add_email_inquiry_button_above() {
 		global $post;
 		global $product;
 		$product_id = $product->id;
@@ -145,7 +127,7 @@ class WC_Email_Inquiry_Hook_Filter{
 		}
 	}
 	
-	function details_add_email_inquiry_button_below($template_name, $template_path, $located){
+	public static function details_add_email_inquiry_button_below($template_name, $template_path, $located){
 		global $post;
 		global $product;
 		if (in_array($template_name, array('single-product/add-to-cart/simple.php', 'single-product/add-to-cart/grouped.php', 'single-product/add-to-cart/external.php', 'single-product/add-to-cart/variable.php'))) {
@@ -157,39 +139,52 @@ class WC_Email_Inquiry_Hook_Filter{
 		}
 	}
 	
-	function wc_email_inquiry_popup() {
+	public static function wc_email_inquiry_popup() {
 		check_ajax_referer( 'wc_email_inquiry_popup', 'security' );
+		global $wc_email_inquiry_global_settings;
+		global $wc_email_inquiry_email_options;
+		global $wc_email_inquiry_customize_email_button;
+		global $wc_email_inquiry_customize_email_popup;
 		
 		$wc_email_inquiry_action = wp_create_nonce("wc_email_inquiry_action");
 		$product_id = $_REQUEST['product_id'];
 		$product_name = get_the_title($product_id);
-				
-		$wc_email_inquiry_button_title = esc_attr(get_option('wc_email_inquiry_button_title'));
+		
+		$wc_email_inquiry_settings_custom = get_post_meta( $product_id, '_wc_email_inquiry_settings_custom', true);
+		
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_button_title'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_button_title'])) == '') $wc_email_inquiry_button_title = $wc_email_inquiry_customize_email_button['inquiry_button_title'];
+		else $wc_email_inquiry_button_title = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_button_title']);
 		if (trim($wc_email_inquiry_button_title) == '') $wc_email_inquiry_button_title = __('Product Enquiry', 'wc_email_inquiry');
 		
-		$wc_email_inquiry_text_before = esc_attr(get_option('wc_email_inquiry_text_before'));
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_text_before'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_text_before'])) == '') $wc_email_inquiry_text_before = $wc_email_inquiry_customize_email_button['inquiry_text_before'];
+		else $wc_email_inquiry_text_before = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_text_before']);
 		
-		$wc_email_inquiry_hyperlink_text = esc_attr(get_option('wc_email_inquiry_hyperlink_text'));
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_hyperlink_text'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_hyperlink_text'])) == '') $wc_email_inquiry_hyperlink_text = $wc_email_inquiry_customize_email_button['inquiry_hyperlink_text'];
+		else $wc_email_inquiry_hyperlink_text = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_hyperlink_text']);
 		if (trim($wc_email_inquiry_hyperlink_text) == '') $wc_email_inquiry_hyperlink_text = __('Click Here', 'wc_email_inquiry');
 		
-		$wc_email_inquiry_trailing_text = esc_attr(get_option('wc_email_inquiry_trailing_text'));
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_trailing_text'])  || trim(esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_trailing_text'])) == '') $wc_email_inquiry_trailing_text = $wc_email_inquiry_customize_email_button['inquiry_trailing_text'];
+		else $wc_email_inquiry_trailing_text = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_trailing_text']);
 		
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_heading'))) != '') {
-			$wc_email_inquiry_contact_heading = esc_attr(get_option('wc_email_inquiry_contact_heading'));
+		if ( trim( $wc_email_inquiry_customize_email_popup['inquiry_contact_heading'] ) != '') {
+			$wc_email_inquiry_contact_heading = $wc_email_inquiry_customize_email_popup['inquiry_contact_heading'];
 		} else {
-			$wc_email_inquiry_button_type = esc_attr(get_option('wc_email_inquiry_button_type'));
+			if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_button_type'])) $wc_email_inquiry_button_type = $wc_email_inquiry_global_settings['inquiry_button_type'];
+			else $wc_email_inquiry_button_type = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_button_type']);
 			
-			if ($wc_email_inquiry_button_type == 'link') $wc_email_inquiry_contact_heading = $wc_email_inquiry_text_before .' '. $wc_email_inquiry_hyperlink_text .' '.$wc_email_inquiry_trailing_text;
-			else $wc_email_inquiry_contact_heading = $wc_email_inquiry_button_title;
+			$wc_email_inquiry_contact_heading = $wc_email_inquiry_button_title;
 		}
 		
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_text_button'))) != '') $wc_email_inquiry_contact_text_button = esc_attr(get_option('wc_email_inquiry_contact_text_button'));
+		if ( trim( $wc_email_inquiry_customize_email_popup['inquiry_contact_text_button'] ) != '') $wc_email_inquiry_contact_text_button = $wc_email_inquiry_customize_email_popup['inquiry_contact_text_button'];
 		else $wc_email_inquiry_contact_text_button = __('SEND', 'wc_email_inquiry');
 				
 		$wc_email_inquiry_contact_button_class = '';
 		$wc_email_inquiry_contact_form_class = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_button_class'))) != '') $wc_email_inquiry_contact_button_class = esc_attr(get_option('wc_email_inquiry_contact_button_class'));
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_form_class'))) != '') $wc_email_inquiry_contact_form_class = esc_attr(get_option('wc_email_inquiry_contact_form_class'));		
+		if ( trim( $wc_email_inquiry_customize_email_popup['inquiry_contact_button_class'] ) != '') $wc_email_inquiry_contact_button_class = $wc_email_inquiry_customize_email_popup['inquiry_contact_button_class'];
+		if ( trim( $wc_email_inquiry_customize_email_popup['inquiry_contact_form_class'] ) != '') $wc_email_inquiry_contact_form_class = $wc_email_inquiry_customize_email_popup['inquiry_contact_form_class'];
+		
+		$wc_email_inquiry_send_copy = false;
+		
 		
 	?>	
 <div class="wc_email_inquiry_form <?php echo $wc_email_inquiry_contact_form_class; ?>">
@@ -212,7 +207,7 @@ class WC_Email_Inquiry_Hook_Filter{
 			<textarea class="your_message" name="your_message" id="your_message_<?php echo $product_id; ?>"></textarea></div>
         <div class="wc_email_inquiry_field">
         	<label class="wc_email_inquiry_label">&nbsp;</label>
-            <a class="wc_email_inquiry_button_button wc_email_inquiry_form_button wc_email_inquiry_bt_<?php echo $product_id; ?> <?php echo $wc_email_inquiry_contact_button_class; ?>" id="wc_email_inquiry_bt_<?php echo $product_id; ?>" product_id="<?php echo $product_id; ?>"><span><?php echo $wc_email_inquiry_contact_text_button; ?></span></a> <span class="wc_email_inquiry_loading" id="wc_email_inquiry_loading_<?php echo $product_id; ?>"><img src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/ajax-loader.gif" /></span>
+            <a class="wc_email_inquiry_form_button wc_email_inquiry_bt_<?php echo $product_id; ?> <?php echo $wc_email_inquiry_contact_button_class; ?>" id="wc_email_inquiry_bt_<?php echo $product_id; ?>" product_id="<?php echo $product_id; ?>"><?php echo $wc_email_inquiry_contact_text_button; ?></a> <span class="wc_email_inquiry_loading" id="wc_email_inquiry_loading_<?php echo $product_id; ?>"><img src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/ajax-loader.gif" /></span>
         </div>
 	</div>
 </div>
@@ -220,7 +215,7 @@ class WC_Email_Inquiry_Hook_Filter{
 		die();
 	}
 	
-	function wc_email_inquiry_action() {
+	public static function wc_email_inquiry_action() {
 		check_ajax_referer( 'wc_email_inquiry_action', 'security' );
 		$product_id 	= $_REQUEST['product_id'];
 		$your_name 		= $_REQUEST['your_name'];
@@ -234,150 +229,22 @@ class WC_Email_Inquiry_Hook_Filter{
 		die();
 	}
 		
-	function add_style_header() {
+	public static function add_style_header() {
 		wp_enqueue_style('a3_wc_email_inquiry_style', WC_EMAIL_INQUIRY_CSS_URL . '/wc_email_inquiry_style.css');
 	}
 	
-	function footer_print_scripts() {
+	public static function include_customized_style() {
+		include( WC_EMAIL_INQUIRY_DIR. '/templates/customized_style.php' );
+	}
+	
+	public static function footer_print_scripts() {
 		global $woocommerce;
+		global $wc_email_inquiry_customize_email_popup;
 		$current_db_version = get_option( 'woocommerce_db_version', null );
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-		$wc_email_inquiry_button_padding = 5;
-		if ( trim(esc_attr(get_option('wc_email_inquiry_button_padding'))) != '') $wc_email_inquiry_button_padding = intval(esc_attr(get_option('wc_email_inquiry_button_padding')));
 		
-		$wc_email_inquiry_button_bg_colour = '';		
-		if ( trim(esc_attr(get_option('wc_email_inquiry_button_bg_colour'))) != '') $wc_email_inquiry_button_bg_colour = esc_attr(get_option('wc_email_inquiry_button_bg_colour'));
-		
-		$wc_email_inquiry_button_border_colour = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_button_border_colour'))) != '') $wc_email_inquiry_button_border_colour = esc_attr(get_option('wc_email_inquiry_button_border_colour'));
-		
-		$wc_email_inquiry_border_rounded = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_border_rounded'))) != '') $wc_email_inquiry_border_rounded = esc_attr(get_option('wc_email_inquiry_border_rounded'));
-		
-		$wc_email_inquiry_rounded_value = 15;
-		if ( trim(esc_attr(get_option('wc_email_inquiry_rounded_value'))) != '') $wc_email_inquiry_rounded_value = esc_attr(get_option('wc_email_inquiry_rounded_value'));
-		
-		$wc_email_inquiry_button_text_size = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_button_text_size'))) != '') $wc_email_inquiry_button_text_size = esc_attr(get_option('wc_email_inquiry_button_text_size'));
-		
-		$wc_email_inquiry_button_text_style = 'bold';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_button_text_style'))) != '') $wc_email_inquiry_button_text_style = esc_attr(get_option('wc_email_inquiry_button_text_style'));
-		
-		$wc_email_inquiry_button_text_colour = '#FFFFFF';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_button_text_colour'))) != '') $wc_email_inquiry_button_text_colour = esc_attr(get_option('wc_email_inquiry_button_text_colour'));
-		
-		$wc_email_inquiry_contact_button_bg_colour = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_button_bg_colour'))) != '') $wc_email_inquiry_contact_button_bg_colour = esc_attr(get_option('wc_email_inquiry_contact_button_bg_colour'));
-		
-		$wc_email_inquiry_contact_button_border_colour = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_button_border_colour'))) != '') $wc_email_inquiry_contact_button_border_colour = esc_attr(get_option('wc_email_inquiry_contact_button_border_colour'));
-		
-		$wc_email_inquiry_contact_border_rounded = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_border_rounded'))) != '') $wc_email_inquiry_contact_border_rounded = esc_attr(get_option('wc_email_inquiry_contact_border_rounded'));
-		
-		$wc_email_inquiry_contact_rounded_value = 15;
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_rounded_value'))) != '') $wc_email_inquiry_contact_rounded_value = esc_attr(get_option('wc_email_inquiry_contact_rounded_value'));
-		
-		$wc_email_inquiry_contact_button_text_size = '';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_button_text_size'))) != '') $wc_email_inquiry_contact_button_text_size = esc_attr(get_option('wc_email_inquiry_contact_button_text_size'));
-		
-		$wc_email_inquiry_contact_button_text_style = 'bold';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_button_text_style'))) != '') $wc_email_inquiry_contact_button_text_style = esc_attr(get_option('wc_email_inquiry_contact_button_text_style'));
-		
-		$wc_email_inquiry_contact_button_text_colour = '#FFFFFF';
-		if ( trim(esc_attr(get_option('wc_email_inquiry_contact_button_text_colour'))) != '') $wc_email_inquiry_contact_button_text_colour = esc_attr(get_option('wc_email_inquiry_contact_button_text_colour'));
-	?>
-		<style type="text/css">
-		h1.wc_email_inquiry_result_heading {
-			<?php if (trim(str_replace('#', '', $wc_email_inquiry_contact_button_bg_colour)) != '') { ?>
-			color: <?php echo $wc_email_inquiry_contact_button_bg_colour; ?> !important;
-			<?php } ?>
-		}
-		.wc_email_inquiry_button_container { padding-top:<?php echo $wc_email_inquiry_button_padding ?>px !important; padding-bottom:<?php echo $wc_email_inquiry_button_padding ?>px !important; }
-		body a.wc_email_inquiry_email_button, body a.wc_email_inquiry_email_button:hover, body a.wc_email_inquiry_email_button.hover, body a.wc_email_inquiry_email_button.active {
-			<?php if (trim(str_replace('#', '', $wc_email_inquiry_button_bg_colour)) != '') { ?>
-			background: <?php echo $wc_email_inquiry_button_bg_colour; ?>  !important;
-			<?php } ?>
-			<?php if (trim(str_replace('#', '', $wc_email_inquiry_button_border_colour)) != '') { ?>
-			border-color: <?php echo $wc_email_inquiry_button_border_colour; ?>  !important;
-			<?php } ?>
-			<?php if (trim($wc_email_inquiry_border_rounded) == 'square') { ?>
-			-webkit-border-radius: 0px !important;
-			-moz-border-radius: 0px !important;
-			border-radius: 0px !important;
-			<?php } else { ?>
-			-webkit-border-radius: <?php echo $wc_email_inquiry_rounded_value; ?>px !important;
-			-moz-border-radius: <?php echo $wc_email_inquiry_rounded_value; ?>px !important;
-			border-radius: <?php echo $wc_email_inquiry_rounded_value; ?>px !important;
-			<?php } ?>
-		}
-		body a.wc_email_inquiry_email_button span, body a.wc_email_inquiry_email_button:hover span, body a.wc_email_inquiry_email_button.hover span, body a.wc_email_inquiry_email_button.active span {
-			<?php if (trim(str_replace('#', '', $wc_email_inquiry_button_text_colour)) != '') { ?>
-			color: <?php echo $wc_email_inquiry_button_text_colour; ?>  !important;
-			<?php } ?>
-			<?php if (trim($wc_email_inquiry_button_text_size) != '' && $wc_email_inquiry_button_text_size > 0) { ?>
-			font-size: <?php echo $wc_email_inquiry_button_text_size; ?>px  !important;
-			<?php } ?>
-			<?php if ($wc_email_inquiry_button_text_style == 'italic' || $wc_email_inquiry_button_text_style == 'bold_italic') { ?>
-			font-style:italic !important;
-			<?php } ?>
-			<?php if ($wc_email_inquiry_button_text_style == '' || $wc_email_inquiry_button_text_style == 'bold' || $wc_email_inquiry_button_text_style == 'bold_italic') { ?>
-			font-weight:bold !important;
-			<?php } ?>
-			<?php if ($wc_email_inquiry_button_text_style == 'normal') { ?>
-			font-weight:normal !important;
-			font-style:normal !important;
-			<?php } ?>
-		}
-		<?php if (trim(str_replace('#', '', $wc_email_inquiry_button_bg_colour)) != '' || trim(str_replace('#', '', $wc_email_inquiry_button_border_colour)) != '') { ?>
-		body a.wc_email_inquiry_email_button:hover {
-			opacity:0.85;	
-		}
-		<?php } ?>
-		body a.wc_email_inquiry_form_button, body a.wc_email_inquiry_form_button:hover, body a.wc_email_inquiry_form_button.hover, body a.wc_email_inquiry_form_button.active {
-			<?php if (trim(str_replace('#', '', $wc_email_inquiry_contact_button_bg_colour)) != '') { ?>
-			background: <?php echo $wc_email_inquiry_contact_button_bg_colour; ?>  !important;
-			<?php } ?>
-			<?php if (trim(str_replace('#', '', $wc_email_inquiry_contact_button_border_colour)) != '') { ?>
-			border-color: <?php echo $wc_email_inquiry_contact_button_border_colour; ?>  !important;
-			<?php } ?>
-			<?php if (trim($wc_email_inquiry_contact_border_rounded) == 'square') { ?>
-			-webkit-border-radius: 0px !important;
-			-moz-border-radius: 0px !important;
-			border-radius: 0px !important;
-			<?php } else { ?>
-			-webkit-border-radius: <?php echo $wc_email_inquiry_contact_rounded_value; ?>px !important;
-			-moz-border-radius: <?php echo $wc_email_inquiry_contact_rounded_value; ?>px !important;
-			border-radius: <?php echo $wc_email_inquiry_contact_rounded_value; ?>px !important;
-			<?php } ?>
-		}
-		body a.wc_email_inquiry_form_button span, body a.wc_email_inquiry_form_button:hover span, body a.wc_email_inquiry_form_button.hover span, body a.wc_email_inquiry_form_button.active span {
-			<?php if (trim(str_replace('#', '', $wc_email_inquiry_contact_button_text_colour)) != '') { ?>
-			color: <?php echo $wc_email_inquiry_contact_button_text_colour; ?>  !important;
-			<?php } ?>
-			<?php if (trim($wc_email_inquiry_contact_button_text_size) != '' && $wc_email_inquiry_contact_button_text_size > 0) { ?>
-			font-size: <?php echo $wc_email_inquiry_contact_button_text_size; ?>px  !important;
-			<?php } ?>
-			<?php if ($wc_email_inquiry_contact_button_text_style == 'italic' || $wc_email_inquiry_contact_button_text_style == 'bold_italic') { ?>
-			font-style:italic !important;
-			<?php } ?>
-			<?php if ($wc_email_inquiry_contact_button_text_style == '' || $wc_email_inquiry_contact_button_text_style == 'bold' || $wc_email_inquiry_contact_button_text_style == 'bold_italic') { ?>
-			font-weight:bold !important;
-			<?php } ?>
-			<?php if ($wc_email_inquiry_contact_button_text_style == 'normal') { ?>
-			font-weight:normal !important;
-			font-style:normal !important;
-			<?php } ?>
-		}
-		<?php if (trim(str_replace('#', '', $wc_email_inquiry_contact_button_bg_colour)) != '' || trim(str_replace('#', '', $wc_email_inquiry_contact_button_border_colour)) != '') { ?>
-		body a.wc_email_inquiry_form_button:hover {
-			opacity:0.85;	
-		}
-		<?php } ?>
-		</style>
-    <?php
 		wp_enqueue_script('jquery');
-		$wc_email_inquiry_popup_type = get_option('wc_email_inquiry_popup_type');
+		$wc_email_inquiry_popup_type = $wc_email_inquiry_customize_email_popup['inquiry_popup_type'];
 		if ($wc_email_inquiry_popup_type == 'colorbox') {
 			wp_enqueue_style( 'a3_colorbox_style', WC_EMAIL_INQUIRY_JS_URL . '/colorbox/colorbox.css' );
 			wp_enqueue_script( 'colorbox_script', WC_EMAIL_INQUIRY_JS_URL . '/colorbox/jquery.colorbox'.$suffix.'.js', array(), false, true );
@@ -395,7 +262,8 @@ class WC_Email_Inquiry_Hook_Filter{
 		}
 	}
 	
-	function script_contact_popup() {
+	public static function script_contact_popup() {
+		global $wc_email_inquiry_customize_email_popup;
 		$current_db_version = get_option( 'woocommerce_db_version', null );
 		$wc_email_inquiry_popup = wp_create_nonce("wc_email_inquiry_popup");
 		$wc_email_inquiry_action = wp_create_nonce("wc_email_inquiry_action");
@@ -404,11 +272,11 @@ class WC_Email_Inquiry_Hook_Filter{
 (function($){
 	$(function(){
 		var ajax_url = "<?php echo ( ( is_ssl() || force_ssl_admin() || force_ssl_login() ) ? str_replace( 'http:', 'https:', admin_url( 'admin-ajax.php' ) ) : str_replace( 'https:', 'http:', admin_url( 'admin-ajax.php' ) ) ); ?>";
-		$(".wc_email_inquiry_buton").live("click", function(){
+		$(document).on("click", ".wc_email_inquiry_button", function(){
 			var product_id = $(this).attr("product_id");
 			var product_name = $(this).attr("product_name");
 		<?php
-			$wc_email_inquiry_popup_type = get_option('wc_email_inquiry_popup_type');
+			$wc_email_inquiry_popup_type = $wc_email_inquiry_customize_email_popup['inquiry_popup_type'];
 			if ($wc_email_inquiry_popup_type == 'colorbox') {
 		?>
 			$.colorbox({
@@ -440,7 +308,7 @@ class WC_Email_Inquiry_Hook_Filter{
 		<?php } } ?>
 		});
 		
-		$(".wc_email_inquiry_form_button").live("click", function(){
+		$(document).on("click", ".wc_email_inquiry_form_button", function(){
 			var product_id = $(this).attr("product_id");
 			var your_name = $("#your_name_"+product_id).val();
 			var your_email = $("#your_email_"+product_id).val();
@@ -493,49 +361,68 @@ class WC_Email_Inquiry_Hook_Filter{
     <?php
 	}
 	
-	function admin_footer_scripts() {
+	public static function admin_header_script() {
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_style('farbtastic');
+	}
+	
+	public static function admin_footer_scripts() {
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		
+		wp_enqueue_script('jquery');
+		
+		wp_enqueue_style( 'a3rev-chosen-style', WC_EMAIL_INQUIRY_JS_URL . '/chosen/chosen.css' );
+		wp_enqueue_script( 'chosen', WC_EMAIL_INQUIRY_JS_URL . '/chosen/chosen.jquery'.$suffix.'.js', array(), false, true );
+		wp_enqueue_script( 'a3rev-chosen-script-init', WC_EMAIL_INQUIRY_JS_URL.'/init-chosen.js', array(), false, true );
 	?>
-    <script type="text/javascript">
-		(function($){		
-			$(function(){	
-				// Color picker
-				$('.colorpick').each(function(){
-					$('.colorpickdiv', $(this).parent()).farbtastic(this);
-					$(this).live('click',function() {
-						if ( $(this).val() == "" ) $(this).val('#ee2b2b');
-						$('.colorpickdiv', $(this).parent() ).show();
-					});	
-				});
-				$(document).mousedown(function(){
-					$('.colorpickdiv').hide();
-				});
-			});		  
-		})(jQuery);
-	</script>
+<script type="text/javascript">
+jQuery(window).load(function(){
+	// Subsubsub tabs
+	jQuery('div.a3_subsubsub_section ul.subsubsub li a:eq(0)').addClass('current');
+	jQuery('div.a3_subsubsub_section .section:gt(0)').hide();
+	jQuery('div.a3_subsubsub_section ul.subsubsub li a').click(function(){
+		var $clicked = jQuery(this);
+		var $section = $clicked.closest('.a3_subsubsub_section');
+		var $target  = $clicked.attr('href');
+	
+		$section.find('a').removeClass('current');
+	
+		if ( $section.find('.section:visible').size() > 0 ) {
+			$section.find('.section:visible').fadeOut( 100, function() {
+				$section.find( $target ).fadeIn('fast');
+			});
+		} else {
+			$section.find( $target ).fadeIn('fast');
+		}
+	
+		$clicked.addClass('current');
+		jQuery('#last_tab').val( $target );
+	
+		return false;
+	});
+	<?php if (isset($_REQUEST['subtab']) && $_REQUEST['subtab']) echo 'jQuery("div.a3_subsubsub_section ul.subsubsub li a[href='.$_REQUEST['subtab'].']").click();'; ?>
+});
+(function($){
+	$(function(){
+		// Color picker
+		$('.colorpick').each(function(){
+			$('.colorpickdiv', $(this).parent()).farbtastic(this);
+			$(this).click(function() {
+				if ( $(this).val() == "" ) $(this).val('#000000');
+				$('.colorpickdiv', $(this).parent() ).show();
+			});	
+		});
+		$(document).mousedown(function(){
+			$('.colorpickdiv').hide();
+		});
+	});
+})(jQuery);
+</script>
     <?php
 	}
 	
-	function wp_admin_footer_scripts() {
-	?>
-    <script type="text/javascript">
-		(function($){		
-			$(function(){	
-				$("a.nav-tab").click(function(){
-					if($(this).attr('data-tab-id') == 'inquiry_cart_options'){
-						window.location.href=$(this).attr('href');
-						return false;
-					}
-				});
-			});		  
-		})(jQuery);
-	</script>
-    <?php
-	}
-	
-	function plugin_extra_links($links, $plugin_name) {
+	public static function plugin_extra_links($links, $plugin_name) {
 		if ( $plugin_name != WC_EMAIL_INQUIRY_NAME) {
 			return $links;
 		}

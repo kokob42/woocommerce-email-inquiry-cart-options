@@ -2,7 +2,7 @@
 /*
 Plugin Name: WooCommerce Email Inquiry & Cart Options LITE
 Description: Transform your entire WooCommerce products catalog or any individual product into an online brochure with Product Email Inquiry button and pop-up email form. Add product email inquiry functionality to any product either with WooCommerce functionality or hide that functionality and the page becomes a brochure.
-Version: 1.0.2
+Version: 1.0.3
 Author: A3 Revolution
 Author URI: http://www.a3rev.com/
 License: This software is under commercial license and copyright to A3 Revolution Software Development team
@@ -30,10 +30,18 @@ define('WC_EMAIL_INQUIRY_CSS_URL',  WC_EMAIL_INQUIRY_URL . '/assets/css' );
 if(!defined("WC_EMAIL_AUTHOR_URI"))
     define("WC_EMAIL_AUTHOR_URI", "http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/");
 
-include('admin/classes/class-wc-email-inquiry-settings.php');
 include('classes/class-wc-email-inquiry-functions.php');
 include('classes/class-wc-email-inquiry-hook.php');
 include('classes/class-wc-email-inquiry-metabox.php');
+
+include('admin/classes/class-rules-roles-panel.php');
+
+include('admin/classes/email-inquiry-panel/class-global-settings.php');
+include('admin/classes/email-inquiry-panel/class-email-options.php');
+include('admin/classes/email-inquiry-panel/class-customize-email-button.php');
+include('admin/classes/email-inquiry-panel/class-customize-email-popup.php');
+include('admin/classes/class-email-inquiry-panel.php');
+
 include('admin/wc-email-inquiry-init.php');
 
 /**

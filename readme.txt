@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -112,7 +112,7 @@ The manual installation method involves downloading our plugin and uploading it 
 
 1. Install and activate the plugin
 
-2. Go to WooCommerce > Settings > Email & Cart tab
+2. Go to WooCommerce > Email & Cart Options
 
 3. Select the global settings you require.
 
@@ -129,6 +129,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.3 - 2013/05/04 =
+* Feature: Moved plugin admin panel from a single tab on WooCommerce Settings to its own link  'Email & Cart Options' on the WooCommerce wp-admin menu.
+* Feature: Added main tab for Rules & Roles settings.
+* Feature: Added Email Inquiry main tab with related sub tabs.
+* Feature: Added when install and activate plugin link redirects to the plugins dashboard instead of the wp-plugins dashboard.
+* Fixed: Updated all JavaScript functions so that the plugin is compatible with jQuery Version1.9 and backwards to version 1.6. WordPress still uses jQuery version 1.8.3. In themes that use Google js Library instead of the WordPress jQuery then there was trouble because Google uses the latest jQuery version 1.9. There are a number of functions in jQuery Version 1.9 that have been depreciated and hence this was causing errors with the jQuery function in the plugin.
+* Fixed: Did a full WP_DEBUG. All uncaught exceptions, notices, warnings and errors fixed.
+* Tweak: Updated plugins Wiki documentation.
+
 = 1.0.2 - 2013/04/10 =
 * Fixed: WooCommerce Reviews form opening in duplicate popup tools, PrettyPhoto and Fancybox caused by our old WooCommerce v1.6 fancybox lib.
 * Fixed: Bug for users who have https: (SSL) on their sites wp-admin but have http on sites front end. This was causing a -1 to show when email pop-up form is called. wp-admin with SSL applied only allows https: but the url of admin-ajax.php is http: and it is denied hence returning the ajax -1 error. Fixed by writing a filter to recognize when https is configured on wp-admin and parsing correctly.
@@ -137,4 +146,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 * Fixed : Can't activate the plugin on some sites . The problem was in php configuration differences .It was caused by php configuration related to short <?php syntax which allows to use <? instead.
 
 = 1.0.0 - 2013/03/07 =
-* First working release 
+* First working release
+
+
+== Upgrade Notice ==
+
+= 1.0.3 =
+Upgrade now for major admin User interface upgrade and various minor bug fixes.
