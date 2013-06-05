@@ -271,7 +271,7 @@ class WC_Email_Inquiry_Hook_Filter
 <script type="text/javascript">
 (function($){
 	$(function(){
-		var ajax_url = "<?php echo ( ( is_ssl() || force_ssl_admin() || force_ssl_login() ) ? str_replace( 'http:', 'https:', admin_url( 'admin-ajax.php' ) ) : str_replace( 'https:', 'http:', admin_url( 'admin-ajax.php' ) ) ); ?>";
+		var ajax_url = "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>";
 		$(document).on("click", ".wc_email_inquiry_button", function(){
 			var product_id = $(this).attr("product_id");
 			var product_name = $(this).attr("product_name");
@@ -362,9 +362,14 @@ class WC_Email_Inquiry_Hook_Filter
 	}
 	
 	public static function admin_header_script() {
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('farbtastic');
 		wp_enqueue_style('farbtastic');
+		
+		wp_enqueue_style( 'tipTip-style', WC_EMAIL_INQUIRY_JS_URL . '/tipTip/tipTip.css' );
+		wp_enqueue_script( 'tipTip', WC_EMAIL_INQUIRY_JS_URL . '/tipTip/jquery.tipTip'.$suffix.'.js', array(), false );
 	}
 	
 	public static function admin_footer_scripts() {
@@ -405,6 +410,12 @@ jQuery(window).load(function(){
 });
 (function($){
 	$(function(){
+		// Tooltips
+		$(".help_tip").tipTip({
+			"attribute" : "tip",
+			"fadeIn" : 50,
+			"fadeOut" : 50
+		});
 		// Color picker
 		$('.colorpick').each(function(){
 			$('.colorpickdiv', $(this).parent()).farbtastic(this);
@@ -427,7 +438,7 @@ jQuery(window).load(function(){
 			return $links;
 		}
 		$links[] = '<a href="http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/" target="_blank">'.__('Documentation', 'wc_email_inquiry').'</a>';
-		$links[] = '<a href="'.WC_EMAIL_AUTHOR_URI.'#help_tab" target="_blank">'.__('Support', 'wc_email_inquiry').'</a>';
+		$links[] = '<a href="https://a3rev.com/forums/forum/woocommerce-plugins/email-inquiry-cart-options/" target="_blank">'.__('Support', 'wc_email_inquiry').'</a>';
 		return $links;
 	}
 }

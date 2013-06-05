@@ -1,6 +1,6 @@
 <?php
 function wc_email_inquiry_install(){
-	update_option('a3rev_wc_email_inquiry_version', '1.0.3');
+	update_option('a3rev_wc_email_inquiry_version', '1.0.3.1');
 
 	WC_Email_Inquiry_Rules_Roles_Panel::set_settings_default();
 	
@@ -83,7 +83,7 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 		update_option('a3rev_wc_email_inquiry_version', '1.0.3');
 	}
 
-	update_option('a3rev_wc_email_inquiry_version', '1.0.3');	
+	update_option('a3rev_wc_email_inquiry_version', '1.0.3.1');	
 
 
 function woo_email_cart_options_dashboard() {
@@ -94,13 +94,15 @@ function woo_email_cart_options_dashboard() {
     .icon32-email-cart-options {background:url(<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/a3-plugins.png) no-repeat left top !important;}
     .subsubsub{white-space:normal;}
     .subsubsub li{ white-space:nowrap;}
+	img.help_tip{float: right; margin: 0 -10px 0 0;}
 	#wc_email_inquiry_panel_container { position:relative; margin-top:10px;}
 	#wc_email_inquiry_panel_fields {width:60%; float:left;}
 	#wc_email_inquiry_upgrade_area { position:relative; margin-left: 60%; padding-left:10px;}
-	#wc_email_inquiry_extensions { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; color: #555555; margin: 0px; padding: 5px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); background:#FFFBCC; }
+	#wc_email_inquiry_extensions { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; color: #555555; margin: 0px; padding: 5px 10px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); background:#FFFBCC; }
 	.pro_feature_fields { margin-right: -12px; position: relative; z-index: 10; border:2px solid #E6DB55;-webkit-border-radius:10px 0 0 10px;-moz-border-radius:10px 0 0 10px;-o-border-radius:10px 0 0 10px; border-radius: 10px 0 0 10px; border-right: 2px solid #FFFFFF; }
-	.pro_feature_fields h3, .pro_feature_fields p { margin-left:5px; }
-	.pro_feature_fields  .form-table td { padding:5px 10px; }
+	.pro_feature_fields h3 { margin:8px 5px; }
+	.pro_feature_fields p { margin-left:5px; }
+	.pro_feature_fields  .form-table td { padding:4px 10px; }
     </style>
     <div class="wrap">
     	<?php if( isset($_POST['wc_email_inquiry_pin_submit']) ) echo '<div id="message" class="updated fade"><p>'.get_option("a3rev_wc_email_inquiry_message").'</p></div>'; ?>
@@ -111,8 +113,8 @@ function woo_email_cart_options_dashboard() {
 		$tabs = array(
 			'rules-roles'			=> __( 'Rules & Roles', 'wc_email_inquiry' ),
 			'email-inquiry'			=> __( 'Email Inquiry', 'wc_email_inquiry' ),
-			/*'add-to-quote'			=> __( 'Add to Quote', 'wc_email_inquiry' ),
-			'add-to-order'			=> __( 'Add to Order', 'wc_email_inquiry' ),*/
+			'quotes-mode'			=> __( 'Quotes Mode', 'wc_email_inquiry' ),
+			'orders-mode'			=> __( 'Orders Mode', 'wc_email_inquiry' ),
 		);
 	
 		foreach ($tabs as $name => $label) :
@@ -129,9 +131,11 @@ function woo_email_cart_options_dashboard() {
 			case 'email-inquiry':
 				WC_Email_Inquiry_Panel::panel_manager();
 				break;
-			case 'add-to-quote':
+			case 'quotes-mode':
+				WC_Email_Inquiry_Quote_Panel::panel_manager();
 				break;
-			case 'add-to-order':
+			case 'orders-mode':
+				WC_Email_Inquiry_Order_Panel::panel_manager();
 				break;
 			default :
 				WC_Email_Inquiry_Rules_Roles_Panel::panel_manager();

@@ -259,8 +259,9 @@ class WC_Email_Inquiry_Functions
 		$html .= '<div id="wc_email_inquiry_extensions">';
 		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/a3logo.png" /></a>';
 		$html .= '<h3>'.__('Upgrade to Email Inquiry & Cart Options Pro', 'wc_email_inquiry').'</h3>';
-		$html .= '<p>'.__("<strong>NOTE:</strong> Settings inside the Yellow border are Pro Version advanced Features and are not activated. Visit the", 'wc_email_inquiry').' <a href="'.WC_EMAIL_AUTHOR_URI.'" target="_blank">'.__("a3rev site", 'wc_email_inquiry').'</a> '.__("if you wish to upgrade to activate these features", 'wc_email_inquiry').':</p>';
+		$html .= '<p>'.__("<strong>NOTE:</strong> Settings inside the Yellow border are avaiable by upgrading to either the", 'wc_email_inquiry').' <a href="http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/" target="_blank">'.__("Pro Version of this plugin", 'wc_email_inquiry').'</a> '.__("or to the", 'wc_email_inquiry').' <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__("WooCommerce Quotes and Orders", 'wc_email_inquiry').'</a> '.__("plugin", 'wc_email_inquiry').':</p>';
 		$html .= '<p>';
+		$html .= '<p>'.__('WooCommerce Email Inquiry and Cart Options Pro version features', 'wc_email_inquiry').':</p>';
 		$html .= '<ul style="padding-left:10px;">';
 		$html .= '<li>1. '.__("Activate Rule: Hide Product Prices.", 'wc_email_inquiry').'</li>';
 		$html .= '<li>2. '.__('Activate Email and Cart Product Page Meta.', 'wc_email_inquiry').'</li>';
@@ -274,6 +275,8 @@ class WC_Email_Inquiry_Functions
 		$html .= '<li>10. '.__("Activate lifetime same day priority support", 'wc_email_inquiry').'</li>';
 		$html .= '</ul>';
 		$html .= '</p>';
+		$html .= '<h3>'.__('Quotes and Orders 7 Day Free Trial.', 'wc_email_inquiry').'</h3>';
+		$html .= '<p>'.__("If you'd like to see what all of the Quotes and Orders options features inside the yellow borders on here can enable you to make on your site you can do that for 7 days completely Free. Just go to the ", 'wc_email_inquiry').' <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders plugin', 'wc_email_inquiry').'</a> '.__("page and sign up for the 7 day free trail.", 'wc_email_inquiry').'</p>';
 		$html .= '<h3>'.__('Plugin Documentation', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>'.__('All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request', 'wc_email_inquiry').'. <a href="http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/" target="_blank">'.__('Visit the a3rev wiki.', 'wc_email_inquiry').'</a></p>';
 		$html .= '<h3>'.__('More a3rev Quality Plugins', 'wc_email_inquiry').'</h3>';

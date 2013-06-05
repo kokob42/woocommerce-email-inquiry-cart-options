@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.0.3
+Stable tag: 1.0.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -128,6 +128,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
  
 == Changelog ==
+
+= 1.0.3.1 - 2013/06/05 =
+* Tweak: Upgraded and synched the plugins code to be inline with the new WooCommerce Quotes and Orders plugin. This allows users to seamlessly upgrade to that plugin at any time.
+* Tweak: Updated the plugins support links to the new a3rev support forum.
 
 = 1.0.3 - 2013/05/04 =
 * Feature: Moved plugin admin panel from a single tab on WooCommerce Settings to its own link  'Email & Cart Options' on the WooCommerce wp-admin menu.

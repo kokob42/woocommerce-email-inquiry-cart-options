@@ -19,6 +19,16 @@ class WC_Email_Inquiry_Rules_Roles_Panel
 			'role_apply_hide_cart'					=> array(),
 			'show_button'							=> 'yes',
 			'role_apply_show_inquiry_button'		=> array(),
+			
+			'request_a_quote'						=> 'no',
+			
+			'quote_mode_rule'						=> 'manual',
+			'role_apply_manual_quote'				=> array(),
+			'role_apply_auto_quote'					=> array(),
+			
+			'add_to_order'							=> 'no',
+			'activate_order_logged_in'				=> 'no',
+			'role_apply_activate_order_logged_in'	=> array(),
 		);
 		
 		return $default_settings;
@@ -72,6 +82,14 @@ class WC_Email_Inquiry_Rules_Roles_Panel
 			if (!isset($customized_settings['role_apply_hide_cart'])) $customized_settings['role_apply_hide_cart'] = array();
 			if (!isset($customized_settings['show_button'])) $customized_settings['show_button'] = 'no';
 			if (!isset($customized_settings['role_apply_show_inquiry_button'])) $customized_settings['role_apply_show_inquiry_button'] = array();
+			
+			$customized_settings['request_a_quote'] = 'no';
+			$customized_settings['quote_mode_rule'] = 'manual';
+			$customized_settings['role_apply_manual_quote'] = array();
+			$customized_settings['role_apply_auto_quote'] = array();
+			$customized_settings['add_to_order'] = 'no';
+			$customized_settings['activate_order_logged_in'] = 'no';
+			$customized_settings['role_apply_activate_order_logged_in'] = array();
 			
 			update_option($option_name, $customized_settings);
 			
@@ -155,6 +173,96 @@ class WC_Email_Inquiry_Rules_Roles_Panel
 			</tr>
 		</table>
         </div>
+        
+        <div class="pro_feature_fields" style="margin-top:15px;">
+		<h3><?php _e('Request A Quote Mode', 'wc_email_inquiry'); ?></h3>
+		<table class="form-table">
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="request_a_quote"><?php _e( "Rule: 'Request a Quote'", 'wc_email_inquiry' );?></label></th>
+		    	<td class="forminp">
+                	<label><input disabled="disabled" class="replace_add_to_cart" type="checkbox" value="yes" id="request_a_quote" name="<?php echo $option_name; ?>[request_a_quote]" /> <span class=""><?php _e('If activated this setting over-rides all other Rules for users who are not logged in.', 'wc_email_inquiry');?></span></label>
+				</td>
+			</tr>
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="manual_quote_rule"><?php _e( "Manual Quote Rule", 'wc_email_inquiry' );?></label> <img width="16" height="16" src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/help.png" class="help_tip" tip="<?php _e('Hide prices everywhere including on order email and order details. If you have shipping costs configured it does not hide shipping costs.', 'wc_email_inquiry'); ?>" /></th>
+		    	<td class="forminp">
+                	<label><input disabled="disabled" type="radio" value="manual" id="manual_quote_rule" name="<?php echo $option_name; ?>[quote_mode_rule]" /> <span class=""><?php _e('Check to manually send prices either off-line or via edit order.', 'wc_email_inquiry');?></span></label>
+				</td>
+			</tr>
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="role_apply_manual_quote"><?php _e( 'Apply Rule to logged in roles', 'wc_email_inquiry' );?></label></th>
+		    	<td class="forminp">                    
+                    <select class="chzn-select" multiple="multiple" data-placeholder="<?php _e('Choose Roles', 'wc_email_inquiry'); ?>" name="<?php echo $option_name; ?>[role_apply_manual_quote][]" id="role_apply_manual_quote" style="width:300px; min-height:80px; display:none;">
+                    	<option disabled="disabled" value="manual_quote" selected="selected"><?php _e( 'Manual Quote', 'wc_email_inquiry' ); ?></option>
+                    <?php foreach ($roles as $key => $val) { ?>
+                    	<?php if ( in_array( $key, array('manual_quote', 'auto_quote') ) ) continue; ?>
+                        <option value="<?php echo $key; ?>"><?php esc_attr_e( stripslashes( $val) ); ?></option>
+                    <?php } ?>
+                    </select>
+				</td>
+			</tr>
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="auto_quote_rule"><?php _e( "Auto Quote Rule", 'wc_email_inquiry' );?></label> <img width="16" height="16" src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/help.png" class="help_tip" tip="<?php _e('Hide prices on shop page, product detail page, sidebar, cart widget, cart page, checkout page. Prices including shipping show in order email, order details when subscriber send the quote request.', 'wc_email_inquiry'); ?>" /></th>
+		    	<td class="forminp">
+                	<label><input disabled="disabled" type="radio" value="auto" id="auto_quote_rule" name="<?php echo $option_name; ?>[quote_mode_rule]" /> <span class=""><?php _e('Check to auto include system prices in the quote request email.', 'wc_email_inquiry');?></span></label>
+				</td>
+			</tr>
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="role_apply_auto_quote"><?php _e( 'Apply Rule to logged in roles', 'wc_email_inquiry' );?></label></th>
+		    	<td class="forminp">                    
+                    <select class="chzn-select" multiple="multiple" data-placeholder="<?php _e('Choose Roles', 'wc_email_inquiry'); ?>" name="<?php echo $option_name; ?>[role_apply_auto_quote][]" id="role_apply_auto_quote" style="width:300px; min-height:80px; display:none;">
+                    	<option disabled="disabled" value="auto_quote" selected="selected"><?php _e( 'Auto Quote', 'wc_email_inquiry' ); ?></option>
+                    <?php foreach ($roles as $key => $val) { ?>
+                    	<?php if ( in_array( $key, array('manual_quote', 'auto_quote') ) ) continue; ?>
+                        <option value="<?php echo $key; ?>"><?php esc_attr_e( stripslashes( $val) ); ?></option>
+                    <?php } ?>
+                    </select>
+				</td>
+			</tr>
+        </table>
+        
+        <h3><?php _e('Add to Order Mode', 'wc_email_inquiry'); ?></h3>
+		<table class="form-table">
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="add_to_order"><?php _e( "Rule: 'Add to Order'", 'wc_email_inquiry' );?></label> <img width="16" height="16" src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/help.png" class="help_tip" tip="<?php _e('Product Prices show as usual. Client places order and does not see the WooCommerce generated requests for payment.', 'wc_email_inquiry'); ?>" /></th>
+		    	<td class="forminp">
+                	<label><input disabled="disabled" class="replace_add_to_cart" type="checkbox" value="yes" id="add_to_order" name="<?php echo $option_name; ?>[add_to_order]" /> <span class=""><?php _e('If activated this setting over-rides all other Rules for users who are not logged in.', 'wc_email_inquiry');?></span></label>
+				</td>
+			</tr>
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="activate_order_logged_in"><?php _e( "Activate Rule", 'wc_email_inquiry' );?></label></th>
+		    	<td class="forminp">
+                	<label><input disabled="disabled" type="checkbox" value="yes" id="activate_order_logged_in" name="<?php echo $option_name; ?>[activate_order_logged_in]" /> <span class=""><?php _e('Activate this Rule to apply it to a Role for logged in users.', 'wc_email_inquiry');?></span></label>
+				</td>
+			</tr>
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="role_apply_activate_order_logged_in"><?php _e( 'Apply Rule to logged in roles', 'wc_email_inquiry' );?></label></th>
+		    	<td class="forminp">                    
+                    <select class="chzn-select" multiple="multiple" data-placeholder="<?php _e('Choose Roles', 'wc_email_inquiry'); ?>" name="<?php echo $option_name; ?>[role_apply_activate_order_logged_in][]" id="role_apply_activate_order_logged_in" style="width:300px; min-height:80px; display:none;">
+                    <?php foreach ($roles as $key => $val) { ?>
+                    	<?php if ( in_array( $key, array('manual_quote', 'auto_quote') ) ) continue; ?>
+                        <option value="<?php echo $key; ?>"><?php esc_attr_e( stripslashes( $val) ); ?></option>
+                    <?php } ?>
+                    </select>
+				</td>
+			</tr>
+        </table>
+        </div>
+		<script type="text/javascript">
+			(function($){		
+				$(function(){	
+					$('.replace_add_to_cart').click(function(){
+						if ($(this).is(':checked')) {
+							if ($(this).attr('id') == 'request_a_quote') {
+								$('#add_to_order').attr('checked', false);
+							} else {
+								$('#request_a_quote').attr('checked', false);	
+							}
+						}
+					});
+				});		  
+			})(jQuery);
+		</script>
 	<?php
 	}
 	
