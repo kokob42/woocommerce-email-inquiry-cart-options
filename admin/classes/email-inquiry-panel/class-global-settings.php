@@ -17,40 +17,65 @@ class WC_Email_Inquiry_Global_Settings
 			'inquiry_button_type'					=> 'button',
 			'inquiry_button_position'				=> 'below',
 			'inquiry_button_padding'				=> 5,
-			'inquiry_single_only'					=> 'yes',
+			'inquiry_single_only'					=> 'no',
 		);
 		
 		return $default_settings;
 	}
 	
 	public static function set_settings_default($reset=false) {
-		$option_name = 'wc_email_inquiry_global_settings';		
+		$option_name = 'wc_email_inquiry_global_settings';
+		$customized_settings = get_option($option_name);
+		if ( !is_array($customized_settings) ) $customized_settings = array();
+		
 		$default_settings = WC_Email_Inquiry_Global_Settings::get_settings_default();
-				
+		
+		$customized_settings = array_merge($default_settings, $customized_settings);
+		
 		if ($reset) {
 			update_option($option_name, $default_settings);
 		} else {
-			update_option($option_name, $default_settings);
+			update_option($option_name, $customized_settings);
 		}
 				
 	}
 	
 	public static function get_settings() {
 		global $wc_email_inquiry_global_settings;
-		$wc_email_inquiry_global_settings = WC_Email_Inquiry_Global_Settings::get_settings_default();
+		$customized_settings = get_option('wc_email_inquiry_global_settings');
+		if ( !is_array($customized_settings) ) $customized_settings = array();
+		$default_settings = WC_Email_Inquiry_Global_Settings::get_settings_default();
 		
-		return $wc_email_inquiry_global_settings;
+		$customized_settings = array_merge($default_settings, $customized_settings);
+		
+		foreach ($customized_settings as $key => $value) {
+			if (!isset($default_settings[$key])) continue;
+			
+			if ( !is_array($default_settings[$key]) ) {
+				if ( trim($value) == '' ) $customized_settings[$key] = $default_settings[$key];
+				else $customized_settings[$key] = esc_attr( stripslashes( $value ) );
+			}
+		}
+		
+		$wc_email_inquiry_global_settings = $customized_settings;
+		
+		return $customized_settings;
 	}
 	
 	public static function panel_page() {
 		$option_name = 'wc_email_inquiry_global_settings';
 		if (isset($_REQUEST['bt_save_settings'])) {
-			WC_Email_Inquiry_Global_Settings::set_settings_default(true);
+			$customized_settings = $_REQUEST[$option_name];
+						
+			update_option($option_name, $customized_settings);
 		}elseif (isset($_REQUEST['bt_reset_settings'])) {
 			WC_Email_Inquiry_Global_Settings::set_settings_default(true);
 		}
 		
-		$customized_settings = $default_settings = WC_Email_Inquiry_Global_Settings::get_settings_default();
+		$customized_settings = get_option($option_name);
+		$default_settings = WC_Email_Inquiry_Global_Settings::get_settings_default();
+		if ( !is_array($customized_settings) ) $customized_settings = $default_settings;
+		else $customized_settings = array_merge($default_settings, $customized_settings);
 		
 		extract($customized_settings);
 		
@@ -70,15 +95,15 @@ class WC_Email_Inquiry_Global_Settings
 		    	<th class="titledesc" scope="row"><label for="inquiry_button_position"><?php _e( 'Relative Position', 'wc_email_inquiry' );?></label></th>
 		    	<td class="forminp">                    
                     <select class="chzn-select" name="<?php echo $option_name; ?>[inquiry_button_position]" id="inquiry_button_position" style="width:120px;">
-                        <option value="below" <?php selected( $inquiry_button_position, 'button' ); ?>><?php _e( 'Below (Default)', 'wc_email_inquiry' ); ?></option>
-                        <option value="above" <?php selected( $inquiry_button_position, 'link' ); ?>><?php _e( 'Above', 'wc_email_inquiry' ); ?></option>
+                        <option value="below" <?php selected( $inquiry_button_position, 'below' ); ?>><?php _e( 'Below (Default)', 'wc_email_inquiry' ); ?></option>
+                        <option value="above" <?php selected( $inquiry_button_position, 'above' ); ?>><?php _e( 'Above', 'wc_email_inquiry' ); ?></option>
                     </select> <span class="description"><?php _e( 'Position relative to add to cart button location', 'wc_email_inquiry'); ?></span>
 				</td>
 			</tr>
             <tr valign="top">
 		    	<th class="titledesc" scope="row"><label for="inquiry_button_padding"><?php _e( 'Padding', 'wc_email_inquiry' );?></label></th>
 		    	<td class="forminp">                    
-                    <input disabled="disabled" type="text" value="<?php esc_attr_e( stripslashes( $inquiry_button_padding ) ); ?>" name="<?php echo $option_name; ?>[inquiry_button_padding]" id="inquiry_button_padding" style="width:120px;"  />px <span class="description"><?php _e( 'Default padding is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding.', 'wc_email_inquiry'); ?></span>
+                    <input type="text" value="<?php esc_attr_e( stripslashes( $inquiry_button_padding ) ); ?>" name="<?php echo $option_name; ?>[inquiry_button_padding]" id="inquiry_button_padding" style="width:120px;"  />px <span class="description"><?php _e( 'Default padding is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding.', 'wc_email_inquiry'); ?></span>
 				</td>
 			</tr>
             <tr valign="top">
@@ -90,6 +115,11 @@ class WC_Email_Inquiry_Global_Settings
                     </select> <span class="description"><?php _e( 'Default =  No. Button / Link text shows on single products pages as well as products list view, grid view, category and tag pages.', 'wc_email_inquiry'); ?></span>
 				</td>
 			</tr>
+		</table>
+        
+        <div class="pro_feature_fields">
+        <h3><?php _e('Global Re-Set', 'wc_email_inquiry'); ?></h3>
+		<table class="form-table">
             <tr valign="top">
 		    	<th class="titledesc" scope="row"><label for="wc_email_inquiry_reset_products_options"><?php _e( 'Global Re-Set', 'wc_email_inquiry' );?></label></th>
 		    	<td class="forminp">
@@ -97,6 +127,7 @@ class WC_Email_Inquiry_Global_Settings
 				</td>
 			</tr>
 		</table>
+        </div>
 	<?php
 	}
 }

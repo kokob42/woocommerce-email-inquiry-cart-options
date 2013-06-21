@@ -147,7 +147,7 @@ class WC_Email_Inquiry_Rules_Roles_Panel
 				</td>
 			</tr>
 		</table>
-        <div class="pro_feature_fields">
+        <div class="pro_feature_fields" style="z-index:11;">
         <table class="form-table">
             <tr valign="top">
 		    	<th class="titledesc" scope="row"><label for="hide_price"><?php _e( 'Rule: Hide Price', 'wc_email_inquiry' );?></label></th>

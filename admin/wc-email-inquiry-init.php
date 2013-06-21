@@ -1,6 +1,6 @@
 <?php
 function wc_email_inquiry_install(){
-	update_option('a3rev_wc_email_inquiry_version', '1.0.3.1');
+	update_option('a3rev_wc_email_inquiry_version', '1.0.4');
 
 	WC_Email_Inquiry_Rules_Roles_Panel::set_settings_default();
 	
@@ -8,6 +8,7 @@ function wc_email_inquiry_install(){
 	WC_Email_Inquiry_Email_Options::set_settings_default();
 	WC_Email_Inquiry_Customize_Email_Button::set_settings_default();
 	WC_Email_Inquiry_Customize_Email_Popup::set_settings_default();
+	WC_Email_Inquiry_3RD_ContactForms_Settings::set_settings_default();
 	
 	WC_Email_Inquiry_Functions::reset_products_to_global_settings();
 		
@@ -47,7 +48,7 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 	add_action( 'wp_head', array( 'WC_Email_Inquiry_Hook_Filter', 'include_customized_style'), 11);
 	
 	// Include script into footer
-	add_action('get_footer', array('WC_Email_Inquiry_Hook_Filter', 'script_contact_popup'), 1);
+	add_action('get_footer', array('WC_Email_Inquiry_Hook_Filter', 'script_contact_popup'), 2);
 	
 	// AJAX wc_email_inquiry contact popup
 	add_action('wp_ajax_wc_email_inquiry_popup', array('WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_popup') );
@@ -64,8 +65,20 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 	// Hide Add to Cart button on Details page
 	add_action('woocommerce_before_add_to_cart_button', array('WC_Email_Inquiry_Hook_Filter', 'details_before_hide_add_to_cart_button'), 100 );
 	add_action('woocommerce_after_add_to_cart_button', array('WC_Email_Inquiry_Hook_Filter', 'details_after_hide_add_to_cart_button'), 1 );
+	
+	// Add Email Inquiry Button on Shop page
+	$wc_email_inquiry_global_settings = WC_Email_Inquiry_Global_Settings::get_settings();
+	$wc_email_inquiry_button_position = $wc_email_inquiry_global_settings['inquiry_button_position'];
+	if ($wc_email_inquiry_button_position == 'above' )
+		add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_add_email_inquiry_button_above'), 9, 3);
+	else
+		add_action('woocommerce_after_shop_loop_item', array('WC_Email_Inquiry_Hook_Filter', 'shop_add_email_inquiry_button_below'), 12);
 		
-	add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'details_add_email_inquiry_button_below'), 2, 3);
+	// Add Email Inquiry Button on Product Details page
+	if ($wc_email_inquiry_button_position == 'above' )
+		add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'details_add_email_inquiry_button_above'), 9, 3 );
+	else
+		add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'details_add_email_inquiry_button_below'), 2, 3);
 	
 	// Add meta boxes to product page
 	add_action( 'admin_menu', array('WC_Email_Inquiry_MetaBox', 'add_meta_boxes') );
@@ -83,7 +96,7 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 		update_option('a3rev_wc_email_inquiry_version', '1.0.3');
 	}
 
-	update_option('a3rev_wc_email_inquiry_version', '1.0.3.1');	
+	update_option('a3rev_wc_email_inquiry_version', '1.0.4');	
 
 
 function woo_email_cart_options_dashboard() {
@@ -102,7 +115,7 @@ function woo_email_cart_options_dashboard() {
 	.pro_feature_fields { margin-right: -12px; position: relative; z-index: 10; border:2px solid #E6DB55;-webkit-border-radius:10px 0 0 10px;-moz-border-radius:10px 0 0 10px;-o-border-radius:10px 0 0 10px; border-radius: 10px 0 0 10px; border-right: 2px solid #FFFFFF; }
 	.pro_feature_fields h3 { margin:8px 5px; }
 	.pro_feature_fields p { margin-left:5px; }
-	.pro_feature_fields  .form-table td { padding:4px 10px; }
+	.pro_feature_fields  .form-table td, .pro_feature_fields .form-table th { padding:4px 10px; }
     </style>
     <div class="wrap">
     	<?php if( isset($_POST['wc_email_inquiry_pin_submit']) ) echo '<div id="message" class="updated fade"><p>'.get_option("a3rev_wc_email_inquiry_message").'</p></div>'; ?>

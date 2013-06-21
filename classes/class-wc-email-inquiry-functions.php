@@ -7,6 +7,7 @@
  * plugins_loaded()
  * check_hide_add_cart_button()
  * check_add_email_inquiry_button()
+ * check_add_email_inquiry_button_on_shoppage()
  * reset_products_to_global_settings()
  * email_inquiry()
  * get_from_address()
@@ -30,6 +31,7 @@ class WC_Email_Inquiry_Functions
 		WC_Email_Inquiry_Email_Options::get_settings();
 		WC_Email_Inquiry_Customize_Email_Button::get_settings();
 		WC_Email_Inquiry_Customize_Email_Popup::get_settings();
+		WC_Email_Inquiry_3RD_ContactForms_Settings::get_settings();
 	}
 	
 	public static function check_hide_add_cart_button ($product_id) {
@@ -87,6 +89,19 @@ class WC_Email_Inquiry_Functions
 		}
 		
 		return false;
+		
+	}
+	
+	public static function check_add_email_inquiry_button_on_shoppage ($product_id=0) {
+		global $wc_email_inquiry_global_settings;
+		$wc_email_inquiry_settings_custom = get_post_meta( $product_id, '_wc_email_inquiry_settings_custom', true);
+			
+		if (!isset($wc_email_inquiry_settings_custom['wc_email_inquiry_single_only'])) $wc_email_inquiry_single_only = $wc_email_inquiry_global_settings['inquiry_single_only'];
+		else $wc_email_inquiry_single_only = esc_attr($wc_email_inquiry_settings_custom['wc_email_inquiry_single_only']);
+		
+		if ($wc_email_inquiry_single_only == 'yes') return false;
+		
+		return WC_Email_Inquiry_Functions::check_add_email_inquiry_button($product_id);
 		
 	}
 	
@@ -258,30 +273,45 @@ class WC_Email_Inquiry_Functions
 		$html = '';
 		$html .= '<div id="wc_email_inquiry_extensions">';
 		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/a3logo.png" /></a>';
-		$html .= '<h3>'.__('Upgrade to Email Inquiry & Cart Options Pro', 'wc_email_inquiry').'</h3>';
-		$html .= '<p>'.__("<strong>NOTE:</strong> Settings inside the Yellow border are avaiable by upgrading to either the", 'wc_email_inquiry').' <a href="http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/" target="_blank">'.__("Pro Version of this plugin", 'wc_email_inquiry').'</a> '.__("or to the", 'wc_email_inquiry').' <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__("WooCommerce Quotes and Orders", 'wc_email_inquiry').'</a> '.__("plugin", 'wc_email_inquiry').':</p>';
+		$html .= '<h3>'.__('Upgrades available for Extra Functionality', 'wc_email_inquiry').'</h3>';
+		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border are extra functionality that is only avaiable by upgrading to one of 3 fully supported Pro Version plugins.", 'wc_email_inquiry').':</p>';
+		$html .= '<h3>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/" target="_blank">'.__('WooCommerce Email Inquiry & Cart Options Pro', 'wc_email_inquiry').'</a> '.__('Features', 'wc_email_inquiry').':</h3>';
 		$html .= '<p>';
-		$html .= '<p>'.__('WooCommerce Email Inquiry and Cart Options Pro version features', 'wc_email_inquiry').':</p>';
 		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>1. '.__("Activate Rule: Hide Product Prices.", 'wc_email_inquiry').'</li>';
-		$html .= '<li>2. '.__('Activate Email and Cart Product Page Meta.', 'wc_email_inquiry').'</li>';
-		$html .= '<li>3. '.__("Enables setting up a mixed 'add to cart' and product brochure store.", 'wc_email_inquiry').'</li>';
-		$html .= '<li>4. '.__('Activate WYSIWYG Email Inquiry button creator.', 'wc_email_inquiry').'</li>';
-		$html .= '<li>5. '.__('Activate WYSIWYG pop-up form creator.', 'wc_email_inquiry').'</li>';
-		$html .= '<li>6. '.__('Activate hyperlinked text instead of a Button.', 'wc_email_inquiry').'</li>';
-		$html .= '<li>7. '.__('Activate Email Inquiry products grid view store listings.', 'wc_email_inquiry').'</li>';
-		$html .= '<li>8. '.__("Activate Send a copy to myself feature.", 'wc_email_inquiry').'</li>';
-		$html .= '<li>9. '.__("Activate email 'From Name' and 'From Email Address'", 'wc_email_inquiry').'</li>';
-		$html .= '<li>10. '.__("Activate lifetime same day priority support", 'wc_email_inquiry').'</li>';
+		$html .= '<li>1. '.__("Rule: Hide Product Prices.", 'wc_email_inquiry').'</li>';
+		$html .= '<li>2. '.__('Email and Cart Product Page Meta.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>3. '.__("Create a mixed 'add to cart' and product brochure store.", 'wc_email_inquiry').'</li>';
+		$html .= '<li>4. '.__('WYSIWYG Email Inquiry button creator.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>5. '.__('WYSIWYG pop-up form creator.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>6. '.__('Hyperlinked text instead of a Button.', 'wc_email_inquiry').'</li>';
 		$html .= '</ul>';
 		$html .= '</p>';
-		$html .= '<h3>'.__('Quotes and Orders 7 Day Free Trial.', 'wc_email_inquiry').'</h3>';
-		$html .= '<p>'.__("If you'd like to see what all of the Quotes and Orders options features inside the yellow borders on here can enable you to make on your site you can do that for 7 days completely Free. Just go to the ", 'wc_email_inquiry').' <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders plugin', 'wc_email_inquiry').'</a> '.__("page and sign up for the 7 day free trail.", 'wc_email_inquiry').'</p>';
-		$html .= '<h3>'.__('Plugin Documentation', 'wc_email_inquiry').'</h3>';
-		$html .= '<p>'.__('All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request', 'wc_email_inquiry').'. <a href="http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/" target="_blank">'.__('Visit the a3rev wiki.', 'wc_email_inquiry').'</a></p>';
-		$html .= '<h3>'.__('More a3rev Quality Plugins', 'wc_email_inquiry').'</h3>';
-		$html .= '<p>'.__('Below is a list of the a3rev plugins that are available for free download from wordpress.org', 'wc_email_inquiry').'</p>';
-		$html .= '<h3>'.__('WooCommerce Plugins', 'wc_email_inquiry').'</h3>';
+		$html .= '<h3>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/" target="_blank">'.__('WooCommerce Email Inquiry Ultimate', 'wc_email_inquiry').'</a> '.__('Features', 'wc_email_inquiry').':</h3>';
+		$html .= '<p>';
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>1. '.__("Includes all Email Inquiry and Cart Option Pro features.", 'wc_email_inquiry').'</li>';
+		$html .= '<li>2. '.__('Full integration with Gravity Forms, Conatct Form 7.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>3. '.__("Custom Inquiry forms with Gravity Forms shortcode.", 'wc_email_inquiry').'</li>';
+		$html .= '<li>4. '.__('Custom Inquiry forms using Contact Form 7 shortcode.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>5. '.__('Inquiry form opens On Page below button.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>6. '.__('Open Email Inquiry form on new page option.', 'wc_email_inquiry').'</li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		$html .= '<h3>* <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders', 'wc_email_inquiry').'</a> '.__('Features', 'wc_email_inquiry').':</h3>';
+		$html .= '<p>';
+		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>1. '.__("Includes all features listed above.", 'wc_email_inquiry').'</li>';
+		$html .= '<li>2. '.__('Extends WooCommerce add to cart mode to 3 new modes.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>3. '.__("Converts add to cart function into an add to Quote function.", 'wc_email_inquiry').'</li>';
+		$html .= '<li>4. '.__("Manual' Quote Mode - quote prices off-line after request.", 'wc_email_inquiry').'</li>';
+		$html .= '<li>5. '.__('Auto Quote Mode - Auto sends full quote to user.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>6. '.__('Converts add to cart function into add to Order function.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>7. '.__('Full integration with WooCommerce.', 'wc_email_inquiry').'</li>';
+		$html .= '</ul>';
+		$html .= '</p>';
+		$html .= '<h3>'.__('View this plugins', 'wc_email_inquiry').' <a href="http://docs.a3rev.com/user-guides/plugins-extensions/woocommerce/woo-email-inquiry-cart-options/" target="_blank">'.__('documentation', 'wc_email_inquiry').'</a></h3>';
+		$html .= '<h3>'.__('Visit this plugins', 'wc_email_inquiry').' <a href="http://wordpress.org/support/plugin/woocommerce-email-inquiry-cart-options" target="_blank">'.__('support forum', 'wc_email_inquiry').'</a></h3>';
+		$html .= '<h3>'.__('More FREE a3rev WooCommerce Plugins', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-dynamic-gallery/" target="_blank">'.__('WooCommerce Dynamic Products Gallery', 'wc_email_inquiry').'</a></li>';
@@ -290,18 +320,11 @@ class WC_Email_Inquiry_Functions
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woo-widget-product-slideshow/" target="_blank">'.__('WooCommerce Widget Product Slideshow', 'wc_email_inquiry').'</a></li>';
 		$html .= '</ul>';
 		$html .= '</p>';
-		$html .= '<h3>'.__('WordPress Plugins', 'wc_email_inquiry').'</h3>';
+		$html .= '<h3>'.__('More FREE a3rev WordPress plugins', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wc_email_inquiry').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wc_email_inquiry').'</a></li>';
-		$html .= '</ul>';
-		$html .= '</p>';
-		$html .= '<h3>'.__('Help spread the Word about this plugin', 'wc_email_inquiry').'</h3>';
-		$html .= '<p>'.__("Things you can do to help others find this plugin", 'wc_email_inquiry');
-		$html .= '<ul style="padding-left:10px;">';
-		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-email-inquiry-cart-options/" target="_blank">'.__('Rate this plugin 5', 'wc_email_inquiry').' <img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/stars.png" align="top" /> '.__('on WordPress.org', 'wc_email_inquiry').'</a></li>';
-		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-email-inquiry-cart-options/" target="_blank">'.__('Mark the plugin as a fourite', 'wc_email_inquiry').'</a></li>';
 		$html .= '</ul>';
 		$html .= '</p>';
 		$html .= '</div>';

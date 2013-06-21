@@ -3,11 +3,11 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.0.3.1
+Stable tag: 1.0.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Turn WooCommerce products into a brochure page. Give logged in users add to cart functionality. Add Email Inquiry pop-up form to any product.
+Turn WooCommerce products into a brochure page on the front, allow logged roles add to cart functionality. Add Email Inquiry pop-up form to any product.
   
 == Description ==
 
@@ -25,24 +25,17 @@ Fine tune your entire Catalog visibility by
 
 = Email Inquiry =
 
-WooCommerce Email Inquiry & Cart Options PRO uses the WordPress email config and requires no external email plugin. Features
+WooCommerce Email Inquiry & Cart Options uses the WordPress email config and requires no external email plugin. Features
 
 * Add a Email Inquiry button to every product page.
-* Email Inquiry form is a pop up form. its a beautifully elegant Email Product Inquiry solution that takes up no room on your product page.
+* Option to use hyperlinked text instead of a Button.
+* Option to show Email inquiry on Product Page and on Grid View extract on Shop and Product category and Product Tag pages. 
+* Email Inquiry form is a pop up form. It is a beautifully elegant Email Product Inquiry solution that takes up no room on your product page.
 * Use 'Rules and Roles' setting to customize who can see the Email Inquiry button once they are logged in.
 * Set the receiver email address.
 * Set a receiver cc email address 
 * Fully customizable Sent success message shows as a pop-up on screen after inquiry is submitted.
 * Use the WordPress text editor (WYSIWYG and HTML) to style the success message (see image under the Screenshots tab on this page). 
-
-= WooCommerce V2.0 Compatible =
-
-WooCommerce Email Inquiry & Cart Options is 100% WooCommerce V2.0 compatible with backward version compatibility. No matter if you have upgraded or not the plugin will be compatible with the WooCommerce version you are using.
-
-= View Demo Site =
-
-We have a demo site set up with an out of the box version of the Woothemes Canvas theme - [see it here](http://compare.a3rev.com/shop/plain-t-shirts). For more detailed explanation of all the backend working of the plugin visit the WooCommerce Widget Product Slideshow documents 
-http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/
 
 = Support =
 
@@ -52,17 +45,44 @@ Once you have the plugin installed and activated please refer to the plugins [Co
 
 = Pro Version Upgrade =
 
-This plugin has a Pro version upgrade available. You will see all of the available upgrade features on the widget admin panel. Those Pro features include:
+This plugin has a choice of 3 Pro version upgrade plugins that add more functionality to this Free version. You will see all of the available upgrade features on the plugins admin panel, in the Yellow sidebar. Those Pro features include:
+
+= [WooCommerce Email Inquiry & Cart Options Pro](http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/) features: =
 
 * Hide Products Prices. The Pro Version includes the additional Rule: Hide Product Prices.
 * Per Product Page Customization. Rules are applied Globally across your entire store. With the Pro Version you can customize those Global Rules settings for every individual product from the Product page Email and cart meta. Gives you tremendous flexibility in setting up a mixed 'add to cart' and product brochure store.
 * WYSIWYG Email Inquiry button creator - allows you to style the button anyway you like without writing a line of code.
 * WYSIWYG pop-up form creator allows you to style your email pop-up form without writing a line of code.
-* Option to use hyperlinked text instead of a Button.
 * Option to show the Email Inquiry Button or Hyperlink text on products store and category extracts as well as the product pages
 * Option to allow the sender to send a copy of the form they are submitting to themselves.
 * Option to set Email Sender Options - Set the email 'From Name' and 'From Email Address' 
 
+
+= [WooCommerce Email Inquiry Ultimate](http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/) features: =
+
+* Includes all the features listed above in Email Inquiry and Cart Option Pro features
+* Full integration with the Gravity Forms and Contact Form 7 plugins
+* Use these industry leading email plugin create highly customized inquiry forms.
+* Create custom Inquiry forms using Gravity Forms shortcode.
+* Create custom Inquiry forms using Contact Form 7 shortcode.
+* Add unique contact forms from these plugins shortcodes to individual products.
+* Choose to open the Inquiry form On Page by Ajax 'roll down' below button.
+* For sites where space is limited open the Email Inquiry form on new page.
+
+= [WooCommerce Quotes and Orders](http://a3rev.com/shop/woocommerce-quotes-and-orders/) Features: =
+
+* Includes every feature listed above
+* Extends the WooCommerce add to cart function to 3 new functions on a role by role basis. 
+* Converts the add to cart function into an add to Quote function for creating a multiple product quote request.  
+* Use Manual' Quote Mode when you want to submit quote prices off-line after the Quote request is received.
+* Generate Instant and payable (via your payment gateways) Quotes including shipping and taxes with Auto Quotes Mode.  
+* Converts the WooCommerce add to cart function into a client friendly on-line Ordering system. Ideal for businesses with monthly account clients.
+* Fully integrated with WooCommerce 'Orders' system.
+* Fully integrated with WooCommerce My Account dashboard.
+* Creates 2 all new payment gateways - Quotes gateway and orders gateway.
+* Fully customizable Quotes and Orders email templates integrated into the WooCommerce Email Templates.
+* New WooCommerce 'Quotes' order status.
+* Creates 
 
 = Localization =
 
@@ -72,8 +92,8 @@ This plugin has a Pro version upgrade available. You will see all of the availab
 
 = Plugin Resources =
 
-[PRO Version](http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/) |
 [Documentation](http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/)
+[Support](http://wordpress.org/support/plugin/woocommerce-email-inquiry-cart-options)
 
 
 == Installation ==
@@ -129,6 +149,13 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.4 - 2013/06/21 =
+* Feature: Email Inquiry - Settings. Added option to show Email Inquiry by Hyperlinked text instead of button.
+* Feature: Email Inquiry - Settings. Added option to set relative Button or link position, Above or Below add to cart button position.
+* Feature: Email Inquiry - Settings. Added option to set padding for button / link position.
+* Feature: Email Inquiry - Settings. Added option to show Email Inquiry button / Link on product grid view extracts on shop and archives pages.
+* Tweak: Upgraded admin Yellow sidebar box information to show the 3 available feature Upgrade plugins.  
+
 = 1.0.3.1 - 2013/06/05 =
 * Tweak: Upgraded and synched the plugins code to be inline with the new WooCommerce Quotes and Orders plugin. This allows users to seamlessly upgrade to that plugin at any time.
 * Tweak: Updated the plugins support links to the new a3rev support forum.
@@ -154,6 +181,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+Upgrade now to add functionality from 4 new features.
 
 = 1.0.3 =
 Upgrade now for major admin User interface upgrade and various minor bug fixes.

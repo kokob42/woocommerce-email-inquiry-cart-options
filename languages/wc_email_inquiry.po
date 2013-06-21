@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP e-Commerce Catalog Visibility Email inquiry PRO\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-05 21:27+0700\n"
-"PO-Revision-Date: 2013-06-05 21:27+0700\n"
+"POT-Creation-Date: 2013-06-21 16:37+0700\n"
+"PO-Revision-Date: 2013-06-21 16:37+0700\n"
 "Last-Translator: Nguyen Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "MIME-Version: 1.0\n"
@@ -13,19 +13,19 @@ msgstr ""
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/wc-email-inquiry-init.php:114
+#: admin/wc-email-inquiry-init.php:127
 msgid "Rules & Roles"
 msgstr ""
 
-#: admin/wc-email-inquiry-init.php:115
+#: admin/wc-email-inquiry-init.php:128
 msgid "Email Inquiry"
 msgstr ""
 
-#: admin/wc-email-inquiry-init.php:116
+#: admin/wc-email-inquiry-init.php:129
 msgid "Quotes Mode"
 msgstr ""
 
-#: admin/wc-email-inquiry-init.php:117
+#: admin/wc-email-inquiry-init.php:130
 msgid "Orders Mode"
 msgstr ""
 
@@ -55,14 +55,18 @@ msgstr ""
 msgid "Email Pop-Up Style"
 msgstr ""
 
-#: admin/classes/class-email-inquiry-panel.php:57
+#: admin/classes/class-email-inquiry-panel.php:34
+msgid "3RD Party Contact Forms"
+msgstr ""
+
+#: admin/classes/class-email-inquiry-panel.php:61
 #: admin/classes/class-order-panel.php:93
 #: admin/classes/class-quote-panel.php:93
 #: admin/classes/class-rules-roles-panel.php:290
 msgid "Save changes"
 msgstr ""
 
-#: admin/classes/class-email-inquiry-panel.php:58
+#: admin/classes/class-email-inquiry-panel.php:62
 #: admin/classes/class-order-panel.php:94
 #: admin/classes/class-quote-panel.php:94
 #: admin/classes/class-rules-roles-panel.php:291
@@ -94,6 +98,7 @@ msgstr ""
 
 #: admin/classes/class-order-panel.php:43
 #: admin/classes/class-quote-panel.php:43
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:84
 msgid "Product Page"
 msgstr ""
 
@@ -183,7 +188,10 @@ msgid "Rule: Hide Price"
 msgstr ""
 
 #: admin/classes/class-rules-roles-panel.php:169
-#: admin/classes/email-inquiry-panel/class-global-settings.php:94
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:117
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:120
+#: admin/classes/email-inquiry-panel/class-global-settings.php:121
+#: admin/classes/email-inquiry-panel/class-global-settings.php:124
 msgid "Global Re-Set"
 msgstr ""
 
@@ -264,6 +272,106 @@ msgstr ""
 msgid "Rules & Roles Successfully reseted."
 msgstr ""
 
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:62
+msgid "Use 3RD Party Contact Form Shortcode"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:63
+msgid "Current this plugin support for shortcode of <strong>Gravityform</strong> and <strong>Contact Form 7</strong> plugins"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:66
+msgid "Use Contact Form Shortcodes"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:69
+#: admin/classes/email-inquiry-panel/class-global-settings.php:114
+msgid "No"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:69
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:86
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:116
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:123
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:135
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:146
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:159
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:160
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:196
+#: admin/classes/email-inquiry-panel/class-customize-email-button.php:202
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:154
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:161
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:173
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:184
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:197
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:198
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:234
+#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:240
+msgid "Default"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:70
+#: admin/classes/email-inquiry-panel/class-global-settings.php:113
+msgid "Yes"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:71
+msgid "Select Yes to use 3rd Contact Form Shortcodes instead of Default form from plugin."
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:75
+msgid "Enter Global Form Shortcode"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:77
+msgid "Can add unique form shortcode on each product page."
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:81
+msgid "Custom Form Open Options"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:86
+msgid "Open contact form on new page."
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:87
+msgid "Open contact form on page (form opens by ajax under the inquiry button)."
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:90
+msgid "Grid View"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:92
+msgid "Form opens by default on new page."
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:96
+msgid "Email Inquiry New Page"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:100
+#, php-format
+msgid "A 'Email Inquiry' page with the shortcode %s inserted should have been auto created on install. If not you need to manually create a new page and add the shortcode. Then set that page below so the plugin knows where to find it."
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:103
+msgid "Email Inquiry Page"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:106
+msgid "Select Page"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:111
+msgid "Page contents"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:122
+msgid "Check to reset ALL products that have custom Form Shortcode to the settings made above."
+msgstr ""
+
 #: admin/classes/email-inquiry-panel/class-customize-email-button.php:18
 msgid "Click Here"
 msgstr ""
@@ -313,25 +421,6 @@ msgstr ""
 #: admin/classes/email-inquiry-panel/class-customize-email-button.php:114
 #: admin/classes/email-inquiry-panel/class-customize-email-popup.php:152
 msgid "Button BG Colour Gradient From"
-msgstr ""
-
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:116
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:123
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:135
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:146
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:159
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:160
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:196
-#: admin/classes/email-inquiry-panel/class-customize-email-button.php:202
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:154
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:161
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:173
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:184
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:197
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:198
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:234
-#: admin/classes/email-inquiry-panel/class-customize-email-popup.php:240
-msgid "Default"
 msgstr ""
 
 #: admin/classes/email-inquiry-panel/class-customize-email-button.php:121
@@ -527,8 +616,6 @@ msgid "Form CSS Class"
 msgstr ""
 
 #: admin/classes/email-inquiry-panel/class-customize-email-popup.php:261
-#: admin/classes/order-panel/class-order-product-page.php:89
-#: admin/classes/order-panel/class-order-product-page.php:92
 msgid "Success Message"
 msgstr ""
 
@@ -580,63 +667,55 @@ msgstr ""
 msgid "&lt;empty&gt; defaults to 'no copy sent' or add an email address"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:58
+#: admin/classes/email-inquiry-panel/class-global-settings.php:83
 msgid "Email Inquiry Button / Hyperlink"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:61
+#: admin/classes/email-inquiry-panel/class-global-settings.php:86
 msgid "Button or Hyperlink Text"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:64
+#: admin/classes/email-inquiry-panel/class-global-settings.php:89
 msgid "Button"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:65
+#: admin/classes/email-inquiry-panel/class-global-settings.php:90
 msgid "Link"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:70
+#: admin/classes/email-inquiry-panel/class-global-settings.php:95
 msgid "Relative Position"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:73
+#: admin/classes/email-inquiry-panel/class-global-settings.php:98
 msgid "Below (Default)"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:74
+#: admin/classes/email-inquiry-panel/class-global-settings.php:99
 msgid "Above"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:75
+#: admin/classes/email-inquiry-panel/class-global-settings.php:100
 msgid "Position relative to add to cart button location"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:79
+#: admin/classes/email-inquiry-panel/class-global-settings.php:104
 msgid "Padding"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:81
+#: admin/classes/email-inquiry-panel/class-global-settings.php:106
 msgid "Default padding is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding."
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:85
+#: admin/classes/email-inquiry-panel/class-global-settings.php:110
 msgid "Single Product Page only"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:88
-msgid "Yes"
-msgstr ""
-
-#: admin/classes/email-inquiry-panel/class-global-settings.php:89
-msgid "No"
-msgstr ""
-
-#: admin/classes/email-inquiry-panel/class-global-settings.php:90
+#: admin/classes/email-inquiry-panel/class-global-settings.php:115
 msgid "Default =  No. Button / Link text shows on single products pages as well as products list view, grid view, category and tag pages."
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:96
+#: admin/classes/email-inquiry-panel/class-global-settings.php:126
 msgid "Check to reset ALL products that have custom Button or Hyperlink Text settings to the settings made above."
 msgstr ""
 
@@ -916,10 +995,12 @@ msgid "Add to Order"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:19
+#: admin/classes/order-panel/class-order-widget-cart.php:18
 msgid "View Order &rarr;"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:20
+#: admin/classes/quote-panel/class-quote-product-page.php:20
 msgid "Continue Request &rarr;"
 msgstr ""
 
@@ -955,6 +1036,7 @@ msgid "Order Feature on Product Page"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:70
+#: admin/classes/quote-panel/class-quote-product-page.php:70
 msgid "Button Text"
 msgstr ""
 
@@ -971,50 +1053,65 @@ msgid "Text that shows instead of 'View Cart &rarr;'. Default 'View Order &rarr;
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:82
+#: admin/classes/quote-panel/class-quote-product-page.php:82
 msgid "Continue Request Button Text"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:84
+#: admin/classes/quote-panel/class-quote-product-page.php:84
 msgid "Text that shows instead of 'Continue Shopping &rarr;'. Default 'Continue Request &rarr;'"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:94
 #: admin/classes/order-panel/class-order-product-page.php:100
 #: admin/classes/order-panel/class-order-product-page.php:122
+#: admin/classes/quote-panel/class-quote-product-page.php:94
+#: admin/classes/quote-panel/class-quote-product-page.php:100
+#: admin/classes/quote-panel/class-quote-product-page.php:122
 msgid "Replace by Product name"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:98
+#: admin/classes/quote-panel/class-quote-product-page.php:98
 msgid "Group Added Success Message"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:105
+#: admin/classes/quote-panel/class-quote-product-page.php:105
 msgid "Error Message"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:108
+#: admin/classes/quote-panel/class-quote-product-page.php:108
 msgid "Quantity Error"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:110
 #: admin/classes/order-panel/class-order-product-page.php:116
 #: admin/classes/order-panel/class-order-product-page.php:128
+#: admin/classes/quote-panel/class-quote-product-page.php:110
+#: admin/classes/quote-panel/class-quote-product-page.php:116
+#: admin/classes/quote-panel/class-quote-product-page.php:128
 msgid "Replace for :"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:110
+#: admin/classes/quote-panel/class-quote-product-page.php:110
 msgid "Please choose the quantity of items you wish to add to your cart&hellip;"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:114
+#: admin/classes/quote-panel/class-quote-product-page.php:114
 msgid "No Product Added Error"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:116
+#: admin/classes/quote-panel/class-quote-product-page.php:116
 msgid "Please choose a product to add to your cart&hellip;"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:120
+#: admin/classes/quote-panel/class-quote-product-page.php:120
 msgid "Product Is Out of Stock Error"
 msgstr ""
 
@@ -1023,6 +1120,7 @@ msgid "Product Existed In Order"
 msgstr ""
 
 #: admin/classes/order-panel/class-order-product-page.php:128
+#: admin/classes/quote-panel/class-quote-product-page.php:128
 msgid "You already have this item in your cart."
 msgstr ""
 
@@ -1241,291 +1339,285 @@ msgstr ""
 msgid "View Quote Button"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:145
+#: classes/class-wc-email-inquiry-functions.php:160
 msgid "Email inquiry for"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:146
+#: classes/class-wc-email-inquiry-functions.php:161
 msgid "[Copy]: Email inquiry for"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:154
-#: classes/class-wc-email-inquiry-hook.php:194
+#: classes/class-wc-email-inquiry-functions.php:169
+#: classes/class-wc-email-inquiry-hook.php:227
 msgid "Name"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:160
-#: classes/class-wc-email-inquiry-hook.php:197
+#: classes/class-wc-email-inquiry-functions.php:175
+#: classes/class-wc-email-inquiry-hook.php:230
 msgid "Email Address"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:166
-#: classes/class-wc-email-inquiry-hook.php:200
+#: classes/class-wc-email-inquiry-functions.php:181
+#: classes/class-wc-email-inquiry-hook.php:233
 msgid "Phone"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:171
+#: classes/class-wc-email-inquiry-functions.php:186
 msgid "Product Name"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:176
-#: classes/class-wc-email-inquiry-hook.php:206
+#: classes/class-wc-email-inquiry-functions.php:191
+#: classes/class-wc-email-inquiry-hook.php:239
 msgid "Message"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:205
+#: classes/class-wc-email-inquiry-functions.php:220
 msgid "Sorry, this product don't enable email inquiry."
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:235
+#: classes/class-wc-email-inquiry-functions.php:250
 msgid "Arial"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:236
+#: classes/class-wc-email-inquiry-functions.php:251
 msgid "Verdana"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:237
+#: classes/class-wc-email-inquiry-functions.php:252
 msgid "Trebuchet"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:238
+#: classes/class-wc-email-inquiry-functions.php:253
 msgid "Georgia"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:239
+#: classes/class-wc-email-inquiry-functions.php:254
 msgid "Times New Roman"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:240
+#: classes/class-wc-email-inquiry-functions.php:255
 msgid "Tahoma"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:241
+#: classes/class-wc-email-inquiry-functions.php:256
 msgid "Palatino"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:242
+#: classes/class-wc-email-inquiry-functions.php:257
 msgid "Helvetica*"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:243
+#: classes/class-wc-email-inquiry-functions.php:258
 msgid "Calibri*"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:244
+#: classes/class-wc-email-inquiry-functions.php:259
 msgid "Myriad Pro*"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:245
+#: classes/class-wc-email-inquiry-functions.php:260
 msgid "Lucida"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:246
+#: classes/class-wc-email-inquiry-functions.php:261
 msgid "Arial Black"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:247
+#: classes/class-wc-email-inquiry-functions.php:262
 msgid "Gill Sans*"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:248
+#: classes/class-wc-email-inquiry-functions.php:263
 msgid "Geneva*"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:249
+#: classes/class-wc-email-inquiry-functions.php:264
 msgid "Impact"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:250
+#: classes/class-wc-email-inquiry-functions.php:265
 msgid "Courier"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:251
+#: classes/class-wc-email-inquiry-functions.php:266
 msgid "Century Gothic"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:261
-msgid "Upgrade to Email Inquiry & Cart Options Pro"
+#: classes/class-wc-email-inquiry-functions.php:276
+msgid "Upgrades available for Extra Functionality"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:262
-msgid "<strong>NOTE:</strong> Settings inside the Yellow border are avaiable by upgrading to either the"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:262
-msgid "Pro Version of this plugin"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:262
-msgid "or to the"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:262
-msgid "WooCommerce Quotes and Orders"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:262
-msgid "plugin"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:264
-msgid "WooCommerce Email Inquiry and Cart Options Pro version features"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:266
-msgid "Activate Rule: Hide Product Prices."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:267
-msgid "Activate Email and Cart Product Page Meta."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:268
-msgid "Enables setting up a mixed 'add to cart' and product brochure store."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:269
-msgid "Activate WYSIWYG Email Inquiry button creator."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:270
-msgid "Activate WYSIWYG pop-up form creator."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:271
-msgid "Activate hyperlinked text instead of a Button."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:272
-msgid "Activate Email Inquiry products grid view store listings."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:273
-msgid "Activate Send a copy to myself feature."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:274
-msgid "Activate email 'From Name' and 'From Email Address'"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:275
-msgid "Activate lifetime same day priority support"
+#: classes/class-wc-email-inquiry-functions.php:277
+msgid "<strong>NOTE:</strong> All the functions inside the Yellow border are extra functionality that is only avaiable by upgrading to one of 3 fully supported Pro Version plugins."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:278
-msgid "Quotes and Orders 7 Day Free Trial."
+msgid "WooCommerce Email Inquiry & Cart Options Pro"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:279
-msgid "If you'd like to see what all of the Quotes and Orders options features inside the yellow borders on here can enable you to make on your site you can do that for 7 days completely Free. Just go to the "
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:279
-msgid "WooCommerce Quotes and Orders plugin"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:279
-msgid "page and sign up for the 7 day free trail."
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:280
-msgid "Plugin Documentation"
+#: classes/class-wc-email-inquiry-functions.php:278
+#: classes/class-wc-email-inquiry-functions.php:289
+#: classes/class-wc-email-inquiry-functions.php:300
+msgid "Features"
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:281
-msgid "All of our plugins have comprehensive online documentation. Please refer to the plugins docs before raising a support request"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:281
-msgid "Visit the a3rev wiki."
+msgid "Rule: Hide Product Prices."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:282
-msgid "More a3rev Quality Plugins"
+msgid "Email and Cart Product Page Meta."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:283
-msgid "Below is a list of the a3rev plugins that are available for free download from wordpress.org"
+msgid "Create a mixed 'add to cart' and product brochure store."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:284
-msgid "WooCommerce Plugins"
+msgid "WYSIWYG Email Inquiry button creator."
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:287
-msgid "WooCommerce Dynamic Products Gallery"
+#: classes/class-wc-email-inquiry-functions.php:285
+msgid "WYSIWYG pop-up form creator."
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:288
-msgid "WooCommerce Predictive Search"
+#: classes/class-wc-email-inquiry-functions.php:286
+msgid "Hyperlinked text instead of a Button."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:289
-msgid "WooCommerce Compare Products"
+msgid "WooCommerce Email Inquiry Ultimate"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-functions.php:290
-msgid "WooCommerce Widget Product Slideshow"
+#: classes/class-wc-email-inquiry-functions.php:292
+msgid "Includes all Email Inquiry and Cart Option Pro features."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:293
-msgid "WordPress Plugins"
+msgid "Full integration with Gravity Forms, Conatct Form 7."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:294
+msgid "Custom Inquiry forms with Gravity Forms shortcode."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:295
+msgid "Custom Inquiry forms using Contact Form 7 shortcode."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:296
-msgid "WordPress Email Template"
+msgid "Inquiry form opens On Page below button."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:297
-msgid "Page View Count"
+msgid "Open Email Inquiry form on new page option."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:300
-msgid "Help spread the Word about this plugin"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:301
-msgid "Things you can do to help others find this plugin"
+msgid "WooCommerce Quotes and Orders"
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:303
-msgid "Rate this plugin 5"
-msgstr ""
-
-#: classes/class-wc-email-inquiry-functions.php:303
-msgid "on WordPress.org"
+msgid "Includes all features listed above."
 msgstr ""
 
 #: classes/class-wc-email-inquiry-functions.php:304
-msgid "Mark the plugin as a fourite"
+msgid "Extends WooCommerce add to cart mode to 3 new modes."
 msgstr ""
 
-#: classes/class-wc-email-inquiry-hook.php:29
+#: classes/class-wc-email-inquiry-functions.php:305
+msgid "Converts add to cart function into an add to Quote function."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:306
+msgid "Manual' Quote Mode - quote prices off-line after request."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:307
+msgid "Auto Quote Mode - Auto sends full quote to user."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:308
+msgid "Converts add to cart function into add to Order function."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:309
+msgid "Full integration with WooCommerce."
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:312
+msgid "View this plugins"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:312
+msgid "documentation"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:313
+msgid "Visit this plugins"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:313
+msgid "support forum"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:314
+msgid "More FREE a3rev WooCommerce Plugins"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:317
+msgid "WooCommerce Dynamic Products Gallery"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:318
+msgid "WooCommerce Predictive Search"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:319
+msgid "WooCommerce Compare Products"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:320
+msgid "WooCommerce Widget Product Slideshow"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:323
+msgid "More FREE a3rev WordPress plugins"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:326
+msgid "WordPress Email Template"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-functions.php:327
+msgid "Page View Count"
+msgstr ""
+
+#: classes/class-wc-email-inquiry-hook.php:31
 msgid "Email & Cart Options"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-hook.php:203
+#: classes/class-wc-email-inquiry-hook.php:236
 msgid "Subject"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-hook.php:324
+#: classes/class-wc-email-inquiry-hook.php:357
 msgid "Please enter your Name"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-hook.php:328
+#: classes/class-wc-email-inquiry-hook.php:361
 msgid "Please enter valid Email address"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-hook.php:332
+#: classes/class-wc-email-inquiry-hook.php:365
 msgid "Please enter your Phone"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-hook.php:440
+#: classes/class-wc-email-inquiry-hook.php:473
 msgid "Documentation"
 msgstr ""
 
-#: classes/class-wc-email-inquiry-hook.php:441
+#: classes/class-wc-email-inquiry-hook.php:474
 msgid "Support"
 msgstr ""
 
@@ -1564,7 +1656,6 @@ msgstr ""
 #: templates/emails/order-new-account.php:12
 #: templates/emails/quote-new-account.php:12
 #: templates/emails/plain/order-new-account.php:10
-#: templates/emails/plain/quote-new-account.php:10
 msgid "Please Upgrade to WooCommerce Quotes and Orders plugin"
 msgstr ""
 

@@ -30,13 +30,12 @@ class WC_Email_Inquiry_Panel
             	<li><a href="#global-settings" class="current"><?php _e('Settings', 'wc_email_inquiry'); ?></a> | </li>
                 <li><a href="#email-options"><?php _e('Email Options', 'wc_email_inquiry'); ?></a> | </li>
                 <li><a href="#customize-email-button"><?php _e('Email Button/Link Style', 'wc_email_inquiry'); ?></a> | </li>
-                <li><a href="#customize-email-popup"><?php _e('Email Pop-Up Style', 'wc_email_inquiry'); ?></a></li>
+                <li><a href="#customize-email-popup"><?php _e('Email Pop-Up Style', 'wc_email_inquiry'); ?></a> | </li>
+                <li><a href="#3rd-contact-forms"><?php _e('3RD Party Contact Forms', 'wc_email_inquiry'); ?></a></li>
 			</ul>
             <br class="clear">
             <div class="section" id="global-settings">
-            	<div class="pro_feature_fields">
             	<?php WC_Email_Inquiry_Global_Settings::panel_page(); ?>
-                </div>
             </div>
             <div class="section" id="email-options">
             	<?php WC_Email_Inquiry_Email_Options::panel_page(); ?>
@@ -48,6 +47,11 @@ class WC_Email_Inquiry_Panel
             </div>
             <div class="section" id="customize-email-popup">
             	<?php WC_Email_Inquiry_Customize_Email_Popup::panel_page(); ?>
+            </div>
+            <div class="section" id="3rd-contact-forms">
+            	<div class="pro_feature_fields">
+            	<?php WC_Email_Inquiry_3RD_ContactForms_Settings::panel_page(); ?>
+                </div>
             </div>
 		</div>
         <div id="wc_email_inquiry_upgrade_area"><?php echo WC_Email_Inquiry_Functions::plugin_pro_notice(); ?></div>
