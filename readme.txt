@@ -47,7 +47,8 @@ Once you have the plugin installed and activated please refer to the plugins [Co
 
 This plugin has a choice of 3 Pro version upgrade plugins that add more functionality to this Free version. You will see all of the available upgrade features on the plugins admin panel, in the Yellow sidebar. Those Pro features include:
 
-= [WooCommerce Email Inquiry & Cart Options Pro](http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/) features: =
+= WooCommerce Email Inquiry & Cart Options Pro =
+[WooCommerce Email Inquiry & Cart Options Pro](http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/) features:
 
 * Hide Products Prices. The Pro Version includes the additional Rule: Hide Product Prices.
 * Per Product Page Customization. Rules are applied Globally across your entire store. With the Pro Version you can customize those Global Rules settings for every individual product from the Product page Email and cart meta. Gives you tremendous flexibility in setting up a mixed 'add to cart' and product brochure store.
@@ -58,7 +59,8 @@ This plugin has a choice of 3 Pro version upgrade plugins that add more function
 * Option to set Email Sender Options - Set the email 'From Name' and 'From Email Address' 
 
 
-= [WooCommerce Email Inquiry Ultimate](http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/) features: =
+= WooCommerce Email Inquiry Ultimate =
+[WooCommerce Email Inquiry Ultimate](http://a3rev.com/shop/woocommerce-email-inquiry-ultimate/) features:
 
 * Includes all the features listed above in Email Inquiry and Cart Option Pro features
 * Full integration with the Gravity Forms and Contact Form 7 plugins
@@ -69,7 +71,8 @@ This plugin has a choice of 3 Pro version upgrade plugins that add more function
 * Choose to open the Inquiry form On Page by Ajax 'roll down' below button.
 * For sites where space is limited open the Email Inquiry form on new page.
 
-= [WooCommerce Quotes and Orders](http://a3rev.com/shop/woocommerce-quotes-and-orders/) Features: =
+= WooCommerce Quotes and Orders =
+[WooCommerce Quotes and Orders](http://a3rev.com/shop/woocommerce-quotes-and-orders/) Features:
 
 * Includes every feature listed above
 * Extends the WooCommerce add to cart function to 3 new functions on a role by role basis. 
