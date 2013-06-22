@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP e-Commerce Catalog Visibility Email inquiry PRO\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-21 16:37+0700\n"
-"PO-Revision-Date: 2013-06-21 16:37+0700\n"
+"POT-Creation-Date: 2013-06-22 12:36+0700\n"
+"PO-Revision-Date: 2013-06-22 12:36+0700\n"
 "Last-Translator: Nguyen Tuan <mr.nguyencongtuan@gmail.com>\n"
 "Language-Team: a3rev\n"
 "MIME-Version: 1.0\n"
@@ -190,8 +190,8 @@ msgstr ""
 #: admin/classes/class-rules-roles-panel.php:169
 #: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:117
 #: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:120
-#: admin/classes/email-inquiry-panel/class-global-settings.php:121
-#: admin/classes/email-inquiry-panel/class-global-settings.php:124
+#: admin/classes/email-inquiry-panel/class-global-settings.php:128
+#: admin/classes/email-inquiry-panel/class-global-settings.php:131
 msgid "Global Re-Set"
 msgstr ""
 
@@ -285,7 +285,7 @@ msgid "Use Contact Form Shortcodes"
 msgstr ""
 
 #: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:69
-#: admin/classes/email-inquiry-panel/class-global-settings.php:114
+#: admin/classes/email-inquiry-panel/class-global-settings.php:121
 msgid "No"
 msgstr ""
 
@@ -311,7 +311,7 @@ msgid "Default"
 msgstr ""
 
 #: admin/classes/email-inquiry-panel/class-3rd-contact-forms.php:70
-#: admin/classes/email-inquiry-panel/class-global-settings.php:113
+#: admin/classes/email-inquiry-panel/class-global-settings.php:120
 msgid "Yes"
 msgstr ""
 
@@ -667,55 +667,63 @@ msgstr ""
 msgid "&lt;empty&gt; defaults to 'no copy sent' or add an email address"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:83
+#: admin/classes/email-inquiry-panel/class-global-settings.php:84
 msgid "Email Inquiry Button / Hyperlink"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:86
+#: admin/classes/email-inquiry-panel/class-global-settings.php:87
 msgid "Button or Hyperlink Text"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:89
+#: admin/classes/email-inquiry-panel/class-global-settings.php:90
 msgid "Button"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:90
+#: admin/classes/email-inquiry-panel/class-global-settings.php:91
 msgid "Link"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:95
+#: admin/classes/email-inquiry-panel/class-global-settings.php:96
 msgid "Relative Position"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:98
+#: admin/classes/email-inquiry-panel/class-global-settings.php:99
 msgid "Below (Default)"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:99
+#: admin/classes/email-inquiry-panel/class-global-settings.php:100
 msgid "Above"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:100
+#: admin/classes/email-inquiry-panel/class-global-settings.php:101
 msgid "Position relative to add to cart button location"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:104
-msgid "Padding"
+#: admin/classes/email-inquiry-panel/class-global-settings.php:105
+msgid "Padding Top"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:106
-msgid "Default padding is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding."
+#: admin/classes/email-inquiry-panel/class-global-settings.php:107
+msgid "Default padding top is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding."
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:110
+#: admin/classes/email-inquiry-panel/class-global-settings.php:111
+msgid "Padding Bottom"
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-global-settings.php:113
+msgid "Default padding bottom is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding."
+msgstr ""
+
+#: admin/classes/email-inquiry-panel/class-global-settings.php:117
 msgid "Single Product Page only"
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:115
+#: admin/classes/email-inquiry-panel/class-global-settings.php:122
 msgid "Default =  No. Button / Link text shows on single products pages as well as products list view, grid view, category and tag pages."
 msgstr ""
 
-#: admin/classes/email-inquiry-panel/class-global-settings.php:126
+#: admin/classes/email-inquiry-panel/class-global-settings.php:133
 msgid "Check to reset ALL products that have custom Button or Hyperlink Text settings to the settings made above."
 msgstr ""
 

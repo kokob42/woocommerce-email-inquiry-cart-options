@@ -16,7 +16,8 @@ class WC_Email_Inquiry_Global_Settings
 		$default_settings = array(
 			'inquiry_button_type'					=> 'button',
 			'inquiry_button_position'				=> 'below',
-			'inquiry_button_padding'				=> 5,
+			'inquiry_button_padding_top'			=> 5,
+			'inquiry_button_padding_bottom'			=> 5,
 			'inquiry_single_only'					=> 'no',
 		);
 		
@@ -101,9 +102,15 @@ class WC_Email_Inquiry_Global_Settings
 				</td>
 			</tr>
             <tr valign="top">
-		    	<th class="titledesc" scope="row"><label for="inquiry_button_padding"><?php _e( 'Padding', 'wc_email_inquiry' );?></label></th>
+		    	<th class="titledesc" scope="row"><label for="inquiry_button_padding_top"><?php _e( 'Padding Top', 'wc_email_inquiry' );?></label></th>
 		    	<td class="forminp">                    
-                    <input type="text" value="<?php esc_attr_e( stripslashes( $inquiry_button_padding ) ); ?>" name="<?php echo $option_name; ?>[inquiry_button_padding]" id="inquiry_button_padding" style="width:120px;"  />px <span class="description"><?php _e( 'Default padding is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding.', 'wc_email_inquiry'); ?></span>
+                    <input type="text" value="<?php esc_attr_e( stripslashes( $inquiry_button_padding_top ) ); ?>" name="<?php echo $option_name; ?>[inquiry_button_padding_top]" id="inquiry_button_padding_top" style="width:120px;"  />px <span class="description"><?php _e( 'Default padding top is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding.', 'wc_email_inquiry'); ?></span>
+				</td>
+			</tr>
+            <tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="inquiry_button_padding_bottom"><?php _e( 'Padding Bottom', 'wc_email_inquiry' );?></label></th>
+		    	<td class="forminp">                    
+                    <input type="text" value="<?php esc_attr_e( stripslashes( $inquiry_button_padding_bottom ) ); ?>" name="<?php echo $option_name; ?>[inquiry_button_padding_bottom]" id="inquiry_button_padding_bottom" style="width:120px;"  />px <span class="description"><?php _e( 'Default padding bottom is <code>5px</code>. If you see padding between the add to cart button and the email button before adding a value here that padding is added by your theme. Increasing the padding here will add to the themes default button padding.', 'wc_email_inquiry'); ?></span>
 				</td>
 			</tr>
             <tr valign="top">

@@ -10,11 +10,8 @@ extract($wc_email_inquiry_customize_email_button);
 
 /* Email Inquiry Button Style */
 .wc_email_inquiry_button_container { 
-<?php if ($inquiry_button_position == 'above') { ?>
-	margin-bottom: <?php echo $inquiry_button_padding; ?>px !important;
-<? } else { ?>
-	margin-top: <?php echo $inquiry_button_padding; ?>px !important;
-<?php } ?>
+	margin-bottom: <?php echo $inquiry_button_padding_bottom; ?>px !important;
+	margin-top: <?php echo $inquiry_button_padding_top; ?>px !important;
 }
 body .wc_email_inquiry_button_container .wc_email_inquiry_button {
 	position: relative !important;
