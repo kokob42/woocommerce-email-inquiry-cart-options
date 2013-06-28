@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.3
-Tested up to: 3.5.1
-Stable tag: 1.0.5
+Tested up to: 3.5.2
+Stable tag: 1.0.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.6 - 2013/06/28 =
+* Fixed: Replaced hardcode iso-8859-1 charset to dynamic get_option('blog_charset')
+
 = 1.0.5 - 2013/06/22 =
 * Feature: Email Inquiry - Settings. Added option to set padding in px above and below the Email Inquiry button / Hyperlink.
 
@@ -187,6 +190,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.6 =
+Update your plugin now for an important charset bug fix.
 
 = 1.0.4 =
 Upgrade now to add functionality from 4 new features.

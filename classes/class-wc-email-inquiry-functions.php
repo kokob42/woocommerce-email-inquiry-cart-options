@@ -140,7 +140,7 @@ class WC_Email_Inquiry_Functions
 			
 			$headers = array();
 			$headers[] = 'MIME-Version: 1.0';
-			$headers[] = 'Content-type: text/html; charset=iso-8859-1';
+			$headers[] = 'Content-type: text/html; charset='. get_option('blog_charset');
 			$headers[] = 'From: '.$from_name.' <'.$from_email.'>';
 			$headers_yourself = $headers;
 			
