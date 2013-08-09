@@ -33,6 +33,11 @@ class WC_Email_Inquiry_Customize_Email_Popup
 			'inquiry_contact_button_font_colour'	=> '#FFFFFF',
 			'inquiry_contact_button_class'			=> '',
 			
+			'inquiry_contact_popup_text_font'		=> '',
+			'inquiry_contact_popup_text_font_size'	=> '',
+			'inquiry_contact_popup_text_font_style'	=> '',
+			'inquiry_contact_popup_text_font_colour'=> '',
+			
 			'inquiry_contact_form_class'			=> '',
 		);
 		
@@ -52,6 +57,11 @@ class WC_Email_Inquiry_Customize_Email_Popup
 		unset($free_default_settings['inquiry_popup_type']);
 		unset($free_default_settings['inquiry_contact_heading']);
 		unset($free_default_settings['inquiry_contact_text_button']);
+		
+		unset($free_default_settings['inquiry_contact_popup_text_font']);
+		unset($free_default_settings['inquiry_contact_popup_text_font_size']);
+		unset($free_default_settings['inquiry_contact_popup_text_font_style']);
+		unset($free_default_settings['inquiry_contact_popup_text_font_colour']);
 		$customized_settings = array_merge($customized_settings, $free_default_settings);
 		
 		if ($reset) {
@@ -125,12 +135,31 @@ class WC_Email_Inquiry_Customize_Email_Popup
 					</select> <span class="description"><?php _e('PrettyPhoto is WooCommerce default pop up tool. Some bespoke themes use Fancybox or ColorBox.', 'wc_email_inquiry');?></span>
 				</td>
 			</tr>
+		</table>
+        
+        <div class="pro_feature_fields">
+        <table class="form-table">
+        	<tr valign="top">
+		    	<th class="titledesc" scope="row"><label for="inquiry_contact_form_class"><?php _e( 'Form CSS Class', 'wc_email_inquiry' );?></label></th>
+		    	<td class="forminp">                    
+                    <input disabled="disabled" type="text" value="<?php esc_attr_e( stripslashes( $inquiry_contact_form_class ) ); ?>" name="inquiry_contact_form_class" id="inquiry_contact_form_class" style="width:300px;"  />
+				</td>
+			</tr>
+		</table>    
+        </div>
+        
+        <h3><?php _e('Email Pop-up Heading', 'wc_email_inquiry'); ?></h3>
+		<table class="form-table">        
             <tr valign="top">
 		    	<th class="titledesc" scope="row"><label for="inquiry_contact_heading"><?php _e( 'Header Title', 'wc_email_inquiry' );?></label></th>
 		    	<td class="forminp">                    
                     <input type="text" value="<?php esc_attr_e( stripslashes( $inquiry_contact_heading ) ); ?>" name="<?php echo $option_name; ?>[inquiry_contact_heading]" id="inquiry_contact_heading" style="width:300px;"  /> <span class="description"><?php _e("&lt;empty&gt; and the form title will be the Button title", 'wc_email_inquiry');?></span>
 				</td>
 			</tr>
+		</table>       
+        
+        <h3><?php _e('Send Button Styling', 'wc_email_inquiry'); ?></h3>
+		<table class="form-table">
             <tr valign="top">
 		    	<th class="titledesc" scope="row"><label for="inquiry_contact_text_button"><?php _e( 'Send Button Title', 'wc_email_inquiry' );?></label></th>
 		    	<td class="forminp">                    
@@ -256,6 +285,52 @@ class WC_Email_Inquiry_Customize_Email_Popup
 		</table>
         </div>
         
+		<h3><?php _e('Email Pop-up Font Styling', 'wc_email_inquiry'); ?></h3>
+		<table class="form-table">
+			<tr>
+				<th class="titledesc" scope="row"><label for="inquiry_contact_popup_text_font"><?php _e('Font', 'wc_email_inquiry');?></label></th>
+				<td class="forminp">
+					<select class="chzn-select" style="width:120px;" id="inquiry_contact_popup_text_font" name="<?php echo $option_name; ?>[inquiry_contact_popup_text_font]">
+						<option value="" selected="selected"><?php _e('Select Font', 'wc_email_inquiry');?></option>
+						<?php foreach($fonts as $key=>$value){ ?>
+                        <option <?php selected( htmlspecialchars( $inquiry_contact_popup_text_font ), htmlspecialchars($key) ); ?> value='<?php echo htmlspecialchars($key); ?>'><?php echo $value; ?></option>
+						<?php } ?>                                  
+					</select> <span class="description"><?php _e('&lt;empty&gt; to use theme style', 'wc_email_inquiry');?></span>
+				</td>
+			</tr>
+			<tr>
+				<th class="titledesc" scope="row"><label for="inquiry_contact_popup_text_font_size"><?php _e('Font Size', 'wc_email_inquiry');?></label></th>
+				<td class="forminp">
+					<select class="chzn-select" style="width:120px;" id="inquiry_contact_popup_text_font_size" name="<?php echo $option_name; ?>[inquiry_contact_popup_text_font_size]">
+						<option value="" selected="selected"><?php _e('Select Size', 'wc_email_inquiry');?></option>
+                        <?php for( $i = 9 ; $i <= 40 ; $i++ ){ ?>
+                        <option value="<?php echo ($i); ?>px" <?php selected( $inquiry_contact_popup_text_font_size, $i.'px' ); ?>><?php echo $i; ?>px</option>
+                        <?php } ?>                                  
+                        </select> <span class="description"><?php _e('&lt;empty&gt; to use theme style', 'wc_email_inquiry');?></span>
+                    </td>
+			</tr>
+			<tr>
+				<th class="titledesc" scope="row"><label for="inquiry_contact_popup_text_font_style"><?php _e('Font Style', 'wc_email_inquiry');?></label></th>
+				<td class="forminp">
+					<select class="chzn-select" style="width:120px;" id="inquiry_contact_popup_text_font_style" name="<?php echo $option_name; ?>[inquiry_contact_popup_text_font_style]">
+						<option value="" selected="selected"><?php _e('Select Style', 'wc_email_inquiry');?></option>
+						<option <?php selected( $inquiry_contact_popup_text_font_style, 'normal' ); ?> value="normal"><?php _e('Normal', 'wc_email_inquiry');?></option>
+						<option <?php selected( $inquiry_contact_popup_text_font_style, 'italic' ); ?> value="italic"><?php _e('Italic', 'wc_email_inquiry');?></option>
+						<option <?php selected( $inquiry_contact_popup_text_font_style, 'bold' ); ?> value="bold"><?php _e('Bold', 'wc_email_inquiry');?></option>
+						<option <?php selected( $inquiry_contact_popup_text_font_style, 'bold_italic' ); ?> value="bold_italic"><?php _e('Bold/Italic', 'wc_email_inquiry');?></option>
+					</select> <span class="description"><?php _e('&lt;empty&gt; to use theme style', 'wc_email_inquiry');?></span>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th class="titledesc" scope="rpw"><label for="inquiry_contact_popup_text_font_colour"><?php _e('Font Colour','wc_email_inquiry'); ?></label></th>
+				<td class="forminp">
+					<input type="text" class="colorpick" name="<?php echo $option_name; ?>[inquiry_contact_popup_text_font_colour]" id="inquiry_contact_popup_text_font_colour" value="<?php esc_attr_e( stripslashes( $inquiry_contact_popup_text_font_colour ) );?>" style="width:120px;" /> <span class="description"><?php _e('&lt;empty&gt; to use theme style', 'wc_email_inquiry');?></span>
+					<div id="colorPickerDiv_inquiry_contact_popup_text_font_colour" class="colorpickdiv" style="z-index: 100;background:#eee;border:1px solid #ccc;position:absolute;display:none;"></div>
+				</td>
+			</tr>
+		</table>
+        
+        <h3><?php _e('Success Message Setup', 'wc_email_inquiry'); ?></h3>
         <table class="form-table">
             <tr valign="top">
 				<th class="titledesc" scope="rpw"><label for="wc_email_inquiry_contact_success"><?php _e('Success Message','wc_email_inquiry'); ?></label></th>

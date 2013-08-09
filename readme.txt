@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.3
-Tested up to: 3.5.2
-Stable tag: 1.0.6
+Tested up to: 3.6
+Stable tag: 1.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.7 - 2013/08/09 =
+* Feature :
+   	* Default Contact Form new options for 'Email Pop-up Font Styling'. Use WYSIWYG settings to set the default pop-ups Font type (choose from 17 web safe fonts), size, style and colour.
+* Tweaks :
+	* Tested for full compatibility with WordPress v3.6.0
+* Fixes :
+	* Fixed script validate email for default contact form. Old script conflicted with WordPress 3.6.0 jQuery 1.10.2. Conflict caused the popup tools to break. 
+	* Added box-sizing:content-box class attribute for compatibility with new WordPress Twenty Thirteen default theme.
+
 = 1.0.6 - 2013/06/28 =
 * Fixed: Replaced hardcode iso-8859-1 charset to dynamic get_option('blog_charset')
 
@@ -190,6 +199,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.7 =
+Update now for 100% compatibility with WordPress v3.6.0. Includes 2 bug fixes and 1 new Default Contact Form features - pop-up form text editor.
 
 = 1.0.6 =
 Update your plugin now for an important charset bug fix.

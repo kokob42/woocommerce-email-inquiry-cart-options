@@ -295,6 +295,7 @@ class WC_Email_Inquiry_Functions
 		$html .= '<li>4. '.__('Custom Inquiry forms using Contact Form 7 shortcode.', 'wc_email_inquiry').'</li>';
 		$html .= '<li>5. '.__('Inquiry form opens On Page below button.', 'wc_email_inquiry').'</li>';
 		$html .= '<li>6. '.__('Open Email Inquiry form on new page option.', 'wc_email_inquiry').'</li>';
+		$html .= '<li>7. '.__('Open Gravity / Contact 7 form by pop-up.', 'wc_email_inquiry').'</li>';
 		$html .= '</ul>';
 		$html .= '</p>';
 		$html .= '<h3>* <a href="http://a3rev.com/shop/woocommerce-quotes-and-orders/" target="_blank">'.__('WooCommerce Quotes and Orders', 'wc_email_inquiry').'</a> '.__('Features', 'wc_email_inquiry').':</h3>';
@@ -314,6 +315,7 @@ class WC_Email_Inquiry_Functions
 		$html .= '<h3>'.__('More FREE a3rev WooCommerce Plugins', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/woocommerce-product-sort-and-display/" target="_blank">'.__('WooCommerce Product Sort and Display', 'wc_email_inquiry').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-dynamic-gallery/" target="_blank">'.__('WooCommerce Dynamic Products Gallery', 'wc_email_inquiry').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-predictive-search/" target="_blank">'.__('WooCommerce Predictive Search', 'wc_email_inquiry').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/woocommerce-compare-products/" target="_blank">'.__('WooCommerce Compare Products', 'wc_email_inquiry').'</a></li>';
@@ -323,6 +325,7 @@ class WC_Email_Inquiry_Functions
 		$html .= '<h3>'.__('More FREE a3rev WordPress plugins', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>';
 		$html .= '<ul style="padding-left:10px;">';
+		$html .= '<li>* <a href="http://wordpress.org/plugins/contact-us-page-contact-people/" target="_blank">'.__('Contact Us Page - Contact People', 'wc_email_inquiry').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/wp-email-template/" target="_blank">'.__('WordPress Email Template', 'wc_email_inquiry').'</a></li>';
 		$html .= '<li>* <a href="http://wordpress.org/extend/plugins/page-views-count/" target="_blank">'.__('Page View Count', 'wc_email_inquiry').'</a></li>';
 		$html .= '</ul>';

@@ -17,7 +17,7 @@ class WC_Email_Inquiry_3RD_ContactForms_Settings
 			'enable_3rd_contact_form_plugin'		=> 'no',
 			'contact_form_shortcode'				=> '',
 			'product_page_open_form_type'			=> 'new_page',
-			
+			'category_page_open_form_type'			=> 'new_page',
 			
 		);
 		
@@ -83,13 +83,17 @@ class WC_Email_Inquiry_3RD_ContactForms_Settings
             <tr valign="top">
 				<th class="titledesc" scope="rpw"><label><?php _e('Product Page', 'wc_email_inquiry'); ?></label></th>
 				<td class="forminp">
-                	<label><input disabled="disabled" type="radio" class="product_page_open_form_type" name="<?php echo $option_name; ?>[product_page_open_form_type]" value="new_page" checked="checked" /> <?php _e('Open contact form on new page.', 'wc_email_inquiry'); ?> <span class="description">(<?php _e('Default', 'wc_email_inquiry');?>)</span></label><br /> 
-                    <label><input disabled="disabled" type="radio" class="product_page_open_form_type" name="<?php echo $option_name; ?>[product_page_open_form_type]" value="inner_page" /> <?php _e('Open contact form on page (form opens by ajax under the inquiry button).', 'wc_email_inquiry'); ?></label> 
+                	<label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[product_page_open_form_type]" value="new_page" checked="checked" /> <?php _e('Open contact form on new page', 'wc_email_inquiry'); ?> - <?php _e('new window', 'wc_email_inquiry'); ?>. <span class="description">(<?php _e('Default', 'wc_email_inquiry');?>)</span></label><br />
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[product_page_open_form_type]" value="new_page_same_window" /> <?php _e('Open contact form on new page', 'wc_email_inquiry'); ?> - <?php _e('same window', 'wc_email_inquiry'); ?>.</label><br />
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[product_page_open_form_type]" value="popup" /> <?php _e('Open contact form by Pop-up', 'wc_email_inquiry'); ?>.</label><br />
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[product_page_open_form_type]" value="inner_page" /> <?php _e('Open contact form on page (form opens by ajax under the inquiry button).', 'wc_email_inquiry'); ?></label> 
 			</tr>
             <tr valign="top">
-				<th class="titledesc" scope="rpw"><label for="grid_view_open_form_type"><?php _e('Grid View', 'wc_email_inquiry'); ?></label></th>
+				<th class="titledesc" scope="rpw"><label><?php _e('Grid View', 'wc_email_inquiry'); ?></label></th>
 				<td class="forminp">
-                	<label><input disabled="disabled" type="radio" id="grid_view_open_form_type" class="grid_view_open_form_type" name="<?php echo $option_name; ?>[grid_view_open_form_type]" value="new_page" checked="checked" /> <?php _e('Form opens by default on new page.', 'wc_email_inquiry'); ?></label>
+                	<label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[category_page_open_form_type]" value="new_page" checked="checked" /> <?php _e('Open contact form on new page', 'wc_email_inquiry'); ?> - <?php _e('new window', 'wc_email_inquiry'); ?>. <span class="description">(<?php _e('Default', 'wc_email_inquiry');?>)</span></label><br />
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[category_page_open_form_type]" value="new_page_same_window" /> <?php _e('Open contact form on new page', 'wc_email_inquiry'); ?> - <?php _e('same window', 'wc_email_inquiry'); ?>.</label><br />
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[category_page_open_form_type]" value="popup" /> <?php _e('Open contact form by Pop-up', 'wc_email_inquiry'); ?>.</label>
 			</tr>
 		</table>
         

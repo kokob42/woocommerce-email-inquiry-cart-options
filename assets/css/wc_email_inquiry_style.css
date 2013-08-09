@@ -8,12 +8,16 @@
 .wc_email_inquiry_form{
 	width:500px;	
 }
+.wc_email_inquiry_form_inner {
+	clear:both;	
+	margin-bottom:10px;
+}
 #cboxContent .wc_email_inquiry_form {
 	padding:10px;	
 }
 h1.wc_email_inquiry_result_heading {
 	font-size:20px;
-	margin-bottom:10px;
+	margin:0 0 10px !important;
 	color: red;
 }
 body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
@@ -36,7 +40,8 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	height:65px;	
 }
 .wc_email_inquiry_field{
-	margin-bottom:10px;				
+	margin-bottom:10px;
+	clear:both;		
 }
 .wc_email_inquiry_required{
 	color:red;	
@@ -61,4 +66,23 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 }
 .wc_email_inquiry_button_container { 
 	display:inline-block;
+}
+
+/* 3RD shortcode page */
+.wc_3rd_inquiry_form_container {
+	margin-top:10px;	
+}
+.wc_email_inquiry_custom_form_container {
+	position:relative;	
+}
+.wc_email_inquiry_image_container {
+	text-align:center;	
+}
+.wc_email_inquiry_form_container {
+	display:block;	
+}
+
+/* Default Contact Form Inner Page */
+.wc_defaul_inquiry_form_inner_container {
+	margin-top:10px;
 }

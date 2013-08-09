@@ -19,6 +19,9 @@ class WC_Email_Inquiry_Global_Settings
 			'inquiry_button_padding_top'			=> 5,
 			'inquiry_button_padding_bottom'			=> 5,
 			'inquiry_single_only'					=> 'no',
+			
+			'defaul_product_page_open_form_type'	=> 'popup',
+			'defaul_category_page_open_form_type'	=> 'popup',
 		);
 		
 		return $default_settings;
@@ -132,6 +135,21 @@ class WC_Email_Inquiry_Global_Settings
 		    	<td class="forminp">
                 	<label><input disabled="disabled" type="checkbox" value="yes" id="wc_email_inquiry_reset_products_options" name="wc_email_inquiry_reset_products_options" /> <span class=""><?php _e('Check to reset ALL products that have custom Button or Hyperlink Text settings to the settings made above.', 'wc_email_inquiry');?></span></label>
 				</td>
+			</tr>
+		</table>
+        
+        <h3><?php _e('Open Default Contact Form Method', 'wc_email_inquiry'); ?></h3>
+		<table class="form-table">
+            <tr valign="top">
+				<th class="titledesc" scope="rpw"><label><?php _e('Product Page', 'wc_email_inquiry'); ?></label></th>
+				<td class="forminp">
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[defaul_product_page_open_form_type]" value="popup" checked="checked" /> <?php _e('Open contact form by Pop-up', 'wc_email_inquiry'); ?>.</label><br />
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[defaul_product_page_open_form_type]" value="inner_page" /> <?php _e('Open contact form on page (form opens by ajax under the inquiry button).', 'wc_email_inquiry'); ?></label> 
+			</tr>
+            <tr valign="top">
+				<th class="titledesc" scope="rpw"><label><?php _e('Grid View', 'wc_email_inquiry'); ?></label></th>
+				<td class="forminp">
+                    <label><input disabled="disabled" type="radio" name="<?php echo $option_name; ?>[defaul_category_page_open_form_type]" value="popup" checked="checked" /> <?php _e('Open contact form by Pop-up', 'wc_email_inquiry'); ?>.</label>
 			</tr>
 		</table>
         </div>

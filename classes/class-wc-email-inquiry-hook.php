@@ -351,7 +351,7 @@ class WC_Email_Inquiry_Hook_Filter
 			
 			var wc_email_inquiry_error = "";
 			var wc_email_inquiry_have_error = false;
-			var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			var filter = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			
 			if (your_name == "") {
 				wc_email_inquiry_error += "<?php _e('Please enter your Name', 'wc_email_inquiry'); ?>\n";

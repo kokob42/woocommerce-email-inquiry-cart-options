@@ -1,6 +1,6 @@
 <?php
 function wc_email_inquiry_install(){
-	update_option('a3rev_wc_email_inquiry_version', '1.0.6');
+	update_option('a3rev_wc_email_inquiry_version', '1.0.7');
 
 	WC_Email_Inquiry_Rules_Roles_Panel::set_settings_default();
 	
@@ -96,7 +96,7 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 		update_option('a3rev_wc_email_inquiry_version', '1.0.3');
 	}
 
-	update_option('a3rev_wc_email_inquiry_version', '1.0.6');	
+	update_option('a3rev_wc_email_inquiry_version', '1.0.7');	
 
 
 function woo_email_cart_options_dashboard() {

@@ -1,4 +1,7 @@
 <style>
+.wc_email_inquiry_custom_form_container {
+	position:relative !important;	
+}
 <?php
 // Email Inquiry Button Style
 global $wc_email_inquiry_global_settings, $wc_email_inquiry_customize_email_button;
@@ -13,7 +16,7 @@ extract($wc_email_inquiry_customize_email_button);
 	margin-bottom: <?php echo $inquiry_button_padding_bottom; ?>px !important;
 	margin-top: <?php echo $inquiry_button_padding_top; ?>px !important;
 }
-body .wc_email_inquiry_button_container .wc_email_inquiry_button {
+body .wc_email_inquiry_button_container .wc_email_inquiry_button, body .wc_email_inquiry_button_container .wc_email_inquiry_popup_button, body .wc_email_inquiry_button_container .wc_email_inquiry_button_3rd {
 	position: relative !important;
 	cursor:pointer;
 	display: inline-block !important;
@@ -77,6 +80,34 @@ global $wc_email_inquiry_customize_email_popup;
 extract($wc_email_inquiry_customize_email_popup);
 ?>
 
+/* Email Inquiry Form Style */
+.wc_email_inquiry_form * {
+	box-sizing:content-box !important;
+	-moz-box-sizing:content-box !important;
+	-webkit-box-sizing:content-box !important;	
+}
+body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_email_inquiry_field {
+	/* Font */
+	font-family: <?php echo $inquiry_contact_popup_text_font; ?> !important;
+	font-size: <?php echo $inquiry_contact_popup_text_font_size; ?> !important;
+	color: <?php echo $inquiry_contact_popup_text_font_colour; ?> !important;
+<?php if ( stristr($inquiry_contact_popup_text_font_style, 'bold') !== FALSE) { ?>
+	font-weight: bold !important;
+<?php } ?>
+<?php if ( stristr($inquiry_contact_popup_text_font_style, 'italic') !== FALSE) { ?>
+	font-style:italic !important;
+<?php } ?>
+<?php if ( $inquiry_contact_popup_text_font_style == 'normal') { ?>
+	font-weight: normal !important;
+	font-style: normal !important;
+<?php } ?>
+}
+.wc_email_inquiry_custom_form_product_heading {
+	clear:none !important;
+	margin-top:5px !important;
+	padding-top:0 !important;	
+}
+
 /* Email Inquiry Form Button Style */
 body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	position: relative !important;
@@ -135,7 +166,6 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	text-shadow: 0 -1px 0 hsla(0,0%,0%,.3);
 	text-decoration: none !important;
 }
-
 
 /* Contact Form Heading */
 h1.wc_email_inquiry_result_heading {
