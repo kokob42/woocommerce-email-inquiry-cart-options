@@ -6,7 +6,6 @@
 	cursor:pointer;	
 }
 .wc_email_inquiry_form{
-	width:500px;	
 }
 .wc_email_inquiry_form_inner {
 	clear:both;	
@@ -16,9 +15,7 @@
 	padding:10px;	
 }
 h1.wc_email_inquiry_result_heading {
-	font-size:20px;
 	margin:0 0 10px !important;
-	color: red;
 }
 body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	float:right !important;
@@ -40,8 +37,8 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	height:65px;	
 }
 .wc_email_inquiry_field{
-	margin-bottom:10px;
-	clear:both;		
+	margin-bottom:10px;	
+	clear:both;			
 }
 .wc_email_inquiry_required{
 	color:red;	

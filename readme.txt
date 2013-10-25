@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.3
-Tested up to: 3.6
-Stable tag: 1.0.7
+Tested up to: 3.6.1
+Stable tag: 1.0.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,11 +37,9 @@ WooCommerce Email Inquiry & Cart Options uses the WordPress email config and req
 * Fully customizable Sent success message shows as a pop-up on screen after inquiry is submitted.
 * Use the WordPress text editor (WYSIWYG and HTML) to style the success message (see image under the Screenshots tab on this page). 
 
-= Support =
+= Lite Version Support =
 
-If you have any problem with setting up the Free lite version please post your support request here on the WordPress support forum. PLEASE if you have a problem DO NOT just give the plugin a bad star rating and review without first requesting support. Giving the plugin a bagging without affording us the opportunity to help solve the issue is in our opinion very unfair.
-
-Once you have the plugin installed and activated please refer to the plugins [Comprehensive Online Documentation](http://docs.a3rev.com/user-guides/woocommerce/woo-email-inquiry-cart-options/) and guide to setting up the WooCommerce Email Inquiry & Cart Options plugin on your WooCommerce store. If you have questions - again please post them to the support forum here.
+As a Lite Version user please post all support requests to the plugins WordPress Support forum. We do not watch that forum and posting there you will be relying on another user for support not an a3rev team member. Pro Version License holders have 'write' access to the a3rev support forum and priority support, not from support staff but from the developers.
 
 = Pro Version Upgrade =
 
@@ -91,7 +89,7 @@ This plugin has a choice of 3 Pro version upgrade plugins that add more function
 
 * English (default) - always included.
 * .po file (wc_email_inquiry.po) in languages folder for translations.
-* If you do a translation for your site please send it to us for inclusion in the plugin language folder. We'll acknowledge your work here. [Go here](http://a3rev.com/contact/) to send your translation files to us.
+* If you do a translation for your site please send it to us for inclusion in the plugin language folder. We'll acknowledge your work here. [Go here](http://a3rev.com/contact-us-page/) to send your translation files to us.
 
 = Plugin Resources =
 
@@ -152,6 +150,28 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.8 - 2013/10/25 =
+* Features :
+	* Major plugin upgrade. Full code rework. 
+	* Upgraded the plugin to the newly developed a3rev admin Framework with app style interface.
+	* Moved admin from WooCommerce settings tab onto its own Email Inquiry & Cart Options main menu item with sidebar sub menu.
+	* Email Inquiry & Cart Options sub menus, Rules & Roles | Email Inquiry | Quotes Mode | Orders Mode
+	* Email Inquiry menu broken up into tabs - Settings | Default Form | Custom Form | Button Style | Pop-Up Style
+	* New admin UI features check boxes replaced by switches, some dropdowns replaced by sliders.
+	* Added intuitive triggers for admin panel settings. When selected corresponding feature settings appear.
+	* Added choice of 350 Google fonts to the existing 17 websafe fonts in all new single row font editor.
+	* New on page instant previews for Font editor.
+	* Rules & Roles - Activate any Rule for logged in user Role by adding the Role to the Rule.
+	* Rules and Roles - incorporate help message under each Rules Roles. Show when the Rule is turned on.
+	* Settings - Added House Keeping function to settings. Clean up on Deletion. Option - Choose if you ever delete this plugin it will completely remove all tables and data it has created, leaving no trace it was ever installed.
+* Tweaks :
+	* Fixed up all existing typos on admin panel.
+	* Updated support url to WordPress support forum.
+	* Updated transaltion submission URL
+	* Updated Lite Version support text on plugins description.
+* Fixed :
+	* Plugins admin script and style not loading in Firefox with SSL on admin. Stripped http// and https// protocols so browser will use the protocol that the page was loaded with.
+
 = 1.0.7 - 2013/08/09 =
 * Feature :
    	* Default Contact Form new options for 'Email Pop-up Font Styling'. Use WYSIWYG settings to set the default pop-ups Font type (choose from 17 web safe fonts), size, style and colour.
@@ -199,6 +219,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.8 =
+Major plugin upgrade! All new intuitive app style admin interface featuring conditional logic and associated features and 1 known bug fix.
 
 = 1.0.7 =
 Update now for 100% compatibility with WordPress v3.6.0. Includes 2 bug fixes and 1 new Default Contact Form features - pop-up form text editor.

@@ -3,9 +3,10 @@
 	position:relative !important;	
 }
 <?php
+global $wc_ei_admin_interface, $wc_ei_fonts_face;
+
 // Email Inquiry Button Style
-global $wc_email_inquiry_global_settings, $wc_email_inquiry_customize_email_button;
-extract($wc_email_inquiry_global_settings);
+global $wc_email_inquiry_customize_email_button;
 extract($wc_email_inquiry_customize_email_button);
 ?>
 @charset "UTF-8";
@@ -13,8 +14,10 @@ extract($wc_email_inquiry_customize_email_button);
 
 /* Email Inquiry Button Style */
 .wc_email_inquiry_button_container { 
-	margin-bottom: <?php echo $inquiry_button_padding_bottom; ?>px !important;
-	margin-top: <?php echo $inquiry_button_padding_top; ?>px !important;
+	margin-bottom: <?php echo $inquiry_button_margin_bottom; ?>px !important;
+	margin-top: <?php echo $inquiry_button_margin_top; ?>px !important;
+	margin-left: <?php echo $inquiry_button_margin_left; ?>px !important;
+	margin-right: <?php echo $inquiry_button_margin_right; ?>px !important;
 }
 body .wc_email_inquiry_button_container .wc_email_inquiry_button, body .wc_email_inquiry_button_container .wc_email_inquiry_popup_button, body .wc_email_inquiry_button_container .wc_email_inquiry_button_3rd {
 	position: relative !important;
@@ -23,7 +26,7 @@ body .wc_email_inquiry_button_container .wc_email_inquiry_button, body .wc_email
 	line-height: 1 !important;
 }
 body .wc_email_inquiry_button_container .wc_email_inquiry_email_button {
-	padding: 7px 10px !important;
+	padding: <?php echo $inquiry_button_padding_tb; ?>px <?php echo $inquiry_button_padding_lr; ?>px !important;
 	margin:0;
 	
 	/*Background*/
@@ -43,35 +46,23 @@ body .wc_email_inquiry_button_container .wc_email_inquiry_email_button {
 	
 		
 	/*Border*/
-	border: <?php echo $inquiry_button_border_size; ?> <?php echo $inquiry_button_border_style; ?> <?php echo $inquiry_button_border_colour; ?> !important;
-<?php if ($inquiry_button_rounded_corner == 'rounded') { ?>
-	-webkit-border-radius: <?php echo $inquiry_button_rounded_value; ?>px !important;
-	-moz-border-radius: <?php echo $inquiry_button_rounded_value; ?>px !important;
-	border-radius: <?php echo $inquiry_button_rounded_value; ?>px !important;
-<?php } else { ?>
-	-webkit-border-radius: 0px !important;
-	-moz-border-radius: 0px !important;
-	border-radius: 0px !important;
-<?php } ?>
+	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_button_border ); ?>
 	
 	/* Font */
-	font-family: <?php echo $inquiry_button_font; ?> !important;
-	font-size: <?php echo $inquiry_button_font_size; ?> !important;
-	color: <?php echo $inquiry_button_font_colour; ?> !important;
-<?php if ( stristr($inquiry_button_font_style, 'bold') !== FALSE) { ?>
-	font-weight: bold !important;
-<?php } ?>
-<?php if ( stristr($inquiry_button_font_style, 'italic') !== FALSE) { ?>
-	font-style:italic !important;
-<?php } ?>
-<?php if ( $inquiry_button_font_style == 'normal') { ?>
-	font-weight: normal !important;
-	font-style: normal !important;
-<?php } ?>
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_button_font ); ?>
 	
 	text-align: center !important;
 	text-shadow: 0 -1px 0 hsla(0,0%,0%,.3);
 	text-decoration: none !important;
+}
+
+body .wc_email_inquiry_button_container .wc_email_inquiry_hyperlink_text {
+	/* Font */
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_hyperlink_font ); ?>
+}
+
+body .wc_email_inquiry_button_container .wc_email_inquiry_hyperlink_text:hover {
+	color: <?php echo $inquiry_hyperlink_hover_color ; ?> !important;	
 }
 
 <?php
@@ -88,19 +79,7 @@ extract($wc_email_inquiry_customize_email_popup);
 }
 body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_email_inquiry_field {
 	/* Font */
-	font-family: <?php echo $inquiry_contact_popup_text_font; ?> !important;
-	font-size: <?php echo $inquiry_contact_popup_text_font_size; ?> !important;
-	color: <?php echo $inquiry_contact_popup_text_font_colour; ?> !important;
-<?php if ( stristr($inquiry_contact_popup_text_font_style, 'bold') !== FALSE) { ?>
-	font-weight: bold !important;
-<?php } ?>
-<?php if ( stristr($inquiry_contact_popup_text_font_style, 'italic') !== FALSE) { ?>
-	font-style:italic !important;
-<?php } ?>
-<?php if ( $inquiry_contact_popup_text_font_style == 'normal') { ?>
-	font-weight: normal !important;
-	font-style: normal !important;
-<?php } ?>
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_popup_text ); ?>
 }
 .wc_email_inquiry_custom_form_product_heading {
 	clear:none !important;
@@ -134,34 +113,12 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 					<?php echo $inquiry_contact_button_bg_colour_to; ?> 100%
 				) !important;;
 	
-		
 	/*Border*/
-	border: <?php echo $inquiry_contact_button_border_size; ?> <?php echo $inquiry_contact_button_border_style; ?> <?php echo $inquiry_contact_button_border_colour; ?> !important;
-<?php if ($inquiry_contact_button_rounded_corner == 'rounded') { ?>
-	-webkit-border-radius: <?php echo $inquiry_contact_button_rounded_value; ?>px !important;
-	-moz-border-radius: <?php echo $inquiry_contact_button_rounded_value; ?>px !important;
-	border-radius: <?php echo $inquiry_contact_button_rounded_value; ?>px !important;
-<?php } else { ?>
-	-webkit-border-radius: 0px !important;
-	-moz-border-radius: 0px !important;
-	border-radius: 0px !important;
-<?php } ?>
+	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_contact_button_border ); ?>
 	
 	/* Font */
-	font-family: <?php echo $inquiry_contact_button_font; ?> !important;
-	font-size: <?php echo $inquiry_contact_button_font_size; ?> !important;
-	color: <?php echo $inquiry_contact_button_font_colour; ?> !important;
-<?php if ( stristr($inquiry_contact_button_font_style, 'bold') !== FALSE) { ?>
-	font-weight: bold !important;
-<?php } ?>
-<?php if ( stristr($inquiry_contact_button_font_style, 'italic') !== FALSE) { ?>
-	font-style:italic !important;
-<?php } ?>
-<?php if ( $inquiry_contact_button_font_style == 'normal') { ?>
-	font-weight: normal !important;
-	font-style: normal !important;
-<?php } ?>
-	
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_button_font ); ?>
+		
 	text-align: center !important;
 	text-shadow: 0 -1px 0 hsla(0,0%,0%,.3);
 	text-decoration: none !important;
@@ -169,6 +126,11 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 
 /* Contact Form Heading */
 h1.wc_email_inquiry_result_heading {
-	color: <?php echo $inquiry_contact_button_bg_colour; ?> !important;
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_heading_font ); ?>
+}
+
+/* Colorbox Background */
+#cboxOverlay{ 
+	background:#666666 !important;
 }
 </style>
