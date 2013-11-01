@@ -17,11 +17,11 @@ Add a space saving and impressive pop-up email inquiry form to your product offe
 = Catalog Visibility Rules =
 
 * Product Page Rule: Hide 'Add to Cart'
-- Apply Rule not logged in users
-- Filter Rule by user role to logged in users.
+	- Apply Rule not logged in users
+	- Filter Rule by user role to logged in users.
 * Product Page Rule: Show Email Inquiry Button
-- Apply Rule to logged in users.
-- Filter Rule by user Role to logged in users.
+	- Apply Rule to logged in users.
+	- Filter Rule by user Role to logged in users.
 
 =  Apply Rules to Roles =
 
