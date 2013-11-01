@@ -217,7 +217,7 @@ class WC_Email_Inquiry_MetaBox
         <table cellspacing="0" class="form-table">
 			<tbody>
             	<tr valign="top">
-                    <th class="titledesc" scope="rpw"><label><?php _e('Single Product Page only','wc_email_inquiry'); ?></label></th>
+                    <th class="titledesc" scope="rpw"><label><?php _e('Exclude from Grid View','wc_email_inquiry'); ?></label></th>
                     <td class="forminp"><label><input type="radio" name="_wc_email_inquiry_settings_custom[wc_email_inquiry_single_only]" id="wc_email_inquiry_single_only_yes" value="yes" <?php checked( $wc_email_inquiry_single_only, 'yes' ); ?> /> <?php _e('Yes', 'wc_email_inquiry'); ?></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label><input type="radio" name="_wc_email_inquiry_settings_custom[wc_email_inquiry_single_only]" id="wc_email_inquiry_single_only_no" value="no" <?php if ($wc_email_inquiry_single_only != 'yes' ) echo 'checked="checked"'; ?> /> <?php _e('No', 'wc_email_inquiry'); ?></label>
                     </td>
                	</tr>

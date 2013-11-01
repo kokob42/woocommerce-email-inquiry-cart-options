@@ -70,7 +70,7 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 	public $form_messages = array();
 	
 	public function custom_types() {
-		$custom_type = array( 'hide_addtocart_yellow_message', 'hide_inquiry_button_yellow_message', 'hide_price_yellow_message', 'manual_quote_yellow_message' );
+		$custom_type = array( 'hide_addtocart_yellow_message', 'hide_inquiry_button_yellow_message', 'hide_price_yellow_message', 'manual_quote_yellow_message', 'store_rule_yellow_message' );
 		
 		return $custom_type;
 	}
@@ -269,6 +269,13 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 				'desc'		=> __( "Store Rules apply a set of Rules that determine how users use your store BEFORE and AFTER they log in.", 'wc_email_inquiry' ),
 				'id'		=> 'pro_store_rules',
                 'type' 		=> 'heading',
+           	),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'yellow_message_container store_rule_yellow_message_container',
+           	),
+			array(
+                'type' 		=> 'store_rule_yellow_message',
            	),
 			
 			array(
@@ -651,7 +658,7 @@ $(document).ready(function() {
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
             <div style="width:450px;">
             <?php 
-				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Note', 'wc_email_inquiry' ).':</strong> '.__( "If you do not apply Rules to your role i.e. 'administrator' you will need to either log out or open the site in another browser where you are not logged in to see the Rule feature is activated.", 'wc_email_inquiry' ).'</div>
+				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( "If a product does not have a price set (even 0) it is a function of WooCommmerce that the add to cart function is removed from the product. The Email Inquiry button hooks to that function and if it is not present the button cannot show. Also if a bespoke theme has removed the WooCommerce add to cart template and replaced it with a custom template the button cannot show on any products.", 'wc_email_inquiry' ).'</div>
                 <div style="clear:both"></div>
                 <a class="hide_inquiry_button_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="hide_inquiry_button_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
@@ -786,7 +793,6 @@ $(document).ready(function() {
 	}
 	
 	public function manual_quote_yellow_message( $value ) {
-		$customized_settings = get_option( $this->option_name, array() );
 	?>
     	<tr valign="top" class="manual_quote_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
@@ -828,6 +834,61 @@ $(document).ready(function() {
 		var data = {
 				action: 		"wc_ei_yellow_message_dismiss",
 				session_name: 	"wc_ei_manual_quote_message_dismiss",
+				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dismiss"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+});
+})(jQuery);
+</script>
+			</td>
+		</tr>
+    <?php
+	
+	}
+	
+	public function store_rule_yellow_message( $value ) {
+	?>
+    	<tr valign="top" class="store_rule_yellow_message_tr" style=" ">
+			<th scope="row" class="titledesc">&nbsp;</th>
+			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+            <div style="width:450px;">
+            <?php 
+				$store_rule_blue_message = '<div><div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong></div><div>'.__( "* Store Rules 'add to' Buttons / function is the WooCommerce 'add to cart' buttons / function.", 'wc_email_inquiry' ).'</div><div>'.__( "* WooCommerce has 2 core Conditionals that remove the 'add to cart' button / function from any product page.", 'wc_email_inquiry' ).'</div><div>'.__( "1. IF a product has no Price entered.", 'wc_email_inquiry' ).'</div><div>'.__( "2. IF 'Inventory Management' is ON and product is 'Out of Stock'.", 'wc_email_inquiry' ).'</div><div><strong>'.__( 'Important!', 'wc_email_inquiry' ).'</strong> '.__( "If either of the above Conditional exists on a product then the Store Rule 'add to' button / function cannot show on that product.", 'wc_email_inquiry' ).'</div></div>
+				<div style="clear:both"></div>
+                <a class="store_rule_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
+                <a class="store_rule_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
+                <div style="clear:both"></div>';
+            	echo $this->blue_message_box( $store_rule_blue_message ); 
+			?>
+            </div>
+<style>
+.a3rev_panel_container .store_rule_yellow_message_container {
+<?php if ( get_option( 'wc_ei_store_rule_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wc_ei_store_rule_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+}
+</style>
+<script>
+(function($) {
+$(document).ready(function() {
+	
+	$(document).on( "click", ".store_rule_yellow_message_dontshow", function(){
+		$(".store_rule_yellow_message_tr").slideUp();
+		$(".store_rule_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wc_ei_yellow_message_dontshow",
+				option_name: 	"wc_ei_store_rule_message_dontshow",
+				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dontshow"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+	
+	$(document).on( "click", ".store_rule_yellow_message_dismiss", function(){
+		$(".store_rule_yellow_message_tr").slideUp();
+		$(".store_rule_yellow_message_container").slideUp();
+		var data = {
+				action: 		"wc_ei_yellow_message_dismiss",
+				session_name: 	"wc_ei_store_rule_message_dismiss",
 				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dismiss"); ?>"
 			};
 		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);

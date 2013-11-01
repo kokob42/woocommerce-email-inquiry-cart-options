@@ -104,7 +104,7 @@ class WC_Email_Inquiry_Functions
 	
 	public static function email_inquiry($product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself = 1) {
 		global $wc_email_inquiry_contact_form_settings;
-		global $wc_email_inquiry_contact_success;
+		$wc_email_inquiry_contact_success = stripslashes( get_option( 'wc_email_inquiry_contact_success', '' ) );
 		
 		if ( WC_Email_Inquiry_Functions::check_add_email_inquiry_button($product_id) ) {
 			

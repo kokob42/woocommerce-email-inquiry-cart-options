@@ -90,6 +90,12 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 		add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
 		
 		// Add yellow border for pro fields
+		add_action( $this->plugin_name . '_settings_pro_form_title_font_before', array( $this, 'pro_fields_before' ) );
+		add_action( $this->plugin_name . '_settings_pro_product_url_after', array( $this, 'pro_fields_after' ) );
+		
+		add_action( $this->plugin_name . '_settings_pro_email_subject_name_before', array( $this, 'pro_fields_before' ) );
+		add_action( $this->plugin_name . '_settings_pro_form_input_field_style_after', array( $this, 'pro_fields_after' ) );
+		
 		add_action( $this->plugin_name . '_settings_pro_send_button_style_before', array( $this, 'pro_fields_before' ) );
 		add_action( $this->plugin_name . '_settings_pro_popup_class_after', array( $this, 'pro_fields_after' ) );
 		
@@ -194,6 +200,19 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 			
 			array(
+            	'name' 		=> __( 'Form Background Colour', 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+				'class'		=> 'pro_feature_fields',
+           	),
+			array(  
+				'name' 		=> __( 'Background Colour', 'wc_email_inquiry' ),
+				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
+				'id' 		=> 'inquiry_form_bg_colour',
+				'type' 		=> 'color',
+				'default'	=> '#FFFFFF'
+			),
+			
+			array(
             	'name' 		=> __( 'Form Title', 'wc_email_inquiry' ),
                 'type' 		=> 'heading',
            	),
@@ -207,13 +226,36 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 			),
 			array(
                 'type' 		=> 'heading',
-				'class'		=> 'pro_feature_fields',
+				'id'		=> 'pro_form_title_font',
            	),
 			array(  
 				'name' 		=> __( 'Title Font', 'wc_email_inquiry' ),
 				'id' 		=> 'inquiry_contact_heading_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '18px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#000000' )
+				'default'	=> array( 'size' => '18px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' )
+			),
+			
+			array(
+            	'name' 		=> __( 'Product Name', 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'name' 		=> __( 'Product Name Font', 'wc_email_inquiry' ),
+				'id' 		=> 'inquiry_form_product_name_font',
+				'type' 		=> 'typography',
+				'default'	=> array( 'size' => '26px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#29577F' )
+			),
+			
+			array(
+            	'name' 		=> __( 'Product URL', 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+				'id'		=> 'pro_product_url',
+           	),
+			array(  
+				'name' 		=> __( 'Product URL Font', 'wc_email_inquiry' ),
+				'id' 		=> 'inquiry_form_product_url_font',
+				'type' 		=> 'typography',
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#29577F' )
 			),
 			
 			array(
@@ -225,7 +267,45 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'id' 		=> 'inquiry_contact_popup_text',
 				'type' 		=> 'typography',
 				'free_version'		=> true,
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#000000' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' )
+			),
+			
+			array(
+            	'name' 		=> __( 'Email Subject Name', 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+				'id'		=> 'pro_email_subject_name',
+           	),
+			array(  
+				'name' 		=> __( 'Subject Name Font', 'wc_email_inquiry' ),
+				'id' 		=> 'inquiry_form_subject_font',
+				'type' 		=> 'typography',
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' )
+			),
+			
+			array(
+            	'name' 		=> __( 'Form Input Field Style', 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+				'id'		=> 'pro_form_input_field_style',
+           	),
+			array(  
+				'name' 		=> __( 'Background Colour', 'wc_email_inquiry' ),
+				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
+				'id' 		=> 'inquiry_input_bg_colour',
+				'type' 		=> 'color',
+				'default'	=> '#FAFAFA'
+			),
+			array(  
+				'name' 		=> __( 'Font Colour', 'wc_email_inquiry' ),
+				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
+				'id' 		=> 'inquiry_input_font_colour',
+				'type' 		=> 'color',
+				'default'	=> '#000000'
+			),
+			array(  
+				'name' 		=> __( 'Input Field Borders', 'wc_email_inquiry' ),
+				'id' 		=> 'inquiry_input_border',
+				'type' 		=> 'border',
+				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#CCCCCC', 'corner' => 'square' , 'rounded_value' => 0 ),
 			),
 			
 			array(
@@ -275,7 +355,7 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'name' 		=> __( 'Button Font', 'wc_email_inquiry' ),
 				'id' 		=> 'inquiry_contact_button_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#FFFFFF' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#FFFFFF' )
 			),
 			
 			array(

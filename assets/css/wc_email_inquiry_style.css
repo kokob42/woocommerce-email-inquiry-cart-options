@@ -12,24 +12,23 @@
 	margin-bottom:10px;
 }
 #cboxContent .wc_email_inquiry_form {
-	padding:10px;	
+	
 }
 h1.wc_email_inquiry_result_heading {
 	margin:0 0 10px !important;
+}
+.wc_email_inquiry_content {
+	margin-top:10px;	
 }
 body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	float:right !important;
 	margin-right:2% !important;
 }
 .wc_email_inquiry_field input, .wc_email_inquiry_field textarea{
-	border:1px solid #CCC !important;
-	-moz-border-radius: 0px !important;
-	-webkit-border-radius: 0px !important;
-	border-radius: 0px !important;
 	-moz-box-shadow: 0px 0px 0px #FFF !important; /* Firefox */
 	-webkit-box-shadow: 0px 0px 0px #FFF !important;
 	box-shadow: 0px 0px 0px #FFF !important; 
-	width:66% !important;
+	width:73% !important;
 	font-size:13px !important;
 	padding:5px;
 }
@@ -44,7 +43,7 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	color:red;	
 }
 .wc_email_inquiry_label{
-	width:30%;
+	width:22%;
 	float:left;
 	cursor:pointer;
 }
@@ -72,7 +71,7 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 .wc_email_inquiry_custom_form_container {
 	position:relative;	
 }
-.wc_email_inquiry_image_container {
+.wc_email_inquiry_image_container, .wc_email_inquiry_default_image_container {
 	text-align:center;	
 }
 .wc_email_inquiry_form_container {
@@ -82,4 +81,51 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 /* Default Contact Form Inner Page */
 .wc_defaul_inquiry_form_inner_container {
 	margin-top:10px;
+}
+
+@media only screen and (max-width: 568px) {
+	
+#fancybox-content {
+	border:5px solid #FFFFFF !important;
+}
+
+body .wc_email_inquiry_label {
+	width:100% !important;
+	clear:both;
+}
+
+.wc_email_inquiry_default_image_container {
+	float:none !important;
+}
+.wc_email_inquiry_image_container {
+	width:100% !important;
+	left:auto !important;
+	top: auto !important;
+	position:relative !important;
+}
+.wc_email_inquiry_form_container {
+	margin-left:0 !important;	
+}
+.wc_email_inquiry_product_heading_container {
+	margin-bottom:0 !important;
+	padding-left:0 !important;
+}
+
+body .wc_email_inquiry_field input, body .wc_email_inquiry_field textarea {
+	width:90% !important;
+}
+body .wc_email_inquiry_send_copy input {
+	width:auto !important;	
+}
+body .wc_email_inquiry_send_copy {
+	width:100%;
+	margin-bottom:5px;
+}
+body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
+	float:left !important;	
+}
+body .wc_email_inquiry_loading {
+	float:left !important;	
+}
+
 }

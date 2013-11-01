@@ -77,14 +77,39 @@ extract($wc_email_inquiry_customize_email_popup);
 	-moz-box-sizing:content-box !important;
 	-webkit-box-sizing:content-box !important;	
 }
+#cboxLoadedContent, .wc_email_inquiry_form, #fancybox-content > div {
+	background-color: <?php echo $inquiry_form_bg_colour; ?> !important;	
+}
 body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_email_inquiry_field {
 	/* Font */
 	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_popup_text ); ?>
 }
 .wc_email_inquiry_custom_form_product_heading {
+	/* Font */
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_form_product_name_font ); ?>
+	
 	clear:none !important;
 	margin-top:5px !important;
 	padding-top:0 !important;	
+}
+a.wc_email_inquiry_custom_form_product_url {
+	/* Font */
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_form_product_url_font ); ?>
+}
+.wc_email_inquiry_subject {
+	/* Font */
+	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_form_subject_font ); ?>
+}
+
+.wc_email_inquiry_field input, .wc_email_inquiry_field textarea{
+	/*Border*/
+	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_input_border ); ?>
+	
+	/*Background*/
+	background-color: <?php echo $inquiry_input_bg_colour; ?> !important;
+	
+	/* Font */
+	color: <?php echo $inquiry_input_font_colour; ?> !important;
 }
 
 /* Email Inquiry Form Button Style */

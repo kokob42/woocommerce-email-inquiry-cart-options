@@ -196,16 +196,6 @@ class WC_EI_ColorBox_Popup_Settings extends WC_Email_Inquiry_Admin_UI
                 'type' 		=> 'heading',
            	),
 			array(  
-				'name' 		=> __( "Pop-Up Tool Wide", 'wc_email_inquiry' ),
-				'id' 		=> 'colorbox_popup_tool_wide',
-				'desc'		=> '%',
-				'type' 		=> 'slider',
-				'default'	=> 75,
-				'min'		=> 50,
-				'max'		=> 100,
-				'increment'	=> 1
-			),
-			array(  
 				'name' 		=> __( "Fix Position on Scroll", 'wc_email_inquiry' ),
 				'id' 		=> 'colorbox_center_on_scroll',
 				'type' 		=> 'onoff_radio',

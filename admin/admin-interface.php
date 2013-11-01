@@ -173,6 +173,10 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 			'double'			=> __( 'Double', 'wc_email_inquiry' ),
 			'dashed'			=> __( 'Dashed', 'wc_email_inquiry' ),
 			'dotted'			=> __( 'Dotted', 'wc_email_inquiry' ),
+			'groove'			=> __( 'Groove', 'wc_email_inquiry' ),
+			'ridge'				=> __( 'Ridge', 'wc_email_inquiry' ),
+			'inset'				=> __( 'Inset', 'wc_email_inquiry' ),
+			'outset'			=> __( 'Outset', 'wc_email_inquiry' ),
 		);
 		return apply_filters( $this->plugin_name . '_border_styles', $border_styles );
 	}
@@ -194,23 +198,58 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 			if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
 			if ( ! isset( $value['default'] ) ) $value['default'] = '';
 			
-			// Do not include when it's separate option
-			if ( isset( $value['separate_option'] ) && $value['separate_option'] != false ) continue;
-			
-			// Remove [, ] characters from id argument
-			if ( strstr( $value['id'], '[' ) ) {
-				parse_str( esc_attr( $value['id'] ), $option_array );
-	
-				// Option name is first key
-				$option_keys = array_keys( $option_array );
-				$first_key = current( $option_keys );
+			switch ( $value['type'] ) {
+				
+				// Array textfields
+				case 'array_textfields' :
+					if ( !isset( $value['ids'] ) || !is_array( $value['ids'] ) || count( $value['ids'] ) < 1 ) break;
 					
-				$id_attribute		= $first_key;
-			} else {
-				$id_attribute		= esc_attr( $value['id'] );
-			}
+					foreach ( $value['ids'] as $text_field ) {
+						if ( ! isset( $text_field['id'] ) || trim( $text_field['id'] ) == '' ) continue;
+						if ( ! isset( $text_field['default'] ) ) $text_field['default'] = '';
+						
+						// Do not include when it's separate option
+						if ( isset( $text_field['separate_option'] ) && $text_field['separate_option'] != false ) continue;
+						
+						// Remove [, ] characters from id argument
+						if ( strstr( $text_field['id'], '[' ) ) {
+							parse_str( esc_attr( $text_field['id'] ), $option_array );
+				
+							// Option name is first key
+							$option_keys = array_keys( $option_array );
+							$first_key = current( $option_keys );
+								
+							$id_attribute		= $first_key;
+						} else {
+							$id_attribute		= esc_attr( $text_field['id'] );
+						}
+						
+						$default_settings[$id_attribute] = $text_field['default'];
+					}
+					
+				break;
+				
+				default :
+					// Do not include when it's separate option
+					if ( isset( $value['separate_option'] ) && $value['separate_option'] != false ) continue;
+					
+					// Remove [, ] characters from id argument
+					if ( strstr( $value['id'], '[' ) ) {
+						parse_str( esc_attr( $value['id'] ), $option_array );
 			
-			$default_settings[$id_attribute] = $value['default'];
+						// Option name is first key
+						$option_keys = array_keys( $option_array );
+						$first_key = current( $option_keys );
+							
+						$id_attribute		= $first_key;
+					} else {
+						$id_attribute		= esc_attr( $value['id'] );
+					}
+					
+					$default_settings[$id_attribute] = $value['default'];
+				
+				break;
+			}
 		}
 		
 		if ( trim( $option_name ) != '' ) $default_settings = apply_filters( $this->plugin_name . '_' . $option_name . '_default_settings' , $default_settings );
@@ -238,8 +277,8 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 			if ( ! is_array( $current_settings ) ) $current_settings = array();
 			$current_settings = array_merge( $default_settings, $current_settings );
 			
-			$current_settings = apply_filters( $this->plugin_name . '_' . $option_name . '_get_settings' , $current_settings );
 			$current_settings = array_map( array( $this, 'admin_stripslashes' ), $current_settings );
+			$current_settings = apply_filters( $this->plugin_name . '_' . $option_name . '_get_settings' , $current_settings );
 			
 			$$option_name = $current_settings;
 			
@@ -273,10 +312,26 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 				
 				$current_setting = get_option( $id_attribute, $value['default'] );
 				
-				if ( is_array( $current_setting ) )
-					$current_setting = array_map( array( $this, 'admin_stripslashes' ), $current_setting );
-				elseif ( ! is_null( $current_setting ) )
-					$current_setting = esc_attr( stripslashes( $current_setting ) );
+				switch ( $value['type'] ) {
+				
+					// Array textfields
+					case 'wp_editor' :
+						if ( is_array( $current_setting ) )
+							$current_setting = array_map( array( $this, 'stripslashes' ), $current_setting );
+						elseif ( ! is_null( $current_setting ) )
+							$current_setting = stripslashes( $current_setting );
+					break;
+					
+					default:
+				
+						if ( is_array( $current_setting ) )
+							$current_setting = array_map( array( $this, 'admin_stripslashes' ), $current_setting );
+						elseif ( ! is_null( $current_setting ) )
+							$current_setting = esc_attr( stripslashes( $current_setting ) );
+					break;
+				}
+				
+				$current_setting = apply_filters( $this->plugin_name . '_' . $id_attribute . '_get_setting' , $current_setting );
 				
 				$$id_attribute = $current_setting;
 			}

@@ -183,7 +183,7 @@ class WC_EI_Success_Message_Settings extends WC_Email_Inquiry_Admin_UI
            	),
 			array(  
 				'name' 		=> __( 'Success Message', 'wc_email_inquiry' ),
-				'desc' 		=> __( ' Message that user sees on page after form is submitted ', 'wc_email_inquiry' ),
+				'desc' 		=> __( 'Message that user will see after their Inquiry is sent.', 'wc_email_inquiry' ),
 				'id' 		=> 'wc_email_inquiry_contact_success',
 				'type' 		=> 'wp_editor',
 				'textarea_rows'		=> 30,

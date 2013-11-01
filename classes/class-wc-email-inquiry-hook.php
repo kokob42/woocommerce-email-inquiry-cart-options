@@ -207,7 +207,7 @@ class WC_Email_Inquiry_Hook_Filter
 		
 		
 	?>	
-<div class="wc_email_inquiry_form <?php echo $wc_email_inquiry_contact_form_class; ?>">
+<div class="wc_email_inquiry_form <?php echo $wc_email_inquiry_contact_form_class; ?>" style="padding:10px;">
 	<h1 class="wc_email_inquiry_result_heading"><?php echo $wc_email_inquiry_contact_heading; ?></h1>
 	<div class="wc_email_inquiry_content" id="wc_email_inquiry_content_<?php echo $product_id; ?>">
 		<div class="wc_email_inquiry_field">
@@ -221,16 +221,16 @@ class WC_Email_Inquiry_Hook_Filter
 			<input type="text" class="your_phone" name="your_phone" id="your_phone_<?php echo $product_id; ?>" value="" /></div>
 		<div class="wc_email_inquiry_field">
         	<label class="wc_email_inquiry_label"><?php _e('Subject','wc_email_inquiry'); ?> </label> 
-			<?php echo $product_name; ?></div>
+			<span class="wc_email_inquiry_subject"><?php echo $product_name; ?></span></div>
 		<div class="wc_email_inquiry_field">
         	<label class="wc_email_inquiry_label" for="your_message_<?php echo $product_id; ?>"><?php _e('Message','wc_email_inquiry'); ?></label> 
 			<textarea class="your_message" name="your_message" id="your_message_<?php echo $product_id; ?>"></textarea></div>
         <div class="wc_email_inquiry_field">
-        	<label class="wc_email_inquiry_label">&nbsp;</label>
             <a class="wc_email_inquiry_form_button wc_email_inquiry_bt_<?php echo $product_id; ?> <?php echo $wc_email_inquiry_contact_button_class; ?>" id="wc_email_inquiry_bt_<?php echo $product_id; ?>" product_id="<?php echo $product_id; ?>"><?php echo $wc_email_inquiry_contact_text_button; ?></a> <span class="wc_email_inquiry_loading" id="wc_email_inquiry_loading_<?php echo $product_id; ?>"><img src="<?php echo WC_EMAIL_INQUIRY_IMAGES_URL; ?>/ajax-loader.gif" /></span>
         </div>
         <div style="clear:both"></div>
 	</div>
+    <div style="clear:both"></div>
 </div>
 	<?php		
 		die();
@@ -298,20 +298,34 @@ class WC_Email_Inquiry_Hook_Filter
 			$wc_email_inquiry_popup_type = $wc_email_inquiry_global_settings['inquiry_popup_type'];
 			if ($wc_email_inquiry_popup_type == 'colorbox') {
 		?>
+			var popup_wide = 520;
+			if ( ei_getWidth()  <= 568 ) { 
+				popup_wide = '100%'; 
+			}
 			$.colorbox({
 				href		: ajax_url+"?action=wc_email_inquiry_popup&product_id="+product_id+"&security=<?php echo $wc_email_inquiry_popup; ?>",
 				opacity		: 0.85,
 				scrolling	: true,
-				innerWidth	: '75%',
-				innerHeight	: '60%',
-				maxWidth  	: '98%',
-				maxHeight  	: '98%',
+				initialWidth: 100,
+				initialHeight: 100,
+				innerWidth	: popup_wide,
+				//innerHeight	: 500,
+				maxWidth  	: '100%',
+				maxHeight  	: '100%',
 				returnFocus : true,
 				transition  : 'none',
 				speed		: 300,
 				fixed		: true
 			});
 		<?php } else { ?> 
+			var popup_wide = 520;
+			var popup_padding = 10;
+			var showclosebt = true;
+			if ( ei_getWidth()  <= 568 ) { 
+				popup_wide = '90%'; 
+				popup_padding = 0;
+				showclosebt = false;
+			}
 			$.fancybox({
 				href: ajax_url+"?action=wc_email_inquiry_popup&product_id="+product_id+"&security=<?php echo $wc_email_inquiry_popup; ?>",
 				centerOnScroll : true,
@@ -321,12 +335,16 @@ class WC_Email_Inquiry_Hook_Filter
 				easingOut: 'swing',
 				speedIn : 300,
 				speedOut : 0,
-				width: '75%',
-				autoScale: false,
+				width: popup_wide,
+				autoScale: true,
 				autoDimensions: false,
+				height: 360,
 				margin: 0,
-				padding: 0,
+				maxWidth: "95%",
+				maxHeight: "90%",
+				padding: popup_padding,
 				overlayColor: '#666666',
+				showCloseButton : showclosebt,
 				openEffect	: "none",
 				closeEffect	: "none"
 			});
@@ -384,6 +402,23 @@ class WC_Email_Inquiry_Hook_Filter
 })(jQuery);
 </script>
     <?php
+	?>
+<script>
+function ei_getWidth() {
+    xWidth = null;
+    if(window.screen != null)
+      xWidth = window.screen.availWidth;
+
+    if(window.innerWidth != null)
+      xWidth = window.innerWidth;
+
+    if(document.body != null)
+      xWidth = document.body.clientWidth;
+
+    return xWidth;
+}
+</script>
+	<?php
 	}
 	
 	public static function add_google_fonts() {

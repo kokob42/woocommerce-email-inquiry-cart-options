@@ -69,11 +69,21 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 	 */
 	public $form_messages = array();
 	
+	public function custom_types() {
+		$custom_type = array( 'button_hyperlink_margin_blue_message' );
+		
+		return $custom_type;
+	}
+	
 	/*-----------------------------------------------------------------------------------*/
 	/* __construct() */
 	/* Settings Constructor */
 	/*-----------------------------------------------------------------------------------*/
-	public function __construct() {
+	public function __construct() {// add custom type
+		foreach ( $this->custom_types() as $custom_type ) {
+			add_action( $this->plugin_name . '_admin_field_' . $custom_type, array( $this, $custom_type ) );
+		}
+		
 		$this->init_form_fields();
 		//$this->subtab_init();
 		
@@ -223,8 +233,7 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'unchecked_label'	=> __( 'Above', 'wc_email_inquiry' ),
 			),
 			array(  
-				'name' 		=> __( 'Button or Hyperlink Magrin', 'wc_email_inquiry' ),
-				'desc'		=> __( 'If you see margin between the add to cart button and the email button before adding a value here that margin is added by your theme. Increasing the margin here will add to the themes default button margin.', 'wc_email_inquiry' ),
+				'name' 		=> __( 'Button or Hyperlink Margin', 'wc_email_inquiry' ),
 				'id' 		=> 'inquiry_button_margin',
 				'type' 		=> 'array_textfields',
 				'free_version'		=> true,
@@ -253,9 +262,20 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 	 										'default'	=> 0 ),
 	 							)
 			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'blue_message_container button_hyperlink_margin_blue_message_container',
+           	),
+			array(
+                'type' 		=> 'button_hyperlink_margin_blue_message',
+           	),
+			
+			array(
+                'type' 		=> 'heading',
+           	),
 			array(  
-				'name' 		=> __( 'Single Product Page only', 'wc_email_inquiry' ),
-				'desc'		=> __( 'Button / Link text shows on single products pages as well as products list view, grid view, category and tag pages.', 'wc_email_inquiry' ),
+				'name' 		=> __( 'Exclude from Grid View', 'wc_email_inquiry' ),
+				'desc'		=> __( "Don't show Email Inquiry Button / Link text on product cards (grid view) display.", 'wc_email_inquiry' ),
 				'id' 		=> 'inquiry_single_only',
 				'type' 		=> 'onoff_checkbox',
 				'default'	=> 'no',
@@ -272,7 +292,7 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
            	),
 			
 			array(
-            	'name' 		=> __( 'Customize Email Inquiry Button', 'wc_email_inquiry' ),
+            	'name' 		=> __( 'Email Inquiry Button Style', 'wc_email_inquiry' ),
                 'type' 		=> 'heading',
           		'class' 	=> 'email_inquiry_button_type_container'
            	),
@@ -291,15 +311,13 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'ids'		=> array( 
 	 								array(  'id' 		=> 'inquiry_button_padding_tb',
 	 										'name' 		=> __( 'Top/Bottom', 'wc_email_inquiry' ),
-	 										'class' 	=> '',
 	 										'css'		=> 'width:40px;',
-	 										'default'	=> '7' ),
+	 										'default'	=> 5 ),
 	 
 	 								array(  'id' 		=> 'inquiry_button_padding_lr',
 	 										'name' 		=> __( 'Left/Right', 'wc_email_inquiry' ),
-	 										'class' 	=> '',
 	 										'css'		=> 'width:40px;',
-	 										'default'	=> '8' ),
+	 										'default'	=> 5 ),
 	 							)
 			),
 			array(  
@@ -407,8 +425,75 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
         ));
 	}
 	
+	public function button_hyperlink_margin_blue_message( $value ) {
+	?>
+    	<tr valign="top" class="button_hyperlink_margin_blue_message_tr" style=" ">
+			<th scope="row" class="titledesc">&nbsp;</th>
+			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+            <div style="width:450px;">
+            <?php 
+				$button_hyperlink_margin_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( 'If you see margin between the add to cart button and the email button before adding a value here that margin is added by your theme. Increasing the margin here will add to the themes default button margin.', 'wc_email_inquiry' ).'</div>
+				<div style="clear:both"></div>
+                <a class="button_hyperlink_margin_blue_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
+                <a class="button_hyperlink_margin_blue_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
+                <div style="clear:both"></div>';
+            	echo $this->blue_message_box( $button_hyperlink_margin_blue_message ); 
+			?>
+            </div>
+<style>
+.a3rev_panel_container .button_hyperlink_margin_blue_message_container {
+<?php if ( get_option( 'wc_ei_button_hyperlink_margin_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wc_ei_button_hyperlink_margin_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+}
+</style>
+<script>
+(function($) {
+$(document).ready(function() {
+	
+	$(document).on( "click", ".button_hyperlink_margin_blue_message_dontshow", function(){
+		$(".button_hyperlink_margin_blue_message_tr").slideUp();
+		$(".button_hyperlink_margin_blue_message_container").slideUp();
+		var data = {
+				action: 		"wc_ei_yellow_message_dontshow",
+				option_name: 	"wc_ei_button_hyperlink_margin_message_dontshow",
+				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dontshow"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+	
+	$(document).on( "click", ".button_hyperlink_margin_blue_message_dismiss", function(){
+		$(".button_hyperlink_margin_blue_message_tr").slideUp();
+		$(".button_hyperlink_margin_blue_message_container").slideUp();
+		var data = {
+				action: 		"wc_ei_yellow_message_dismiss",
+				session_name: 	"wc_ei_button_hyperlink_margin_message_dismiss",
+				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dismiss"); ?>"
+			};
+		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
+	});
+});
+})(jQuery);
+</script>
+			</td>
+		</tr>
+    <?php
+	
+	}
+	
 	public function include_script() {
 	?>
+<style>
+.blue_message_container {
+	margin-top: -15px;	
+}
+.blue_message_container a {
+	text-decoration:none;	
+}
+.blue_message_container th, .blue_message_container td {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+}
+</style>
 <script>
 (function($) {
 $(document).ready(function() {
