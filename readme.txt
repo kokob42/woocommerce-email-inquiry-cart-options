@@ -91,23 +91,23 @@ This plugin has a choice of 3 Pro version upgrade plugins that add more function
 * Auto Converts the WooCommerce add to cart function into the activated Store Rule function.
 * Apply a Store Rule to not logged in users and then Filter by selected Roles for logged in users.
 * Choice of Manual Quotes or Auto Quotes  
-- Users never see product prices
-- Add products to 'Request a Quote' cart.
-- Fully integrated with WooCommerce - submit Quote request and saved as new Order Status 'Quotes'
-- Customizable Quotes My Cart, Checkout, Order Received Templates
-- Customizable Email Request and account created email templates.
-- Manual Quotes - Submit Quote Prices 'Off line' or edit Quote and send to client from the Edit Order dashboard.
-- Auto Quotes - Quote Request Received Email shows products prices with link to pay for the order. Client still never sees prices on products on your store.
+	- Users never see product prices
+	- Add products to 'Request a Quote' cart.
+	- Fully integrated with WooCommerce - submit Quote request and saved as new Order Status 'Quotes'
+	- Customizable Quotes My Cart, Checkout, Order Received Templates
+	- Customizable Email Request and account created email templates.
+	- Manual Quotes - Submit Quote Prices 'Off line' or edit Quote and send to client from the Edit Order dashboard.
+	- Auto Quotes - Quote Request Received Email shows products prices with link to pay for the order. Client still never sees prices on products on your store.
 * Use Manual' Quote Mode when you want to submit quote prices off-line after the Quote request is received.
 * Generate Instant and payable (via your payment gateways) Quotes including shipping and taxes with Auto Quotes Mode.  
 * Add to Order for Business to Business users.
-- Converts the WooCommerce add to cart function into a client friendly on-line Ordering system. 
-- Ideal for businesses with monthly account clients.
-- Customizable Orders My Cart, Checkout, Order Received Templates
-- Built in Orders payment gateway removes WooCommerce payment requests
-- Customizable Email Order received and account created email templates.
-- Fully integrated with WooCommerce 'Orders' system.
-- Fully integrated with WooCommerce My Account dashboard.
+	- Converts the WooCommerce add to cart function into a client friendly on-line Ordering system. 
+	- Ideal for businesses with monthly account clients.
+	- Customizable Orders My Cart, Checkout, Order Received Templates
+	- Built in Orders payment gateway removes WooCommerce payment requests
+	- Customizable Email Order received and account created email templates.
+	- Fully integrated with WooCommerce 'Orders' system.
+	- Fully integrated with WooCommerce My Account dashboard.
 * 100% WPML compatibility for all static and dynamic text. 
 
 = Localization =
