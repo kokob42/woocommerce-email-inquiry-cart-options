@@ -207,7 +207,8 @@ class WC_Email_Inquiry_Hook_Filter
 		
 		
 	?>	
-<div class="wc_email_inquiry_form <?php echo $wc_email_inquiry_contact_form_class; ?>" style="padding:10px;">
+<div class="wc_email_inquiry_form <?php echo $wc_email_inquiry_contact_form_class; ?>">
+<div style="padding:10px;">
 	<h1 class="wc_email_inquiry_result_heading"><?php echo $wc_email_inquiry_contact_heading; ?></h1>
 	<div class="wc_email_inquiry_content" id="wc_email_inquiry_content_<?php echo $product_id; ?>">
 		<div class="wc_email_inquiry_field">
@@ -232,18 +233,19 @@ class WC_Email_Inquiry_Hook_Filter
 	</div>
     <div style="clear:both"></div>
 </div>
+</div>
 	<?php		
 		die();
 	}
 	
 	public static function wc_email_inquiry_action() {
 		check_ajax_referer( 'wc_email_inquiry_action', 'security' );
-		$product_id 	= $_REQUEST['product_id'];
-		$your_name 		= $_REQUEST['your_name'];
-		$your_email 	= $_REQUEST['your_email'];
-		$your_phone 	= $_REQUEST['your_phone'];
-		$your_message 	= $_REQUEST['your_message'];
-		$send_copy_yourself	= $_REQUEST['send_copy'];
+		$product_id 	= esc_attr( stripslashes( $_REQUEST['product_id'] ) );
+		$your_name 		= esc_attr( stripslashes( $_REQUEST['your_name'] ) );
+		$your_email 	= esc_attr( stripslashes( $_REQUEST['your_email'] ) );
+		$your_phone 	= esc_attr( stripslashes( $_REQUEST['your_phone'] ) );
+		$your_message 	= esc_attr( stripslashes( strip_tags( $_REQUEST['your_message'] ) ) );
+		$send_copy_yourself	= esc_attr( stripslashes( $_REQUEST['send_copy'] ) );
 		
 		$email_result = WC_Email_Inquiry_Functions::email_inquiry($product_id, $your_name, $your_email, $your_phone, $your_message, $send_copy_yourself);
 		echo json_encode($email_result );
@@ -304,6 +306,7 @@ class WC_Email_Inquiry_Hook_Filter
 			}
 			$.colorbox({
 				href		: ajax_url+"?action=wc_email_inquiry_popup&product_id="+product_id+"&security=<?php echo $wc_email_inquiry_popup; ?>",
+				className	: 'email_inquiry_cb',
 				opacity		: 0.85,
 				scrolling	: true,
 				initialWidth: 100,
@@ -311,7 +314,7 @@ class WC_Email_Inquiry_Hook_Filter
 				innerWidth	: popup_wide,
 				//innerHeight	: 500,
 				maxWidth  	: '100%',
-				maxHeight  	: '100%',
+				maxHeight  	: '90%',
 				returnFocus : true,
 				transition  : 'none',
 				speed		: 300,
@@ -319,12 +322,8 @@ class WC_Email_Inquiry_Hook_Filter
 			});
 		<?php } else { ?> 
 			var popup_wide = 520;
-			var popup_padding = 10;
-			var showclosebt = true;
 			if ( ei_getWidth()  <= 568 ) { 
-				popup_wide = '90%'; 
-				popup_padding = 0;
-				showclosebt = false;
+				popup_wide = '95%'; 
 			}
 			$.fancybox({
 				href: ajax_url+"?action=wc_email_inquiry_popup&product_id="+product_id+"&security=<?php echo $wc_email_inquiry_popup; ?>",
@@ -337,14 +336,14 @@ class WC_Email_Inquiry_Hook_Filter
 				speedOut : 0,
 				width: popup_wide,
 				autoScale: true,
-				autoDimensions: false,
-				height: 360,
+				autoDimensions: true,
+				height: 460,
 				margin: 0,
 				maxWidth: "95%",
-				maxHeight: "90%",
-				padding: popup_padding,
+				maxHeight: "80%",
+				padding: 10,
 				overlayColor: '#666666',
-				showCloseButton : showclosebt,
+				showCloseButton : true,
 				openEffect	: "none",
 				closeEffect	: "none"
 			});
@@ -363,7 +362,7 @@ class WC_Email_Inquiry_Hook_Filter
 			var wc_email_inquiry_have_error = false;
 			var filter = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			
-			if (your_name == "") {
+			if (your_name.replace(/^\s+|\s+$/g, '') == "") {
 				wc_email_inquiry_error += "<?php _e('Please enter your Name', 'wc_email_inquiry'); ?>\n";
 				wc_email_inquiry_have_error = true;
 			}
@@ -371,7 +370,7 @@ class WC_Email_Inquiry_Hook_Filter
 				wc_email_inquiry_error += "<?php _e('Please enter valid Email address', 'wc_email_inquiry'); ?>\n";
 				wc_email_inquiry_have_error = true;
 			}
-			if (your_phone == "") {
+			if (your_phone.replace(/^\s+|\s+$/g, '') == "") {
 				wc_email_inquiry_error += "<?php _e('Please enter your Phone', 'wc_email_inquiry'); ?>\n";
 				wc_email_inquiry_have_error = true;
 			}
@@ -396,6 +395,15 @@ class WC_Email_Inquiry_Hook_Filter
 				wc_email_inquiry_response = $.parseJSON( response );
 				$("#wc_email_inquiry_loading_"+product_id).hide();
 				$("#wc_email_inquiry_content_"+product_id).html(wc_email_inquiry_response);
+				<?php if ( $wc_email_inquiry_popup_type == 'colorbox' ) { ?>
+				var height_cb = false;
+				if ( ei_getWidth()  <= 568 ) { 
+					height_cb = '90%';
+				}
+				$.colorbox.resize({
+					height:		height_cb
+				});
+				<?php } ?>
 			});
 		});
 	});

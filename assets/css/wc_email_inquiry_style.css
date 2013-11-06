@@ -6,6 +6,7 @@
 	cursor:pointer;	
 }
 .wc_email_inquiry_form{
+	width: 520px;
 }
 .wc_email_inquiry_form_inner {
 	clear:both;	
@@ -87,6 +88,11 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	
 #fancybox-content {
 	border:5px solid #FFFFFF !important;
+	width:auto !important;
+}
+
+.wc_email_inquiry_form {
+	width:auto !important;	
 }
 
 body .wc_email_inquiry_label {

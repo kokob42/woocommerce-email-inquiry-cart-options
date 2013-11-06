@@ -77,7 +77,7 @@ extract($wc_email_inquiry_customize_email_popup);
 	-moz-box-sizing:content-box !important;
 	-webkit-box-sizing:content-box !important;	
 }
-#cboxLoadedContent, .wc_email_inquiry_form, #fancybox-content > div {
+.email_inquiry_cb #cboxLoadedContent, .wc_email_inquiry_form, #fancybox-content > div {
 	background-color: <?php echo $inquiry_form_bg_colour; ?> !important;	
 }
 body .wc_email_inquiry_form, .wc_email_inquiry_form, .wc_email_inquiry_form .wc_email_inquiry_field {
@@ -155,7 +155,7 @@ h1.wc_email_inquiry_result_heading {
 }
 
 /* Colorbox Background */
-#cboxOverlay{ 
+#cboxOverlay.email_inquiry_cb{ 
 	background:#666666 !important;
 }
 </style>

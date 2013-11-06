@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 1.0.9
+Stable tag: 1.0.9.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -175,6 +175,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.9.1 - 2013/11/06 =
+* Tweak - Stricter sanitization of Default Form Message input field. Only allow input of plain text with auto paragraph on line break.
+* Tweak - Added function .replace(/^\s+|\s+$/g, '') to check form for empty spaces for required fields Name, Email and Phone.
+* Tweak - Default Form Success Message Pop-up auto resizes to whatever the tall of the success message content is.
+* Tweak - Added class .email_inquiry_cb for Colorbox Pop-up tool content custom background display. 
+
 = 1.0.9 - 2013/11/01 =
 * Tweak - Removed dynamic pop-up wide setting and replaced with static pop-up max wide.
 * Tweak - Pop-up tools wide under 520px shows 100% wide of the screen for mobiles in portrait or landscape. 
@@ -251,6 +257,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.9.1 =
+Upgrade now for stricter default form text input field sanitization, improved default form success message pop-up display and Colorbox Pop-up content display tweak.
 
 = 1.0.9 =
 Major scheduled upgrade to the Default Contact Form, including 7 new features, and 1 bug fix.
