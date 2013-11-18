@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Global Settings
+WC EI Read More Global Settings
 
 TABLE OF CONTENTS
 
@@ -28,7 +28,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
+class WC_EI_Read_More_Global_Settings extends WC_Email_Inquiry_Admin_UI
 {
 	
 	/**
@@ -45,13 +45,13 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	 * @var string
 	 * You must change to correct option name that you are working
 	 */
-	public $option_name = 'wc_email_inquiry_global_settings';
+	public $option_name = 'wc_email_inquiry_read_more_settings';
 	
 	/**
 	 * @var string
 	 * You must change to correct form key that you are working
 	 */
-	public $form_key = 'wc_email_inquiry_global_settings';
+	public $form_key = 'wc_email_inquiry_read_more_settings';
 	
 	/**
 	 * @var string
@@ -70,7 +70,7 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	public $form_messages = array();
 	
 	public function custom_types() {
-		$custom_type = array( 'hide_inquiry_button_yellow_message' );
+		$custom_type = array( 'hide_read_more_yellow_message' );
 		
 		return $custom_type;
 	}
@@ -89,25 +89,21 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 		//$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'Email Inquiry Settings successfully saved.', 'wc_email_inquiry' ),
-				'error_message'		=> __( 'Error: Email Inquiry Settings can not save.', 'wc_email_inquiry' ),
-				'reset_message'		=> __( 'Email Inquiry Settings successfully reseted.', 'wc_email_inquiry' ),
+				'success_message'	=> __( 'Read More Settings successfully saved.', 'wc_email_inquiry' ),
+				'error_message'		=> __( 'Error: Read More Settings can not save.', 'wc_email_inquiry' ),
+				'reset_message'		=> __( 'Read More Settings successfully reseted.', 'wc_email_inquiry' ),
 			);
 			
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
 			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 		
-		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'after_save_settings' ) );
-		
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
-		
+				
 		add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
 		
-		// Add yellow border for pro fields
-		add_action( $this->plugin_name . '_settings_pro_contact_form_type_before', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '_settings_pro_product_page_rules_reset_after', array( $this, 'pro_fields_after' ) );
-		
+		add_action( $this->plugin_name . '-'. $this->form_key.'_settings_start', array( $this, 'pro_fields_before' ) );
+		add_action( $this->plugin_name . '-'. $this->form_key.'_settings_end', array( $this, 'pro_fields_after' ) );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -141,18 +137,6 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
-	/* after_save_settings()
-	/* Process when clean on deletion option is un selected */
-	/*-----------------------------------------------------------------------------------*/
-	public function after_save_settings() {
-		if ( get_option( 'wc_email_inquiry_lite_clean_on_deletion' ) == 0  )  {
-			$uninstallable_plugins = (array) get_option('uninstall_plugins');
-			unset($uninstallable_plugins[WC_EMAIL_INQUIRY_NAME]);
-			update_option('uninstall_plugins', $uninstallable_plugins);
-		}
-	}
-	
-	/*-----------------------------------------------------------------------------------*/
 	/* get_settings()
 	/* Get settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
@@ -176,9 +160,9 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	public function subtab_data() {
 		
 		$subtab_data = array( 
-			'name'				=> 'global-settings',
+			'name'				=> 'settings',
 			'label'				=> __( 'Settings', 'wc_email_inquiry' ),
-			'callback_function'	=> 'wc_ei_global_settings_form',
+			'callback_function'	=> 'wc_ei_read_more_global_settings_form',
 		);
 		
 		if ( $this->subtab_data ) return $this->subtab_data;
@@ -226,16 +210,15 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 		
 			array(
-            	'name' 		=> __( "Product Page Rule: Show Email Inquiry Button", 'wc_email_inquiry' ),
+            	'name' 		=> __( "Product Card Rule: Show Read More Button", 'wc_email_inquiry' ),
                 'type' 		=> 'heading',
            	),
 			array(  
 				'name' 		=> __( "Apply for all users before log in", 'wc_email_inquiry' ),
-				'class'		=> 'show_email_inquiry_button_before_login',
-				'id' 		=> 'show_button',
+				'class'		=> 'show_read_more_button_before_login',
+				'id' 		=> 'show_read_more_button_before_login',
 				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'yes',
-				'free_version'		=> true,
+				'default'	=> 'no',
 				'checked_value'		=> 'yes',
 				'unchecked_value' 	=> 'no',
 				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
@@ -243,96 +226,38 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 			),
 			array(  
 				'name' 		=> __( "Apply by user role after log in", 'wc_email_inquiry' ),
-				'class'		=> 'show_email_inquiry_button_after_login',
-				'id' 		=> 'show_button_after_login',
+				'class'		=> 'show_read_more_button_after_login',
+				'id' 		=> 'show_read_more_button_after_login',
 				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'yes',
-				'free_version'		=> true,
+				'default'	=> 'no',
 				'checked_value'		=> 'yes',
 				'unchecked_value' 	=> 'no',
 				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
 				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
 			),
 			array(
-				'class'		=> 'show_email_inquiry_button_after_login_container',
+				'class'		=> 'show_read_more_button_after_login_container',
                 'type' 		=> 'heading',
            	),
 			array(  
 				'desc' 		=> '',
-				'id' 		=> 'role_apply_show_inquiry_button',
+				'id' 		=> 'role_apply_show_read_more',
 				'type' 		=> 'multiselect',
-				'free_version'		=> true,
 				'placeholder' => __( 'Choose Roles', 'wc_email_inquiry' ),
 				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
 				'options'	=> $roles,
 			),
 			array(
                 'type' 		=> 'heading',
-				'class'		=> 'yellow_message_container hide_inquiry_button_yellow_message_container',
+				'class'		=> 'yellow_message_container hide_read_more_yellow_message_container',
            	),
 			array(
-                'type' 		=> 'hide_inquiry_button_yellow_message',
+                'type' 		=> 'hide_read_more_yellow_message',
            	),
-			
-			array(
-				'name'		=> __( 'Product Cards', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Email Inquiry Feature', 'wc_email_inquiry' ),
-				'desc'		=> __( "ON to show Button / Link Text on Product Cards (grid view) display.", 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_single_only',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'no',
-				'free_version'		=> true,
-				'checked_value'		=> 'no',
-				'unchecked_value'	=> 'yes',
-				'checked_label' 	=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label'	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			
-			array(
-            	'name' => __( 'Contact Form Type', 'wc_email_inquiry' ),
-                'type' => 'heading',
-				'id'		=> 'pro_contact_form_type',
-           	),
-			array(  
-				'name' 		=> __( 'Plugins Default Contact Form', 'wc_email_inquiry' ),
-				'id' 		=> 'enable_3rd_contact_form_plugin',
-				'class'		=> 'enable_3rd_contact_form_plugin default_contact_form_type',
-				'type' 		=> 'onoff_radio',
-				'default' 	=> 'no',
-				'onoff_options' => array(
-					array(
-						'val' 				=> 'no',
-						'text' 				=> '',
-						'checked_label'		=> __( 'ON', 'wc_email_inquiry') ,
-						'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry') ,
-					),
-					
-				),			
-			),
-			array(  
-				'name' 		=> __( 'Create form by Shortcode', 'wc_email_inquiry' ),
-				'id' 		=> 'enable_3rd_contact_form_plugin',
-				'class'		=> 'enable_3rd_contact_form_plugin',
-				'type' 		=> 'onoff_radio',
-				'default' 	=> 'no',
-				'onoff_options' => array(
-					array(
-						'val' 				=> 'yes',
-						'text' 				=> __( "Only Contact Form 7 or Gravity Forms shortcode will work here", 'wc_email_inquiry' ),
-						'checked_label'		=> __( 'ON', 'wc_email_inquiry') ,
-						'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry') ,
-					),
-					
-				),			
-			),
 			
 			array(
 				'name'		=> __( 'Product Page Rules Reset:', 'wc_email_inquiry' ),
                 'type' 		=> 'heading',
-				'id'		=> 'pro_product_page_rules_reset',
            	),
 			array(  
 				'name' 		=> __( "Reset All Products", 'wc_email_inquiry' ),
@@ -347,100 +272,92 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
 			),
 			
 			array(
-            	'name' => __( 'Select a Pop-Up Tool', 'wc_email_inquiry' ),
+            	'name' => __( 'Set Display Type', 'wc_email_inquiry' ),
                 'type' => 'heading',
            	),
 			array(  
-				'name' 		=> __( "Pop-Up Tool", 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_popup_type',
-				'type' 		=> 'switcher_checkbox',
-				'default'	=> 'fb',
-				'free_version'		=> true,
-				'checked_value'		=> 'fb',
-				'unchecked_value'	=> 'colorbox',
-				'checked_label'		=> __( 'FANCYBOX', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'COLORBOX', 'wc_email_inquiry' ),
+				'name' 		=> __( "Show Read More Button as", 'wc_email_inquiry' ),
+				'id' 		=> 'display_type',
+				'type' 		=> 'onoff_radio',
+				'default'	=> 'under',
+				'onoff_options' => array(
+					array(
+						'val' 				=> 'hover',
+						'text'				=> __( 'Button that shows on mouse hover on product image.', 'wc_email_inquiry' ) ,
+						'checked_label'		=> 'ON',
+						'unchecked_label' 	=> 'OFF',
+					),
+					
+					array(
+						'val' 				=> 'under',
+						'text' 				=> __( 'Show as button or link text above or below the Add to Cart button position.', 'wc_email_inquiry' ) ,
+						'checked_label'		=> 'ON',
+						'unchecked_label' 	=> 'OFF',
+					) 
+				),
 			),
-			
-			array(
-            	'name' => __( 'House Keeping :', 'wc_email_inquiry' ),
-                'type' => 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Clean up on Deletion', 'wc_email_inquiry' ),
-				'desc' 		=> __( "On deletion (not deactivate) the plugin will completely remove all tables and data it created, leaving no trace it was ever here.", 'wc_email_inquiry' ),
-				'id' 		=> 'wc_email_inquiry_lite_clean_on_deletion',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> '1',
-				'free_version'		=> true,
-				'separate_option'	=> true,
-				'checked_value'		=> '1',
-				'unchecked_value'	=> '0',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			
+
         ));
 	}
 	
-	public function hide_inquiry_button_yellow_message( $value ) {
+	public function hide_read_more_yellow_message( $value ) {
 		$customized_settings = get_option( $this->option_name, array() );
 	?>
-    	<tr valign="top" class="hide_inquiry_button_yellow_message_tr" style=" ">
+    	<tr valign="top" class="hide_read_more_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
             <div style="width:450px; max-width:100%;">
             <?php 
-				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( "If a product does not have a price set (even 0) it is a function of WooCommmerce that the add to cart function is removed from the product. The Email Inquiry button hooks to that function and if it is not present the button cannot show. Also if a bespoke theme has removed the WooCommerce add to cart template and replaced it with a custom template the button cannot show on any products.", 'wc_email_inquiry' ).'</div>
+				$hide_read_more_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( "The 'Read More' Button / Text Link shows on the Product Cards only.  Can be individually customized for each product from the product edit page > Email & Cart Meta > Read More tab.", 'wc_email_inquiry' ).'</div>
                 <div style="clear:both"></div>
-                <a class="hide_inquiry_button_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
-                <a class="hide_inquiry_button_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
+                <a class="hide_read_more_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
+                <a class="hide_read_more_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $hide_inquiry_button_blue_message ); 
+            	echo $this->blue_message_box( $hide_read_more_blue_message ); 
 			?>
             </div>
 <style>
-.a3rev_panel_container .hide_inquiry_button_yellow_message_container {
-<?php if ( $customized_settings['show_button'] == 'no' && $customized_settings['show_button_after_login'] == 'no' ) echo 'display: none;'; ?>
-<?php if ( get_option( 'wc_ei_hide_inquiry_button_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wc_ei_hide_inquiry_button_message_dismiss'] ) ) echo 'display: none !important;'; ?>
+.a3rev_panel_container .hide_read_more_yellow_message_container {
+<?php if ( $customized_settings['show_read_more_button_before_login'] == 'no' && $customized_settings['show_read_more_button_after_login'] == 'no' ) echo 'display: none;'; ?>
+<?php if ( get_option( 'wc_ei_hide_read_more_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
+<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wc_ei_hide_read_more_message_dismiss'] ) ) echo 'display: none !important;'; ?>
 }
 </style>
 <script>
 (function($) {
 $(document).ready(function() {
-	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_after_login', function( event, value, status ) {
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_read_more_button_after_login', function( event, value, status ) {
 		if ( status == 'true' ) {
-			$(".hide_inquiry_button_yellow_message_container").slideDown();
-		} else if( $("input.show_email_inquiry_button_before_login").prop( "checked" ) == false ) {
-			$(".hide_inquiry_button_yellow_message_container").slideUp();
+			$(".hide_read_more_yellow_message_container").slideDown();
+		} else if( $("input.show_read_more_button_before_login").prop( "checked" ) == false ) {
+			$(".hide_read_more_yellow_message_container").slideUp();
 		}
 	});
-	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_before_login', function( event, value, status ) {
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_read_more_button_before_login', function( event, value, status ) {
 		if ( status == 'true' ) {
-			$(".hide_inquiry_button_yellow_message_container").slideDown();
-		} else if( $("input.show_email_inquiry_button_after_login").prop( "checked" ) == false ) {
-			$(".hide_inquiry_button_yellow_message_container").slideUp();
+			$(".hide_read_more_yellow_message_container").slideDown();
+		} else if( $("input.show_read_more_button_after_login").prop( "checked" ) == false ) {
+			$(".hide_read_more_yellow_message_container").slideUp();
 		}
 	});
 	
-	$(document).on( "click", ".hide_inquiry_button_yellow_message_dontshow", function(){
-		$(".hide_inquiry_button_yellow_message_tr").slideUp();
-		$(".hide_inquiry_button_yellow_message_container").slideUp();
+	$(document).on( "click", ".hide_read_more_yellow_message_dontshow", function(){
+		$(".hide_read_more_yellow_message_tr").slideUp();
+		$(".hide_read_more_yellow_message_container").slideUp();
 		var data = {
 				action: 		"wc_ei_yellow_message_dontshow",
-				option_name: 	"wc_ei_hide_inquiry_button_message_dontshow",
+				option_name: 	"wc_ei_read_more_button_message_dontshow",
 				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dontshow"); ?>"
 			};
 		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
 	});
 	
-	$(document).on( "click", ".hide_inquiry_button_yellow_message_dismiss", function(){
-		$(".hide_inquiry_button_yellow_message_tr").slideUp();
-		$(".hide_inquiry_button_yellow_message_container").slideUp();
+	$(document).on( "click", ".hide_read_more_yellow_message_dismiss", function(){
+		$(".hide_read_more_yellow_message_tr").slideUp();
+		$(".hide_read_more_yellow_message_container").slideUp();
 		var data = {
 				action: 		"wc_ei_yellow_message_dismiss",
-				session_name: 	"wc_ei_hide_inquiry_button_message_dismiss",
+				session_name: 	"wc_ei_hide_read_more_message_dismiss",
 				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dismiss"); ?>"
 			};
 		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
@@ -451,7 +368,6 @@ $(document).ready(function() {
 			</td>
 		</tr>
     <?php
-	
 	}
 	
 	public function include_script() {
@@ -463,7 +379,7 @@ $(document).ready(function() {
 .yellow_message_container a {
 	text-decoration:none;	
 }
-.yellow_message_container th, .yellow_message_container td, .show_email_inquiry_button_after_login_container th, .show_email_inquiry_button_after_login_container td {
+.yellow_message_container th, .yellow_message_container td, .show_read_more_button_after_login_container th, .show_read_more_button_after_login_container td {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 }
@@ -473,10 +389,10 @@ $(document).ready(function() {
 	
 	$(document).ready(function() {
 		
-		if ( $("input.show_email_inquiry_button_after_login:checked").val() == 'yes') {
-			$(".show_email_inquiry_button_after_login_container").show();
+		if ( $("input.show_read_more_button_after_login:checked").val() == 'yes') {
+			$(".show_read_more_button_after_login_container").show();
 		} else {
-			$(".show_email_inquiry_button_after_login_container").hide();
+			$(".show_read_more_button_after_login_container").hide();
 		}
 		
 		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.rules_roles_explanation', function( event, value, status ) {
@@ -488,11 +404,11 @@ $(document).ready(function() {
 		});
 			
 			
-		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_after_login', function( event, value, status ) {
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_read_more_button_after_login', function( event, value, status ) {
 			if ( status == 'true' ) {
-				$(".show_email_inquiry_button_after_login_container").slideDown();
+				$(".show_read_more_button_after_login_container").slideDown();
 			} else {
-				$(".show_email_inquiry_button_after_login_container").slideUp();
+				$(".show_read_more_button_after_login_container").slideUp();
 			}
 		});
 		
@@ -502,18 +418,19 @@ $(document).ready(function() {
 </script>
     <?php	
 	}
+	
 }
 
-global $wc_ei_global_settings;
-$wc_ei_global_settings = new WC_EI_Global_Settings();
+global $wc_ei_read_more_global_settings;
+$wc_ei_read_more_global_settings = new WC_EI_Read_More_Global_Settings();
 
 /** 
- * wc_ei_global_settings_form()
+ * wc_ei_read_more_global_settings_form()
  * Define the callback function to show subtab content
  */
-function wc_ei_global_settings_form() {
-	global $wc_ei_global_settings;
-	$wc_ei_global_settings->settings_form();
+function wc_ei_read_more_global_settings_form() {
+	global $wc_ei_read_more_global_settings;
+	$wc_ei_read_more_global_settings->settings_form();
 }
 
 ?>

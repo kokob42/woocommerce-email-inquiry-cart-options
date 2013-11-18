@@ -85,14 +85,21 @@
 		if ( controls.find( '.a3rev-ui-border-corner' ).is(":checked") ) {
 			borderRoundedCorner = 1;
 		}
-		var borderRoundedValue = controls.find( '.a3rev-ui-border_corner-rounded_value' ).val();
+		var borderTopLeft = controls.find( '.a3rev-ui-border_top_left_corner' ).val();
+		var borderTopRight = controls.find( '.a3rev-ui-border_top_right_corner' ).val();
+		var borderBottomLeft = controls.find( '.a3rev-ui-border_bottom_left_corner' ).val();
+		var borderBottomRight = controls.find( '.a3rev-ui-border_bottom_right_corner' ).val();
 				
 		// Remove "current" class from previously modified border field.
     	$( '.settings-preview' ).removeClass( 'current' );
 		
     	// Construct styles.
     	previewStyles += 'border: ' + borderSize + ' ' + borderStyle + ' ' + borderColor + ';';
-    	if ( borderRoundedCorner == 1 ) { previewStyles += ' border-radius: ' + borderRoundedValue + 'px;' + ' -webkit-border-radius: ' + borderRoundedValue + 'px;' + ' -moz-border-radius: ' + borderRoundedValue + 'px;'; }
+    	if ( borderRoundedCorner == 1 ) { 
+			previewStyles += ' border-radius: ' + borderTopLeft + 'px ' + borderTopRight + 'px ' + borderBottomRight + 'px ' + borderBottomLeft + 'px ;';
+			previewStyles += ' -webkit-border-radius: ' + borderTopLeft + 'px ' + borderTopRight + 'px ' + borderBottomRight + 'px ' + borderBottomLeft + 'px ;';
+			previewStyles += ' -moz-border-radius: ' + borderTopLeft + 'px ' + borderTopRight + 'px ' + borderBottomRight + 'px ' + borderBottomLeft + 'px ;';
+		}
     	
     	// Construct preview HTML.
     	var previewHTMLInner = $( '<div />' ).addClass( 'current' ).addClass( 'settings-preview' ).html( previewText );

@@ -54,9 +54,9 @@ class WC_Email_Inquiry_Functions
 	}
 		
 	public static function check_add_email_inquiry_button ($product_id) {
-		global $wc_email_inquiry_rules_roles_settings;
+		global $wc_email_inquiry_global_settings;
 			
-		$wc_email_inquiry_show_button = $wc_email_inquiry_rules_roles_settings['show_button'];
+		$wc_email_inquiry_show_button = $wc_email_inquiry_global_settings['show_button'];
 		
 		// dont show email inquiry button if setting is not checked and not logged in users
 		if ($wc_email_inquiry_show_button == 'no' && !is_user_logged_in() ) return false;
@@ -64,12 +64,12 @@ class WC_Email_Inquiry_Functions
 		// alway show email inquiry button if setting is checked and not logged in users
 		if ($wc_email_inquiry_show_button != 'no' && !is_user_logged_in()) return true;
 		
-		$wc_email_inquiry_show_button_after_login = $wc_email_inquiry_rules_roles_settings['show_button_after_login'] ;
+		$wc_email_inquiry_show_button_after_login = $wc_email_inquiry_global_settings['show_button_after_login'] ;
 
 		// don't show email inquiry button if for logged in users is deacticated
 		if ( $wc_email_inquiry_show_button_after_login != 'yes' ) return false;
 		
-		$role_apply_show_inquiry_button = (array) $wc_email_inquiry_rules_roles_settings['role_apply_show_inquiry_button'];		
+		$role_apply_show_inquiry_button = (array) $wc_email_inquiry_global_settings['role_apply_show_inquiry_button'];		
 		
 		$user_login = wp_get_current_user();		
 		if (is_array($user_login->roles) && count($user_login->roles) > 0) {
@@ -87,9 +87,9 @@ class WC_Email_Inquiry_Functions
 	}
 	
 	public static function check_add_email_inquiry_button_on_shoppage ($product_id=0) {
-		global $wc_email_inquiry_customize_email_button;
+		global $wc_email_inquiry_global_settings;
 			
-		$wc_email_inquiry_single_only = $wc_email_inquiry_customize_email_button['inquiry_single_only'];
+		$wc_email_inquiry_single_only = $wc_email_inquiry_global_settings['inquiry_single_only'];
 		
 		if ($wc_email_inquiry_single_only == 'yes') return false;
 		
@@ -361,6 +361,19 @@ class WC_Email_Inquiry_Functions
 			
 		) );
 		update_option( 'wc_email_inquiry_customize_email_popup', $wc_email_inquiry_customize_email_popup_new );
+	}
+	
+	public static function upgrade_version_1_0_9_2() {
+		$wc_email_inquiry_rules_roles_settings = get_option( 'wc_email_inquiry_rules_roles_settings', array() );
+		$wc_email_inquiry_global_settings = get_option( 'wc_email_inquiry_global_settings', array() );
+		$wc_email_inquiry_customize_email_button = get_option( 'wc_email_inquiry_customize_email_button', array('inquiry_single_only' => 'no') );
+		
+		$wc_email_inquiry_global_settings['show_button'] = $wc_email_inquiry_rules_roles_settings['show_button'];
+		$wc_email_inquiry_global_settings['show_button_after_login'] = $wc_email_inquiry_rules_roles_settings['show_button_after_login'];
+		$wc_email_inquiry_global_settings['role_apply_show_inquiry_button'] = $wc_email_inquiry_rules_roles_settings['role_apply_show_inquiry_button'];
+		$wc_email_inquiry_global_settings['inquiry_single_only'] = $wc_email_inquiry_customize_email_button['inquiry_single_only'];
+		
+		update_option( 'wc_email_inquiry_global_settings', $wc_email_inquiry_global_settings );
 	}
 }
 

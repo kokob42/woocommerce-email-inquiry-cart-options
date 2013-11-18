@@ -153,7 +153,7 @@
 			google: { families: [ fontFaceString ] }
 			};
 				
-			if ( $( 'script.google-webfonts-script' ).length ) { $( 'script.google-webfonts-script' ).remove(); }
+			if ( $( 'script.google-webfonts-script' ).length ) { $( 'script.google-webfonts-script' ).remove(); WebFont.load({ google: {families: [ fontFaceString ]} }); }
 				
 				(function() {
 				var wf = document.createElement( 'script' );

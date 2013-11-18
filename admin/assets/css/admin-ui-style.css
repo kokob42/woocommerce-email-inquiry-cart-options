@@ -122,8 +122,9 @@
 /* Border Rounded Corner Control */
 .a3rev_panel_container .forminp-border_corner .desc { margin-bottom:10px !important; }
 .a3rev_panel_container .forminp-border_corner .iPhoneCheckContainer { margin-right:30px; }
-.a3rev_panel_container .a3rev-ui-border-corner-value-container { }
-.a3rev_panel_container .a3rev-ui-border_corner-span { float:left; margin-right:20px; }
+.a3rev_panel_container .a3rev-ui-border-corner-value-container { float:left; width:100%; }
+.a3rev_panel_container .a3rev-ui-border_corner-top_left, .a3rev_panel_container .a3rev-ui-border_corner-top_right, .a3rev_panel_container .a3rev-ui-border_corner-bottom_left, .a3rev_panel_container .a3rev-ui-border_corner-bottom_right { float:left; width:100%; clear:both; padding-top:5px; }
+.a3rev_panel_container .a3rev-ui-border_corner-span { float:left; width:140px; }
 .a3rev_panel_container .a3rev-ui-border_corner-px { float:left; margin-right:10px; }
 .a3rev_panel_container .forminp-border_corner .settings-apply-preview { border:1px solid #515151; }
 .a3rev_panel_container .forminp-border_corner .iPhoneCheckContainer .iPhoneCheckLabelOff, .a3rev_panel_container .forminp-border_corner .iOSCheckContainer .iOSCheckLabelOff {
@@ -418,9 +419,9 @@
 
 
 /* Style for yellow box about Pro or Ultimate version */
-#a3_plugin_panel_container { position:relative; margin-top:10px;}
+#a3_plugin_panel_container { position:relative; margin-top:10px; float:left; width:100%;}
 #a3_plugin_panel_fields { width:65%; float:left;}
-#a3_plugin_panel_upgrade_area { position:relative; margin-left: 65%; padding-left:10px;}
+#a3_plugin_panel_upgrade_area { margin-left: 65%; padding-left:10px;}
 #a3_plugin_panel_extensions { border:2px solid #E6DB55;-webkit-border-radius:10px;-moz-border-radius:10px;-o-border-radius:10px; border-radius: 10px; color: #555555; margin: 0px; padding: 5px 10px; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8); background:#FFFBCC; }
 #a3_plugin_panel_extensions img { width:100%; max-width:100%; }
 .pro_feature_fields { margin-right: -12px; position: relative; z-index: 10; border:2px solid #E6DB55;-webkit-border-radius:10px 0 0 10px;-moz-border-radius:10px 0 0 10px;-o-border-radius:10px 0 0 10px; border-radius: 10px 0 0 10px; border-right: 2px solid #FFFFFF; }

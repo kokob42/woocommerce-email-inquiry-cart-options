@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Default Form Style Settings
+WC EI Read More Above or Below Add To Cart Button Style Settings
 
 TABLE OF CONTENTS
 
@@ -28,13 +28,13 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
+class WC_EI_Read_More_Under_Image_Style_Settings extends WC_Email_Inquiry_Admin_UI
 {
 	
 	/**
 	 * @var string
 	 */
-	private $parent_tab = 'default-contact-form';
+	private $parent_tab = 'button-style';
 	
 	/**
 	 * @var array
@@ -45,13 +45,13 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 	 * @var string
 	 * You must change to correct option name that you are working
 	 */
-	public $option_name = 'wc_email_inquiry_customize_email_popup';
+	public $option_name = 'wc_ei_read_more_under_image_style';
 	
 	/**
 	 * @var string
 	 * You must change to correct form key that you are working
 	 */
-	public $form_key = 'wc_email_inquiry_customize_email_popup';
+	public $form_key = 'wc_ei_read_more_under_image_style';
 	
 	/**
 	 * @var string
@@ -78,27 +78,21 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 		$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'Default Form Style Settings successfully saved.', 'wc_email_inquiry' ),
-				'error_message'		=> __( 'Error: Default Form Style Settings can not save.', 'wc_email_inquiry' ),
-				'reset_message'		=> __( 'Default Form Style Settings successfully reseted.', 'wc_email_inquiry' ),
+				'success_message'	=> __( 'Under Image Style successfully saved.', 'wc_email_inquiry' ),
+				'error_message'		=> __( 'Error: Under Image Style can not save.', 'wc_email_inquiry' ),
+				'reset_message'		=> __( 'Under Image Style successfully reseted.', 'wc_email_inquiry' ),
 			);
-				
+			
+		add_action( $this->plugin_name . '-' . $this->parent_tab . '_tab_end', array( $this, 'include_script' ) );
+			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 		
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
-				
+		
 		add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
 		
-		// Add yellow border for pro fields
-		add_action( $this->plugin_name . '_settings_pro_form_title_font_before', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '_settings_pro_product_url_after', array( $this, 'pro_fields_after' ) );
-		
-		add_action( $this->plugin_name . '_settings_pro_email_subject_name_before', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '_settings_pro_form_input_field_style_after', array( $this, 'pro_fields_after' ) );
-		
-		add_action( $this->plugin_name . '_settings_pro_send_button_style_before', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '_settings_pro_popup_class_after', array( $this, 'pro_fields_after' ) );
-		
+		add_action( $this->plugin_name . '-'. $this->form_key.'_settings_start', array( $this, 'pro_fields_before' ) );
+		add_action( $this->plugin_name . '-'. $this->form_key.'_settings_end', array( $this, 'pro_fields_after' ) );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -155,9 +149,9 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 	public function subtab_data() {
 		
 		$subtab_data = array( 
-			'name'				=> 'default-form-style',
-			'label'				=> __( 'Default Form Style', 'wc_email_inquiry' ),
-			'callback_function'	=> 'wc_ei_popup_form_style_settings_form',
+			'name'				=> 'under-image-style',
+			'label'				=> __( 'Under Image Style', 'wc_email_inquiry' ),
+			'callback_function'	=> 'wc_ei_read_more_under_image_style_settings_form',
 		);
 		
 		if ( $this->subtab_data ) return $this->subtab_data;
@@ -198,188 +192,164 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
-			
+		
 			array(
-            	'name' 		=> __( 'Form Background Colour', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'class'		=> 'pro_feature_fields',
+            	'name' => __( 'Button/Hyperlink Show under Image', 'wc_email_inquiry' ),
+                'type' => 'heading',
            	),
 			array(  
-				'name' 		=> __( 'Background Colour', 'wc_email_inquiry' ),
-				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
-				'id' 		=> 'inquiry_form_bg_colour',
-				'type' 		=> 'color',
-				'default'	=> '#FFFFFF'
+				'name' 		=> __( 'Button or Hyperlink Type', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_bt_type',
+				'class' 	=> 'under_image_bt_type',
+				'type' 		=> 'switcher_checkbox',
+				'default'	=> 'button',
+				'checked_value'		=> 'button',
+				'unchecked_value'	=> 'link',
+				'checked_label'		=> __( 'Button', 'wc_email_inquiry' ),
+				'unchecked_label' 	=> __( 'Hyperlink', 'wc_email_inquiry' ),
+			),
+			array(  
+				'name' 		=> __( 'Relative Position', 'wc_email_inquiry' ),
+				'desc'		=> __( 'Position relative to Add to Cart button location', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_bt_position',
+				'type' 		=> 'switcher_checkbox',
+				'default'	=> 'below',
+				'checked_value'		=> 'below',
+				'unchecked_value'	=> 'above',
+				'checked_label' 	=> __( 'Below', 'wc_email_inquiry' ),
+				'unchecked_label'	=> __( 'Above', 'wc_email_inquiry' ),
+			),
+			array(  
+				'name' 		=> __( 'Button or Hyperlink Magrin', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_bt_margin',
+				'type' 		=> 'array_textfields',
+				'ids'		=> array( 
+	 								array( 
+											'id' 		=> 'under_image_bt_margin_top',
+	 										'name' 		=> __( 'Top', 'wc_email_inquiry' ),
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> 5 ),
+	 
+	 								array(  'id' 		=> 'under_image_bt_margin_bottom',
+	 										'name' 		=> __( 'Bottom', 'wc_email_inquiry' ),
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> 5 ),
+											
+									array( 
+											'id' 		=> 'under_image_bt_margin_left',
+	 										'name' 		=> __( 'Left', 'wc_email_inquiry' ),
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> 0 ),
+											
+									array( 
+											'id' 		=> 'under_image_bt_margin_right',
+	 										'name' 		=> __( 'Right', 'wc_email_inquiry' ),
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> 0 ),
+	 							)
 			),
 			
 			array(
-            	'name' 		=> __( 'Form Title', 'wc_email_inquiry' ),
+            	'name' 		=> __( 'Hyperlink Styling', 'wc_email_inquiry' ),
                 'type' 		=> 'heading',
+          		'class'		=> 'show_under_image_hyperlink_styling'
            	),
 			array(  
-				'name' 		=> __( 'Header Title', 'wc_email_inquiry' ),
-				'desc' 		=> __( "&lt;empty&gt; and the form title will be the Button title", 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_heading',
+				'name' => __( 'Hyperlink Text', 'wc_email_inquiry' ),
+				'desc' 		=> __( 'Text for Hyperlink show under image', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_link_text',
 				'type' 		=> 'text',
-				'free_version'		=> true,
-				'default'	=> ''
+				'default'	=> __('Read More', 'wc_email_inquiry')
 			),
-			array(
-                'type' 		=> 'heading',
-				'id'		=> 'pro_form_title_font',
-           	),
 			array(  
-				'name' 		=> __( 'Title Font', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_heading_font',
+				'name' 		=> __( 'Hyperlink Font', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_link_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '18px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial', 'style' => 'bold', 'color' => '#000000' )
 			),
 			
-			array(
-            	'name' 		=> __( 'Product Name', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
 			array(  
-				'name' 		=> __( 'Product Name Font', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_form_product_name_font',
-				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '26px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#29577F' )
-			),
-			
-			array(
-            	'name' 		=> __( 'Product URL', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'id'		=> 'pro_product_url',
-           	),
-			array(  
-				'name' 		=> __( 'Product URL Font', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_form_product_url_font',
-				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#29577F' )
-			),
-			
-			array(
-            	'name' 		=> __( 'Form Content Font', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Content Font', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_popup_text',
-				'type' 		=> 'typography',
-				'free_version'		=> true,
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' )
-			),
-			
-			array(
-            	'name' 		=> __( 'Email Subject Name', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'id'		=> 'pro_email_subject_name',
-           	),
-			array(  
-				'name' 		=> __( 'Subject Name Font', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_form_subject_font',
-				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#000000' )
-			),
-			
-			array(
-            	'name' 		=> __( 'Form Input Field Style', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'id'		=> 'pro_form_input_field_style',
-           	),
-			array(  
-				'name' 		=> __( 'Background Colour', 'wc_email_inquiry' ),
-				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
-				'id' 		=> 'inquiry_input_bg_colour',
+				'name' 		=> __( 'Hyperlink hover Colour', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_link_font_hover_color',
 				'type' 		=> 'color',
-				'default'	=> '#FAFAFA'
-			),
-			array(  
-				'name' 		=> __( 'Font Colour', 'wc_email_inquiry' ),
-				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
-				'id' 		=> 'inquiry_input_font_colour',
-				'type' 		=> 'color',
-				'default'	=> '#000000'
-			),
-			array(  
-				'name' 		=> __( 'Input Field Borders', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_input_border',
-				'type' 		=> 'border',
-				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#CCCCCC', 'corner' => 'square' , 'rounded_value' => 0 ),
+				'default'	=> '#999999'
 			),
 			
 			array(
-            	'name' 		=> __( 'Form Send / Submit Button', 'wc_email_inquiry' ),
+            	'name' 		=> __( 'Button Styling', 'wc_email_inquiry' ),
                 'type' 		=> 'heading',
+          		'class' 	=> 'show_under_image_button_styling'
            	),
 			array(  
-				'name' 		=> __( 'Send Button Title', 'wc_email_inquiry' ),
-				'desc' 		=> __( "&lt;empty&gt; for default SEND", 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_text_button',
+				'name' 		=> __( 'Button Text', 'wc_email_inquiry' ),
+				'desc' 		=> __( 'Text for Button show under image', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_bt_text',
 				'type' 		=> 'text',
-				'free_version'		=> true,
-				'default'	=> __( 'SEND', 'wc_email_inquiry' ),
+				'default'	=> __('Read More', 'wc_email_inquiry')
 			),
-			array(
-                'type' 		=> 'heading',
-				'id'		=> 'pro_send_button_style',
-           	),
+			array(  
+				'name' 		=> __( 'Button Padding', 'wc_email_inquiry' ),
+				'desc' 		=> __( 'Padding from Button text to Button border show under image', 'wc_email_inquiry' ),
+				'id' 		=> 'under_image_bt_padding',
+				'type' 		=> 'array_textfields',
+				'ids'		=> array( 
+	 								array(  'id' 		=> 'under_image_bt_padding_tb',
+	 										'name' 		=> __( 'Top/Bottom', 'wc_email_inquiry' ),
+	 										'class' 	=> '',
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> '7' ),
+	 
+	 								array(  'id' 		=> 'under_image_bt_padding_lr',
+	 										'name' 		=> __( 'Left/Right', 'wc_email_inquiry' ),
+	 										'class' 	=> '',
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> '8' ),
+	 							)
+			),
 			array(  
 				'name' 		=> __( 'Background Colour', 'wc_email_inquiry' ),
 				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
-				'id' 		=> 'inquiry_contact_button_bg_colour',
+				'id' 		=> 'under_image_bt_bg',
 				'type' 		=> 'color',
 				'default'	=> '#EE2B2B'
 			),
 			array(  
 				'name' 		=> __( 'Background Colour Gradient From', 'wc_email_inquiry' ),
 				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
-				'id' 		=> 'inquiry_contact_button_bg_colour_from',
+				'id' 		=> 'under_image_bt_bg_from',
 				'type' 		=> 'color',
 				'default'	=> '#FBCACA'
 			),
+			
 			array(  
 				'name' 		=> __( 'Background Colour Gradient To', 'wc_email_inquiry' ),
 				'desc' 		=> __( 'Default', 'wc_email_inquiry' ) . ' [default_value]',
-				'id' 		=> 'inquiry_contact_button_bg_colour_to',
+				'id' 		=> 'under_image_bt_bg_to',
 				'type' 		=> 'color',
 				'default'	=> '#EE2B2B'
 			),
 			array(  
 				'name' 		=> __( 'Button Border', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_button_border',
+				'id' 		=> 'under_image_bt_border',
 				'type' 		=> 'border',
 				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#EE2B2B', 'corner' => 'rounded' , 'rounded_value' => 3 ),
 			),
 			array(  
 				'name' 		=> __( 'Button Font', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_button_font',
+				'id' 		=> 'under_image_bt_font',
 				'type' 		=> 'typography',
-				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'normal', 'color' => '#FFFFFF' )
+				'default'	=> array( 'size' => '12px', 'face' => 'Arial', 'style' => 'bold', 'color' => '#FFFFFF' )
 			),
 			array(  
 				'name' => __( 'Button Shadow', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_button_shadow',
+				'id' 		=> 'under_image_bt_shadow',
 				'type' 		=> 'box_shadow',
 				'default'	=> array( 'enable' => 0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#999999', 'inset' => '' )
 			),
-			
-			array(
-            	'name' 		=> __( 'Style Form With Theme CSS', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'id'		=> 'pro_popup_class',
-           	),
 			array(  
-				'name' 		=> __( 'Form CSS Class', 'wc_email_inquiry' ),
-				'desc' 		=> __( "&lt;empty&gt; for default or enter custom form CSS", 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_form_class',
-				'type' 		=> 'text',
-				'default'	=> ''
-			),
-			array(  
-				'name' 		=> __( 'Button CSS Class', 'wc_email_inquiry' ),
+				'name' 		=> __( 'CSS Class', 'wc_email_inquiry' ),
 				'desc' 		=> __( 'Enter your own button CSS class', 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_contact_button_class',
+				'id' 		=> 'under_image_bt_class',
 				'type' 		=> 'text',
 				'default'	=> ''
 			),
@@ -387,18 +357,46 @@ class WC_EI_Popup_Form_Style_Settings extends WC_Email_Inquiry_Admin_UI
         ));
 	}
 	
+	public function include_script() {
+	?>
+<script>
+(function($) {
+$(document).ready(function() {
+	if ( $("input.under_image_bt_type:checked").val() == 'button') {
+		$(".show_under_image_button_styling").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+		$(".show_under_image_hyperlink_styling").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+	} else {
+		$(".show_under_image_button_styling").css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden'} );
+		$(".show_under_image_hyperlink_styling").css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+	}
+	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.under_image_bt_type', function( event, value, status ) {
+		$(".show_under_image_button_styling").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+		$(".show_under_image_hyperlink_styling").hide().css( {'visibility': 'visible', 'height' : 'auto', 'overflow' : 'inherit'} );
+		if ( status == 'true') {
+			$(".show_under_image_button_styling").slideDown();
+			$(".show_under_image_hyperlink_styling").slideUp();
+		} else {
+			$(".show_under_image_button_styling").slideUp();
+			$(".show_under_image_hyperlink_styling").slideDown();
+		}
+	});
+});
+})(jQuery);
+</script>
+    <?php	
+	}
 }
 
-global $wc_ei_popup_form_style_settings;
-$wc_ei_popup_form_style_settings = new WC_EI_Popup_Form_Style_Settings();
+global $wc_ei_read_more_under_image_style_settings;
+$wc_ei_read_more_under_image_style_settings = new WC_EI_Read_More_Under_Image_Style_Settings();
 
 /** 
- * wc_ei_popup_form_style_settings_form()
+ * wc_ei_read_more_under_image_style_settings_form()
  * Define the callback function to show subtab content
  */
-function wc_ei_popup_form_style_settings_form() {
-	global $wc_ei_popup_form_style_settings;
-	$wc_ei_popup_form_style_settings->settings_form();
+function wc_ei_read_more_under_image_style_settings_form() {
+	global $wc_ei_read_more_under_image_style_settings;
+	$wc_ei_read_more_under_image_style_settings->settings_form();
 }
 
 ?>

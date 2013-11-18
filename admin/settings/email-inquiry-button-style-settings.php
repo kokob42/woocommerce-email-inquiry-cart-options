@@ -272,22 +272,6 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 			
 			array(
                 'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( 'Exclude from Grid View', 'wc_email_inquiry' ),
-				'desc'		=> __( "Don't show Email Inquiry Button / Link text on product cards (grid view) display.", 'wc_email_inquiry' ),
-				'id' 		=> 'inquiry_single_only',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'no',
-				'free_version'		=> true,
-				'checked_value'		=> 'yes',
-				'unchecked_value'	=> 'no',
-				'checked_label' 	=> __( 'YES', 'wc_email_inquiry' ),
-				'unchecked_label'	=> __( 'NO', 'wc_email_inquiry' ),
-			),
-			
-			array(
-                'type' 		=> 'heading',
           		'id' 		=> 'pro_email_inquiry_button_hyperlink_start'
            	),
 			
@@ -352,6 +336,12 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'id' 		=> 'inquiry_button_font',
 				'type' 		=> 'typography',
 				'default'	=> array( 'size' => '12px', 'face' => 'Arial, sans-serif', 'style' => 'bold', 'color' => '#FFFFFF' )
+			),
+			array(  
+				'name' => __( 'Button Shadow', 'wc_email_inquiry' ),
+				'id' 		=> 'inquiry_button_shadow',
+				'type' 		=> 'box_shadow',
+				'default'	=> array( 'enable' => 0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#999999', 'inset' => '' )
 			),
 			array(  
 				'name' 		=> __( 'CSS Class', 'wc_email_inquiry' ),

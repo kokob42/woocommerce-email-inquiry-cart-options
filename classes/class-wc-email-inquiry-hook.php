@@ -100,7 +100,7 @@ class WC_Email_Inquiry_Hook_Filter
 		$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button['inquiry_button_position'];
 		
 		$wc_email_inquiry_button_class = '';
-		$wc_email_inquiry_button_class = $wc_email_inquiry_customize_email_button['inquiry_button_class'];
+		if ( trim( $wc_email_inquiry_customize_email_button['inquiry_button_class'] ) != '') $wc_email_inquiry_button_class = $wc_email_inquiry_customize_email_button['inquiry_button_class'];
 		
 		$button_link = '';
 		if (trim($wc_email_inquiry_text_before) != '') $button_link .= '<span class="wc_email_inquiry_text_before wc_email_inquiry_text_before_'.$product_id.'">'.trim($wc_email_inquiry_text_before).'</span> ';
@@ -435,6 +435,8 @@ function ei_getWidth() {
 		$google_fonts = array( 
 							$wc_email_inquiry_customize_email_popup['inquiry_contact_popup_text']['face'], 
 						);
+		
+		$google_fonts = apply_filters( 'wc_ei_google_fonts', $google_fonts );
 		
 		$wc_ei_fonts_face->generate_google_webfonts( $google_fonts );
 	}

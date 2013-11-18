@@ -48,6 +48,9 @@ body .wc_email_inquiry_button_container .wc_email_inquiry_email_button {
 	/*Border*/
 	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_button_border ); ?>
 	
+	/* Shadow */
+	<?php echo $wc_ei_admin_interface->generate_shadow_css( $inquiry_button_shadow ); ?>
+	
 	/* Font */
 	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_button_font ); ?>
 	
@@ -140,6 +143,9 @@ body .wc_email_inquiry_form_button, .wc_email_inquiry_form_button {
 	
 	/*Border*/
 	<?php echo $wc_ei_admin_interface->generate_border_css( $inquiry_contact_button_border ); ?>
+	
+	/* Shadow */
+	<?php echo $wc_ei_admin_interface->generate_shadow_css( $inquiry_contact_button_shadow ); ?>
 	
 	/* Font */
 	<?php echo $wc_ei_fonts_face->generate_font_css( $inquiry_contact_button_font ); ?>

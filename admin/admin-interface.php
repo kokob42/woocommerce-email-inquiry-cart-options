@@ -725,8 +725,10 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 	 * default				=> text : apply for other types
 	 *						   array( 'width' => '125', 'height' => '125', 'crop' => 1 ) : apply image_size only
 	 *						   array( 'size' => '9px', 'face' => 'Arial', 'style' => 'normal', 'color' => '#515151' ) : apply for typography only 
-	 *						   array( 'width' => '1px', 'style' => 'normal', 'color' => '#515151' ) : apply for border, border_styles only
-	 *						   array( 'corner' => 'rounded' | 'square' , 'rounded_value' => 3 ) : apply for border, border_corner only
+	 *						   array( 'width' => '1px', 'style' => 'normal', 'color' => '#515151', 'corner' => 'rounded' | 'square' , 'top_left_corner' => 3, 
+	 *									'top_right_corner' => 3, 'bottom_left_corner' => 3, 'bottom_right_corner' => 3 ) : apply for border, border_styles only
+	 *						   array( 'corner' => 'rounded' | 'square' , 'top_left_corner' => 3, 'top_right_corner' => 3, 'bottom_left_corner' => 3, 
+	 *									'bottom_right_corner' => 3 ) : apply for border, border_corner only
 	 *						   array( 'enable' => 1|0, 'h_shadow' => '5px' , 'v_shadow' => '5px', 'blur' => '2px' , 'spread' => '2px', 'color' => '#515151', 
 	 *									'inset' => '' | 'insert' ) : apply for box_shadow only
 	 *
@@ -884,6 +886,10 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 			 *
 			 * [default_value_width]		: apply for border, border_styles types
 			 * [default_value_rounded_value]: apply for border, border_corner types
+			 * [default_value_top_left_corner]: apply for border, border_corner types
+			 * [default_value_top_right_corner]: apply for border, border_corner types
+			 * [default_value_bottom_left_corner]: apply for border, border_corner types
+			 * [default_value_bottom_right_corner]: apply for border, border_corner types
 			 */
 			if ( $value['type'] == 'image_size' ) {
 				if ( ! is_array( $value['default'] ) ) $value['default'] = array();
@@ -913,11 +919,19 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 					
 				if ( ! isset( $value['default']['corner'] ) ) $value['default']['corner'] = 'rounded';
 				if ( ! isset( $value['default']['rounded_value'] ) ) $value['default']['rounded_value'] = '';
+				if ( ! isset( $value['default']['top_left_corner'] ) ) $value['default']['top_left_corner'] = $value['default']['rounded_value'];
+				if ( ! isset( $value['default']['top_right_corner'] ) ) $value['default']['top_right_corner'] = $value['default']['rounded_value'];
+				if ( ! isset( $value['default']['bottom_left_corner'] ) ) $value['default']['bottom_left_corner'] = $value['default']['rounded_value'];
+				if ( ! isset( $value['default']['bottom_right_corner'] ) ) $value['default']['bottom_right_corner'] = $value['default']['rounded_value'];
 				
 				$description = str_replace( '[default_value_width]', $value['default']['width'], $description );
 				$description = str_replace( '[default_value_style]', $value['default']['style'], $description );
 				$description = str_replace( '[default_value_color]', $value['default']['color'], $description );
 				$description = str_replace( '[default_value_rounded_value]', $value['default']['rounded_value'], $description );
+				$description = str_replace( '[default_value_top_left_corner]', $value['default']['top_left_corner'], $description );
+				$description = str_replace( '[default_value_top_right_corner]', $value['default']['top_right_corner'], $description );
+				$description = str_replace( '[default_value_bottom_left_corner]', $value['default']['bottom_left_corner'], $description );
+				$description = str_replace( '[default_value_bottom_right_corner]', $value['default']['bottom_right_corner'], $description );
 			} elseif ( $value['type'] == 'box_shadow' ) {
 				if ( ! is_array( $value['default'] ) ) $value['default'] = array();
 				if ( ! isset( $value['default']['enable'] ) || trim( $value['default']['enable'] ) == '' ) $value['default']['enable'] = 0;
@@ -1525,15 +1539,36 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 					if ( ! isset( $value['increment'] ) ) $value['increment'] = 1;
 					
 					if ( trim( $option_name ) != '' && $value['separate_option'] != false ) {
-						$corner			= $this->settings_get_option( $value['id'] . '[corner]', $value['default']['corner'] );
-						$rounded_value	= $this->settings_get_option( $value['id'] . '[rounded_value]', $value['default']['rounded_value'] );
+						$corner					= $this->settings_get_option( $value['id'] . '[corner]', $value['default']['corner'] );
+						$rounded_value			= $this->settings_get_option( $value['id'] . '[rounded_value]', $value['default']['rounded_value'] );
+						$top_left_corner		= $this->settings_get_option( $value['id'] . '[top_left_corner]', $value['default']['top_left_corner'] );
+						$top_right_corner		= $this->settings_get_option( $value['id'] . '[top_right_corner]', $value['default']['top_right_corner'] );
+						$bottom_left_corner		= $this->settings_get_option( $value['id'] . '[bottom_left_corner]', $value['default']['bottom_left_corner'] );
+						$bottom_right_corner	= $this->settings_get_option( $value['id'] . '[bottom_right_corner]', $value['default']['bottom_right_corner'] );
 					} else {
 						if ( ! isset( $option_value['corner'] ) ) $option_value['corner'] = '';
-						$corner			= $option_value['corner'];
-						$rounded_value	= $option_value['rounded_value'];
+						$corner					= $option_value['corner'];
+						$rounded_value			= $option_value['rounded_value'];
+						$top_left_corner		= $option_value['top_left_corner'];
+						$top_right_corner		= $option_value['top_right_corner'];
+						$bottom_left_corner		= $option_value['bottom_left_corner'];
+						$bottom_right_corner	= $option_value['bottom_right_corner'];
 					}
+					
 					if ( trim( $rounded_value ) == '' || trim( $rounded_value ) <= 0  ) $rounded_value = $value['min'];
 					$rounded_value = intval( $rounded_value );
+					
+					if ( trim( $top_left_corner ) == '' || trim( $top_left_corner ) <= 0  ) $top_left_corner = $rounded_value;
+					$top_left_corner = intval( $top_left_corner );
+					
+					if ( trim( $top_right_corner ) == '' || trim( $top_right_corner ) <= 0  ) $top_right_corner = $rounded_value;
+					$top_right_corner = intval( $top_right_corner );
+					
+					if ( trim( $bottom_left_corner ) == '' || trim( $bottom_left_corner ) <= 0  ) $bottom_left_corner = $rounded_value;
+					$bottom_left_corner = intval( $bottom_left_corner );
+					
+					if ( trim( $bottom_right_corner ) == '' || trim( $bottom_right_corner ) <= 0  ) $bottom_right_corner = $rounded_value;
+					$bottom_right_corner = intval( $bottom_right_corner );
 				
 					?><tr valign="top">
 						<th scope="row" class="titledesc"><?php echo esc_html( $value['name'] ) ?> <?php echo $tip; ?></th>
@@ -1603,21 +1638,71 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 								/> 
                                 
 							<!-- Border Rounded Value -->
-                            	<div class="a3rev-ui-border-corner-value-container"> 
-                                    <span class="a3rev-ui-border_corner-span"><?php _e( 'Rounded Value', 'wc_email_inquiry' ); ?></span>                              
-                                    <div class="a3rev-ui-slide-container-start">
-                                        <div class="a3rev-ui-slide-container-end">
-                                                <div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-rounded_value_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+								<div class="a3rev-ui-border-corner-value-container">
+                                	<div class="a3rev-ui-border_corner-top_left">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Top Left Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-top_left_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <input
-                                        readonly="readonly"
-                                        name="<?php echo $name_attribute; ?>[rounded_value]"
-                                        id="<?php echo $id_attribute; ?>-rounded_value"
-                                        type="text"
-                                        value="<?php echo esc_attr( $rounded_value ); ?>"
-                                        class="a3rev-ui-border_corner-rounded_value a3rev-ui-slider"
-                                    /> <span class="a3rev-ui-border_corner-px">px</span>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[top_left_corner]"
+                                            id="<?php echo $id_attribute; ?>-top_left_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $top_left_corner ); ?>"
+                                            class="a3rev-ui-border_top_left_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
+                                    <div class="a3rev-ui-border_corner-top_right">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Top Right Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-top_right_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
+                                        </div>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[top_right_corner]"
+                                            id="<?php echo $id_attribute; ?>-top_right_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $top_right_corner ); ?>"
+                                            class="a3rev-ui-border_top_right_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
+                                    <div class="a3rev-ui-border_corner-bottom_right">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Bottom Right Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-bottom_right_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
+                                        </div>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[bottom_right_corner]"
+                                            id="<?php echo $id_attribute; ?>-bottom_right_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $bottom_right_corner ); ?>"
+                                            class="a3rev-ui-border_bottom_right_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
+                                    <div class="a3rev-ui-border_corner-bottom_left">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Bottom Left Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-bottom_left_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
+                                        </div>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[bottom_left_corner]"
+                                            id="<?php echo $id_attribute; ?>-bottom_left_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $bottom_left_corner ); ?>"
+                                            class="a3rev-ui-border_bottom_left_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
                                 </div>
                                 <div style="clear:both"></div>
 							</div>
@@ -1708,15 +1793,36 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 					if ( ! isset( $value['increment'] ) ) $value['increment'] = 1;
 					
 					if ( trim( $option_name ) != '' && $value['separate_option'] != false ) {
-						$corner			= $this->settings_get_option( $value['id'] . '[corner]', $value['default']['corner'] );
-						$rounded_value	= $this->settings_get_option( $value['id'] . '[rounded_value]', $value['default']['rounded_value'] );
+						$corner					= $this->settings_get_option( $value['id'] . '[corner]', $value['default']['corner'] );
+						$rounded_value			= $this->settings_get_option( $value['id'] . '[rounded_value]', $value['default']['rounded_value'] );
+						$top_left_corner		= $this->settings_get_option( $value['id'] . '[top_left_corner]', $value['default']['top_left_corner'] );
+						$top_right_corner		= $this->settings_get_option( $value['id'] . '[top_right_corner]', $value['default']['top_right_corner'] );
+						$bottom_left_corner		= $this->settings_get_option( $value['id'] . '[bottom_left_corner]', $value['default']['bottom_left_corner'] );
+						$bottom_right_corner	= $this->settings_get_option( $value['id'] . '[bottom_right_corner]', $value['default']['bottom_right_corner'] );
 					} else {
 						if ( ! isset( $option_value['corner'] ) ) $option_value['corner'] = '';
-						$corner			= $option_value['corner'];
-						$rounded_value	= $option_value['rounded_value'];
+						$corner					= $option_value['corner'];
+						$rounded_value			= $option_value['rounded_value'];
+						$top_left_corner		= $option_value['top_left_corner'];
+						$top_right_corner		= $option_value['top_right_corner'];
+						$bottom_left_corner		= $option_value['bottom_left_corner'];
+						$bottom_right_corner	= $option_value['bottom_right_corner'];
 					}
+					
 					if ( trim( $rounded_value ) == '' || trim( $rounded_value ) <= 0  ) $rounded_value = $value['min'];
 					$rounded_value = intval( $rounded_value );
+					
+					if ( trim( $top_left_corner ) == '' || trim( $top_left_corner ) <= 0  ) $top_left_corner = $rounded_value;
+					$top_left_corner = intval( $top_left_corner );
+					
+					if ( trim( $top_right_corner ) == '' || trim( $top_right_corner ) <= 0  ) $top_right_corner = $rounded_value;
+					$top_right_corner = intval( $top_right_corner );
+					
+					if ( trim( $bottom_left_corner ) == '' || trim( $bottom_left_corner ) <= 0  ) $bottom_left_corner = $rounded_value;
+					$bottom_left_corner = intval( $bottom_left_corner );
+					
+					if ( trim( $bottom_right_corner ) == '' || trim( $bottom_right_corner ) <= 0  ) $bottom_right_corner = $rounded_value;
+					$bottom_right_corner = intval( $bottom_right_corner );
 				
 					?><tr valign="top">
 						<th scope="row" class="titledesc"><?php echo esc_html( $value['name'] ) ?> <?php echo $tip; ?></th>
@@ -1736,25 +1842,77 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
                                     <?php echo implode( ' ', $custom_attributes ); ?>
 								/> 
                                 
-                                <!-- Border Rounded Value -->
-                                <div class="a3rev-ui-border-corner-value-container">
-                                    <span class="a3rev-ui-border_corner-span"><?php _e( 'Rounded Value', 'wc_email_inquiry' ); ?></span> 
-                                    <div class="a3rev-ui-slide-container-start">
-                                        <div class="a3rev-ui-slide-container-end">
-                                                <div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-rounded_value_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
-                                        </div>
-                                    </div>
-                                    <input
-                                        readonly="readonly"
-                                        name="<?php echo $name_attribute; ?>[rounded_value]"
-                                        id="<?php echo $id_attribute; ?>-rounded_value"
-                                        type="text"
-                                        value="<?php echo esc_attr( $rounded_value ); ?>"
-                                        class="a3rev-ui-border_corner-rounded_value a3rev-ui-slider"
-                                    /> <span class="a3rev-ui-border_corner-px">px</span>
-                                </div>
                                 <!-- Preview Button -->
-                               <div class="a3rev-ui-settings-preview"><a href="#" class="a3rev-ui-border-preview-button a3rev-ui-settings-preview-button button submit-button" title="<?php _e( 'Preview your customized border settings', 'wc_email_inquiry'); ?>"><span>&nbsp;</span></a></div>
+                               	<div class="a3rev-ui-settings-preview"><a href="#" class="a3rev-ui-border-preview-button a3rev-ui-settings-preview-button button submit-button" title="<?php _e( 'Preview your customized border settings', 'wc_email_inquiry'); ?>"><span>&nbsp;</span></a></div>
+                               
+                               	<!-- Border Rounded Value -->
+								<div class="a3rev-ui-border-corner-value-container">
+                                	<div class="a3rev-ui-border_corner-top_left">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Top Left Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-top_left_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
+                                        </div>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[top_left_corner]"
+                                            id="<?php echo $id_attribute; ?>-top_left_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $top_left_corner ); ?>"
+                                            class="a3rev-ui-border_top_left_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
+                                    <div class="a3rev-ui-border_corner-top_right">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Top Right Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-top_right_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
+                                        </div>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[top_right_corner]"
+                                            id="<?php echo $id_attribute; ?>-top_right_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $top_right_corner ); ?>"
+                                            class="a3rev-ui-border_top_right_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
+                                    <div class="a3rev-ui-border_corner-bottom_right">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Bottom Right Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-bottom_right_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
+                                        </div>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[bottom_right_corner]"
+                                            id="<?php echo $id_attribute; ?>-bottom_right_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $bottom_right_corner ); ?>"
+                                            class="a3rev-ui-border_bottom_right_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
+                                    <div class="a3rev-ui-border_corner-bottom_left">
+                                        <span class="a3rev-ui-border_corner-span"><?php _e( 'Bottom Left Corner', 'wc_email_inquiry' ); ?></span> 
+                                        <div class="a3rev-ui-slide-container-start">
+                                            <div class="a3rev-ui-slide-container-end">
+												<div class="a3rev-ui-slide" id="<?php echo $id_attribute; ?>-bottom_left_corner_div" min="<?php echo esc_attr( $value['min'] ); ?>" max="<?php echo esc_attr( $value['max'] ); ?>" inc="<?php echo esc_attr( $value['increment'] ); ?>"></div>
+                                            </div>
+                                        </div>
+                                        <input
+                                            readonly="readonly"
+                                            name="<?php echo $name_attribute; ?>[bottom_left_corner]"
+                                            id="<?php echo $id_attribute; ?>-bottom_left_corner"
+                                            type="text"
+                                            value="<?php echo esc_attr( $bottom_left_corner ); ?>"
+                                            class="a3rev-ui-border_bottom_left_corner a3rev-ui-slider"
+                                        /> <span class="a3rev-ui-border_corner-px">px</span>
+                                	</div>
+                                </div>
+                                <div style="clear:both"></div>
                             </div>
 							<div style="clear:both"></div>
 						</td>
@@ -2121,9 +2279,15 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 		$border_css .= 'border: ' . esc_attr( $option['width'] ) . ' ' . esc_attr( $option['style'] ) . ' ' . esc_attr( $option['color'] ) .' !important;';
 			
 		if ( isset( $option['corner'] ) && esc_attr( $option['corner'] ) == 'rounded' ) {
-			$border_css .= 'border-radius: ' . $option['rounded_value'] . 'px !important;';
-			$border_css .= '-moz-border-radius: ' . $option['rounded_value'] . 'px !important;';
-			$border_css .= '-webkit-border-radius: ' . $option['rounded_value'] . 'px !important;';
+			if ( ! isset( $option['rounded_value'] ) ) $option['rounded_value'] = 0;
+			if ( ! isset( $option['top_left_corner'] ) ) $option['top_left_corner'] = $option['rounded_value'];
+			if ( ! isset( $option['top_right_corner'] ) ) $option['top_right_corner'] = $option['rounded_value'];
+			if ( ! isset( $option['bottom_left_corner'] ) ) $option['bottom_left_corner'] = $option['rounded_value'];
+			if ( ! isset( $option['bottom_right_corner'] ) ) $option['bottom_right_corner'] = $option['rounded_value'];
+			
+			$border_css .= 'border-radius: ' . $option['top_left_corner'] . 'px ' . $option['top_right_corner'] . 'px ' . $option['bottom_right_corner'] . 'px ' . $option['bottom_left_corner'] . 'px !important;';
+			$border_css .= '-moz-border-radius: ' . $option['top_left_corner'] . 'px ' . $option['top_right_corner'] . 'px ' . $option['bottom_right_corner'] . 'px ' . $option['bottom_left_corner'] . 'px !important;';
+			$border_css .= '-webkit-border-radius: ' . $option['top_left_corner'] . 'px ' . $option['top_right_corner'] . 'px ' . $option['bottom_right_corner'] . 'px ' . $option['bottom_left_corner'] . 'px !important;';
 		} else {
 			$border_css .= 'border-radius: 0px !important;';
 			$border_css .= '-moz-border-radius: 0px !important;';
@@ -2157,9 +2321,15 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 		$border_corner_css = '';
 					
 		if ( isset( $option['corner'] ) && esc_attr( $option['corner'] ) == 'rounded' ) {
-			$border_corner_css .= 'border-radius: ' . $option['rounded_value'] . 'px !important;';
-			$border_corner_css .= '-moz-border-radius: ' . $option['rounded_value'] . 'px !important;';
-			$border_corner_css .= '-webkit-border-radius: ' . $option['rounded_value'] . 'px !important;';
+			if ( ! isset( $option['rounded_value'] ) ) $option['rounded_value'] = 0;
+			if ( ! isset( $option['top_left_corner'] ) ) $option['top_left_corner'] = $option['rounded_value'];
+			if ( ! isset( $option['top_right_corner'] ) ) $option['top_right_corner'] = $option['rounded_value'];
+			if ( ! isset( $option['bottom_left_corner'] ) ) $option['bottom_left_corner'] = $option['rounded_value'];
+			if ( ! isset( $option['bottom_right_corner'] ) ) $option['bottom_right_corner'] = $option['rounded_value'];
+			
+			$border_corner_css .= 'border-radius: ' . $option['top_left_corner'] . 'px ' . $option['top_right_corner'] . 'px ' . $option['bottom_right_corner'] . 'px ' . $option['bottom_left_corner'] . 'px !important;';
+			$border_corner_css .= '-moz-border-radius: ' . $option['top_left_corner'] . 'px ' . $option['top_right_corner'] . 'px ' . $option['bottom_right_corner'] . 'px ' . $option['bottom_left_corner'] . 'px !important;';
+			$border_corner_css .= '-webkit-border-radius: ' . $option['top_left_corner'] . 'px ' . $option['top_right_corner'] . 'px ' . $option['bottom_right_corner'] . 'px ' . $option['bottom_left_corner'] . 'px !important;';
 		} else {
 			$border_corner_css .= 'border-radius: 0px !important;';
 			$border_corner_css .= '-moz-border-radius: 0px !important;';

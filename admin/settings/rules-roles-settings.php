@@ -70,7 +70,7 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 	public $form_messages = array();
 	
 	public function custom_types() {
-		$custom_type = array( 'hide_addtocart_yellow_message', 'hide_inquiry_button_yellow_message', 'hide_price_yellow_message', 'manual_quote_yellow_message', 'store_rule_yellow_message' );
+		$custom_type = array( 'hide_addtocart_yellow_message', 'hide_price_yellow_message', 'manual_quote_yellow_message', 'store_rule_yellow_message' );
 		
 		return $custom_type;
 	}
@@ -106,11 +106,8 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 		add_action( $this->plugin_name . '-' . trim( $this->form_key ) . '_before_settings_save', array( $this, 'before_settings_save' ) );
 		
 		// Add yellow border for pro fields
-		add_action( $this->plugin_name . '_settings_pro_store_rules_before', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '_settings_pro_add_to_order_after', array( $this, 'pro_fields_after' ) );
-		
 		add_action( $this->plugin_name . '_settings_pro_hide_price_before', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '_settings_pro_global_reset_after', array( $this, 'pro_fields_after' ) );
+		add_action( $this->plugin_name . '_settings_pro_add_to_order_after', array( $this, 'pro_fields_after' ) );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -264,6 +261,149 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
+			
+			array(
+            	'name' 		=> __( 'Conditional Logic', 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+				'class'		=> 'conditional_logic_container',
+           	),
+			array(  
+				'name' 		=> __( "Rules & Roles Explanation", 'wc_email_inquiry' ),
+				'class'		=> 'rules_roles_explanation',
+				'id' 		=> 'rules_roles_explanation',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'show',
+				'free_version'		=> true,
+				'checked_value'		=> 'show',
+				'unchecked_value' 	=> 'hide',
+				'checked_label'		=> __( 'SHOW', 'wc_email_inquiry' ),
+				'unchecked_label' 	=> __( 'HIDE', 'wc_email_inquiry' ),
+			),
+			array(
+				'desc'		=> '<table class="form-table"><tbody><tr valign="top"><th class="titledesc" scope="row"><label>' . __( "Apply for all users before log in", 'wc_email_inquiry' ) . ':</label></th><td class="forminp">' . __( "Activating any Store Rule auto deactivates Product Page Rules 'Add to Cart' and 'Hide Price'", 'wc_email_inquiry' ) . '</td></tr><tr valign="top"><th class="titledesc" scope="row"><label>' . __( "Apply by user role after log in",'wc_email_inquiry') . ':</label></th><td class="forminp">' . __( "User Roles do not show in Rule drop downs IF they exist in other Rules that conflict. Removing Roles from conflicting Rules makes them instantly available for adding to the new Rule.",'wc_email_inquiry') . '</td></tr></tbody></table>',
+                'type' 		=> 'heading',
+				'class'		=> 'rules_roles_explanation_container',
+           	),
+			
+			array(
+            	'name' 		=> __( 'Product Page Rules:', 'wc_email_inquiry' ),
+				'desc'		=> __( "Product Page Rules apply a single action Rule to all product pages which can be filtered on a per User Role basis. These Rules can also be varied on a product by product basis from each product edit page.", 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+           	),
+			
+			array(
+            	'name' 		=> __( "Product Page Rule: Hide 'Add to Cart'", 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'name' 		=> __( "Apply for all users before log in", 'wc_email_inquiry' ),
+				'class'		=> 'hide_addcartbt_before_login',
+				'id' 		=> 'hide_addcartbt',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'yes',
+				'free_version'		=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
+			),
+			array(  
+				'name' 		=> __( "Apply by user role after log in", 'wc_email_inquiry' ),
+				'class'		=> 'hide_addcartbt_after_login',
+				'id' 		=> 'hide_addcartbt_after_login',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'yes',
+				'free_version'		=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
+			),
+			array(
+				'class'		=> 'hide_addcartbt_after_login_container',
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'class' 	=> 'chzn-select role_apply_hide_cart',
+				'id' 		=> 'role_apply_hide_cart',
+				'type' 		=> 'multiselect',
+				'free_version'		=> true,
+				'placeholder' => __( 'Choose Roles', 'wc_email_inquiry' ),
+				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
+				'options'	=> $roles_hide_cart,
+			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'yellow_message_container hide_addtocart_yellow_message_container',
+           	),
+			array(
+                'type' 		=> 'hide_addtocart_yellow_message',
+           	),
+			
+			array(
+				'name' 		=> __( "Product Page Rule: Hide Price", 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+				'id'		=> 'pro_hide_price',
+           	),
+			array(  
+				'name' 		=> __( "Apply for all users before log in", 'wc_email_inquiry' ),
+				'class'		=> 'email_inquiry_hide_price_before_login',
+				'id' 		=> 'hide_price',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'no',
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
+			),
+			array(  
+				'name' 		=> __( "Apply by user role after log in", 'wc_email_inquiry' ),
+				'class'		=> 'email_inquiry_hide_price_after_login',
+				'id' 		=> 'hide_price_after_login',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'no',
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
+			),
+			array(
+				'class'		=> 'email_inquiry_hide_price_after_login_container',
+                'type' 		=> 'heading',
+           	),
+			array(  
+				'class' 	=> 'chzn-select role_apply_hide_price',
+				'id' 		=> 'role_apply_hide_price',
+				'type' 		=> 'multiselect',
+				'placeholder' => __( 'Choose Roles', 'wc_email_inquiry' ),
+				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
+				'options'	=> $roles_hide_price,
+			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'yellow_message_container hide_price_yellow_message_container',
+           	),
+			array(
+                'type' 		=> 'hide_price_yellow_message',
+           	),
+			array(
+				'name'		=> __( 'Product Page Rules Reset:', 'wc_email_inquiry' ),
+                'type' 		=> 'heading',
+				'id'		=> 'pro_global_reset',
+           	),
+			array(  
+				'name' 		=> __( "Reset All Products", 'wc_email_inquiry' ),
+				'desc' 		=> __( "<strong>Warning:</strong> Set to Yes and Save Changes will reset ALL custom Product Page and Product Card Rules and Roles on ALL products back to the admin panels Global settings.", 'wc_email_inquiry' ),
+				'id' 		=> 'wc_email_inquiry_reset_products_options',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'no',
+				'separate_option'	=> true,
+				'checked_value'		=> 'yes',
+				'unchecked_value' 	=> 'no',
+				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
+				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
+			),
+			
 			array(
             	'name' 		=> __( 'Store Rules:', 'wc_email_inquiry' ),
 				'desc'		=> __( "Store Rules apply a set of Rules that determine how users use your store BEFORE and AFTER they log in.", 'wc_email_inquiry' ),
@@ -386,196 +526,6 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 				'id'		=> 'pro_add_to_order',
            	),
 			
-			array(
-            	'name' 		=> __( 'Conditional Logic', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'class'		=> 'conditional_logic_container',
-           	),
-			array(  
-				'name' 		=> __( "Rules & Roles Explanation", 'wc_email_inquiry' ),
-				'class'		=> 'rules_roles_explanation',
-				'id' 		=> 'rules_roles_explanation',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'show',
-				'free_version'		=> true,
-				'checked_value'		=> 'show',
-				'unchecked_value' 	=> 'hide',
-				'checked_label'		=> __( 'SHOW', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'HIDE', 'wc_email_inquiry' ),
-			),
-			array(
-				'desc'		=> '<table class="form-table"><tbody><tr valign="top"><th class="titledesc" scope="row"><label>' . __( "Apply for all users before log in", 'wc_email_inquiry' ) . ':</label></th><td class="forminp">' . __( "Activating any Store Rule auto deactivates Product Page Rules 'Add to Cart' and 'Hide Price'", 'wc_email_inquiry' ) . '</td></tr><tr valign="top"><th class="titledesc" scope="row"><label>' . __( "Apply by user role after log in",'wc_email_inquiry') . ':</label></th><td class="forminp">' . __( "User Roles do not show in Rule drop downs IF they exist in other Rules that conflict. Removing Roles from conflicting Rules makes them instantly available for adding to the new Rule.",'wc_email_inquiry') . '</td></tr></tbody></table>',
-                'type' 		=> 'heading',
-				'class'		=> 'rules_roles_explanation_container',
-           	),
-			
-			array(
-            	'name' 		=> __( 'Product Page Rules:', 'wc_email_inquiry' ),
-				'desc'		=> __( "Product Page Rules apply a single action Rule to all product pages which can be filtered on a per User Role basis. These Rules can also be varied on a product by product basis from each product edit page.", 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
-			
-			array(
-				'name' 		=> __( "Product Page Rule: Hide Price", 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'id'		=> 'pro_hide_price',
-           	),
-			array(  
-				'name' 		=> __( "Apply for all users before log in", 'wc_email_inquiry' ),
-				'class'		=> 'email_inquiry_hide_price_before_login',
-				'id' 		=> 'hide_price',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'no',
-				'checked_value'		=> 'yes',
-				'unchecked_value' 	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			array(  
-				'name' 		=> __( "Apply by user role after log in", 'wc_email_inquiry' ),
-				'class'		=> 'email_inquiry_hide_price_after_login',
-				'id' 		=> 'hide_price_after_login',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'no',
-				'checked_value'		=> 'yes',
-				'unchecked_value' 	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			array(
-				'class'		=> 'email_inquiry_hide_price_after_login_container',
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'class' 	=> 'chzn-select role_apply_hide_price',
-				'id' 		=> 'role_apply_hide_price',
-				'type' 		=> 'multiselect',
-				'placeholder' => __( 'Choose Roles', 'wc_email_inquiry' ),
-				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
-				'options'	=> $roles_hide_price,
-			),
-			array(
-                'type' 		=> 'heading',
-				'class'		=> 'yellow_message_container hide_price_yellow_message_container',
-           	),
-			array(
-                'type' 		=> 'hide_price_yellow_message',
-           	),
-			array(
-				'name'		=> __( 'Product Page Rules Reset:', 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-				'id'		=> 'pro_global_reset',
-           	),
-			array(  
-				'name' 		=> __( "Reset All Products", 'wc_email_inquiry' ),
-				'desc' 		=> __( "Set to Yes and Save Changes will reset ALL products that have custom Individual Rules to the Individual Rules and Roles set above.", 'wc_email_inquiry' ),
-				'id' 		=> 'wc_email_inquiry_reset_products_options',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'no',
-				'separate_option'	=> true,
-				'checked_value'		=> 'yes',
-				'unchecked_value' 	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			
-			array(
-            	'name' 		=> __( "Product Page Rule: Hide 'Add to Cart'", 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( "Apply for all users before log in", 'wc_email_inquiry' ),
-				'class'		=> 'hide_addcartbt_before_login',
-				'id' 		=> 'hide_addcartbt',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'yes',
-				'free_version'		=> true,
-				'checked_value'		=> 'yes',
-				'unchecked_value' 	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			array(  
-				'name' 		=> __( "Apply by user role after log in", 'wc_email_inquiry' ),
-				'class'		=> 'hide_addcartbt_after_login',
-				'id' 		=> 'hide_addcartbt_after_login',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'yes',
-				'free_version'		=> true,
-				'checked_value'		=> 'yes',
-				'unchecked_value' 	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			array(
-				'class'		=> 'hide_addcartbt_after_login_container',
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'class' 	=> 'chzn-select role_apply_hide_cart',
-				'id' 		=> 'role_apply_hide_cart',
-				'type' 		=> 'multiselect',
-				'free_version'		=> true,
-				'placeholder' => __( 'Choose Roles', 'wc_email_inquiry' ),
-				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
-				'options'	=> $roles_hide_cart,
-			),
-			array(
-                'type' 		=> 'heading',
-				'class'		=> 'yellow_message_container hide_addtocart_yellow_message_container',
-           	),
-			array(
-                'type' 		=> 'hide_addtocart_yellow_message',
-           	),
-			array(
-            	'name' 		=> __( "Product Page Rule: Show Email Inquiry Button", 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( "Apply for all users before log in", 'wc_email_inquiry' ),
-				'class'		=> 'show_email_inquiry_button_before_login',
-				'id' 		=> 'show_button',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'yes',
-				'free_version'		=> true,
-				'checked_value'		=> 'yes',
-				'unchecked_value' 	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			array(  
-				'name' 		=> __( "Apply by user role after log in", 'wc_email_inquiry' ),
-				'class'		=> 'show_email_inquiry_button_after_login',
-				'id' 		=> 'show_button_after_login',
-				'type' 		=> 'onoff_checkbox',
-				'default'	=> 'yes',
-				'free_version'		=> true,
-				'checked_value'		=> 'yes',
-				'unchecked_value' 	=> 'no',
-				'checked_label'		=> __( 'ON', 'wc_email_inquiry' ),
-				'unchecked_label' 	=> __( 'OFF', 'wc_email_inquiry' ),
-			),
-			array(
-				'class'		=> 'show_email_inquiry_button_after_login_container',
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'desc' 		=> '',
-				'id' 		=> 'role_apply_show_inquiry_button',
-				'type' 		=> 'multiselect',
-				'free_version'		=> true,
-				'placeholder' => __( 'Choose Roles', 'wc_email_inquiry' ),
-				'css'		=> 'width:450px; min-height:80px; max-width:100%;',
-				'options'	=> $roles,
-			),
-			array(
-                'type' 		=> 'heading',
-				'class'		=> 'yellow_message_container hide_inquiry_button_yellow_message_container',
-           	),
-			array(
-                'type' 		=> 'hide_inquiry_button_yellow_message',
-           	),
-			
         ));
 	}
 	
@@ -649,78 +599,7 @@ $(document).ready(function() {
     <?php
 	
 	}
-	
-	public function hide_inquiry_button_yellow_message( $value ) {
-		$customized_settings = get_option( $this->option_name, array() );
-	?>
-    	<tr valign="top" class="hide_inquiry_button_yellow_message_tr" style=" ">
-			<th scope="row" class="titledesc">&nbsp;</th>
-			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
-            <?php 
-				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( "If a product does not have a price set (even 0) it is a function of WooCommmerce that the add to cart function is removed from the product. The Email Inquiry button hooks to that function and if it is not present the button cannot show. Also if a bespoke theme has removed the WooCommerce add to cart template and replaced it with a custom template the button cannot show on any products.", 'wc_email_inquiry' ).'</div>
-                <div style="clear:both"></div>
-                <a class="hide_inquiry_button_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
-                <a class="hide_inquiry_button_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
-                <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $hide_inquiry_button_blue_message ); 
-			?>
-            </div>
-<style>
-.a3rev_panel_container .hide_inquiry_button_yellow_message_container {
-<?php if ( $customized_settings['show_button'] == 'no' && $customized_settings['show_button_after_login'] == 'no' ) echo 'display: none;'; ?>
-<?php if ( get_option( 'wc_ei_hide_inquiry_button_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
-<?php if ( !isset($_SESSION) ) { session_start(); } if ( isset( $_SESSION['wc_ei_hide_inquiry_button_message_dismiss'] ) ) echo 'display: none !important;'; ?>
-}
-</style>
-<script>
-(function($) {
-$(document).ready(function() {
-	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_after_login', function( event, value, status ) {
-		if ( status == 'true' ) {
-			$(".hide_inquiry_button_yellow_message_container").slideDown();
-		} else if( $("input.show_email_inquiry_button_before_login").prop( "checked" ) == false ) {
-			$(".hide_inquiry_button_yellow_message_container").slideUp();
-		}
-	});
-	$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_before_login', function( event, value, status ) {
-		if ( status == 'true' ) {
-			$(".hide_inquiry_button_yellow_message_container").slideDown();
-		} else if( $("input.show_email_inquiry_button_after_login").prop( "checked" ) == false ) {
-			$(".hide_inquiry_button_yellow_message_container").slideUp();
-		}
-	});
-	
-	$(document).on( "click", ".hide_inquiry_button_yellow_message_dontshow", function(){
-		$(".hide_inquiry_button_yellow_message_tr").slideUp();
-		$(".hide_inquiry_button_yellow_message_container").slideUp();
-		var data = {
-				action: 		"wc_ei_yellow_message_dontshow",
-				option_name: 	"wc_ei_hide_inquiry_button_message_dontshow",
-				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dontshow"); ?>"
-			};
-		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
-	});
-	
-	$(document).on( "click", ".hide_inquiry_button_yellow_message_dismiss", function(){
-		$(".hide_inquiry_button_yellow_message_tr").slideUp();
-		$(".hide_inquiry_button_yellow_message_container").slideUp();
-		var data = {
-				action: 		"wc_ei_yellow_message_dismiss",
-				session_name: 	"wc_ei_hide_inquiry_button_message_dismiss",
-				security: 		"<?php echo wp_create_nonce("wc_ei_yellow_message_dismiss"); ?>"
-			};
-		$.post( "<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>", data);
-	});
-});
-})(jQuery);
-</script>
-			</td>
-		</tr>
-    <?php
-	
-	}
-	
+		
 	public function hide_price_yellow_message( $value ) {
 		$customized_settings = get_option( $this->option_name, array() );
 	?>
@@ -905,6 +784,10 @@ $(document).ready(function() {
 	public function include_script() {
 	?>
 <style>
+#a3_plugin_panel_extensions {
+	position:absolute;
+	bottom:50px;	
+}
 .conditional_logic_container table th {
 	padding-left:0px;
 	padding-right:20px;	
@@ -919,7 +802,7 @@ $(document).ready(function() {
 .yellow_message_container a {
 	text-decoration:none;	
 }
-.yellow_message_container th, .yellow_message_container td, .hide_addcartbt_after_login_container th, .hide_addcartbt_after_login_container td, .show_email_inquiry_button_after_login_container th, .show_email_inquiry_button_after_login_container td, .email_inquiry_hide_price_after_login_container th, .email_inquiry_hide_price_after_login_container td, .role_apply_activate_order_logged_in_container th, .role_apply_activate_order_logged_in_container td {
+.yellow_message_container th, .yellow_message_container td, .hide_addcartbt_after_login_container th, .hide_addcartbt_after_login_container td, .email_inquiry_hide_price_after_login_container th, .email_inquiry_hide_price_after_login_container td, .role_apply_activate_order_logged_in_container th, .role_apply_activate_order_logged_in_container td {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 }
@@ -949,11 +832,6 @@ $(document).ready(function() {
 				$(".hide_addcartbt_after_login_container").show();
 			} else {
 				$(".hide_addcartbt_after_login_container").hide();
-			}
-			if ( $("input.show_email_inquiry_button_after_login:checked").val() == 'yes') {
-				$(".show_email_inquiry_button_after_login_container").show();
-			} else {
-				$(".show_email_inquiry_button_after_login_container").hide();
 			}
 			if ( $("input.email_inquiry_hide_price_after_login:checked").val() == 'yes') {
 				$(".email_inquiry_hide_price_after_login_container").show();
@@ -1021,13 +899,6 @@ $(document).ready(function() {
 					$(".hide_addcartbt_after_login_container").slideDown();
 				} else {
 					$(".hide_addcartbt_after_login_container").slideUp();
-				}
-			});
-			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.show_email_inquiry_button_after_login', function( event, value, status ) {
-				if ( status == 'true' ) {
-					$(".show_email_inquiry_button_after_login_container").slideDown();
-				} else {
-					$(".show_email_inquiry_button_after_login_container").slideUp();
 				}
 			});
 			$(document).on( "a3rev-ui-onoff_checkbox-switch", '.email_inquiry_hide_price_after_login', function( event, value, status ) {
