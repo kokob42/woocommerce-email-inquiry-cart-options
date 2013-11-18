@@ -1540,18 +1540,38 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 					
 					if ( trim( $option_name ) != '' && $value['separate_option'] != false ) {
 						$corner					= $this->settings_get_option( $value['id'] . '[corner]', $value['default']['corner'] );
+						
+						if ( ! isset( $value['default']['rounded_value'] ) ) $value['default']['rounded_value'] = 3;
 						$rounded_value			= $this->settings_get_option( $value['id'] . '[rounded_value]', $value['default']['rounded_value'] );
+						
+						if ( ! isset( $value['default']['top_left_corner'] ) ) $value['default']['top_left_corner'] = 3;
 						$top_left_corner		= $this->settings_get_option( $value['id'] . '[top_left_corner]', $value['default']['top_left_corner'] );
+						
+						if ( ! isset( $value['default']['top_right_corner'] ) ) $value['default']['top_right_corner'] = 3;
 						$top_right_corner		= $this->settings_get_option( $value['id'] . '[top_right_corner]', $value['default']['top_right_corner'] );
+						
+						if ( ! isset( $value['default']['bottom_left_corner'] ) ) $value['default']['bottom_left_corner'] = 3;
 						$bottom_left_corner		= $this->settings_get_option( $value['id'] . '[bottom_left_corner]', $value['default']['bottom_left_corner'] );
+						
+						if ( ! isset( $value['default']['bottom_right_corner'] ) ) $value['default']['bottom_right_corner'] = 3;
 						$bottom_right_corner	= $this->settings_get_option( $value['id'] . '[bottom_right_corner]', $value['default']['bottom_right_corner'] );
 					} else {
 						if ( ! isset( $option_value['corner'] ) ) $option_value['corner'] = '';
 						$corner					= $option_value['corner'];
+						
+						if ( ! isset( $option_value['rounded_value'] ) ) $option_value['rounded_value'] = 3;
 						$rounded_value			= $option_value['rounded_value'];
+						
+						if ( ! isset( $option_value['top_left_corner'] ) ) $option_value['top_left_corner'] = 3;
 						$top_left_corner		= $option_value['top_left_corner'];
+						
+						if ( ! isset( $option_value['top_right_corner'] ) ) $option_value['top_right_corner'] = 3;
 						$top_right_corner		= $option_value['top_right_corner'];
+						
+						if ( ! isset( $option_value['bottom_left_corner'] ) ) $option_value['bottom_left_corner'] = 3;
 						$bottom_left_corner		= $option_value['bottom_left_corner'];
+						
+						if ( ! isset( $option_value['bottom_right_corner'] ) ) $option_value['bottom_right_corner'] = 3;
 						$bottom_right_corner	= $option_value['bottom_right_corner'];
 					}
 					
@@ -1794,18 +1814,38 @@ class WC_Email_Inquiry_Admin_Interface extends WC_Email_Inquiry_Admin_UI
 					
 					if ( trim( $option_name ) != '' && $value['separate_option'] != false ) {
 						$corner					= $this->settings_get_option( $value['id'] . '[corner]', $value['default']['corner'] );
+						
+						if ( ! isset( $value['default']['rounded_value'] ) ) $value['default']['rounded_value'] = 3;
 						$rounded_value			= $this->settings_get_option( $value['id'] . '[rounded_value]', $value['default']['rounded_value'] );
+						
+						if ( ! isset( $value['default']['top_left_corner'] ) ) $value['default']['top_left_corner'] = 3;
 						$top_left_corner		= $this->settings_get_option( $value['id'] . '[top_left_corner]', $value['default']['top_left_corner'] );
+						
+						if ( ! isset( $value['default']['top_right_corner'] ) ) $value['default']['top_right_corner'] = 3;
 						$top_right_corner		= $this->settings_get_option( $value['id'] . '[top_right_corner]', $value['default']['top_right_corner'] );
+						
+						if ( ! isset( $value['default']['bottom_left_corner'] ) ) $value['default']['bottom_left_corner'] = 3;
 						$bottom_left_corner		= $this->settings_get_option( $value['id'] . '[bottom_left_corner]', $value['default']['bottom_left_corner'] );
+						
+						if ( ! isset( $value['default']['bottom_right_corner'] ) ) $value['default']['bottom_right_corner'] = 3;
 						$bottom_right_corner	= $this->settings_get_option( $value['id'] . '[bottom_right_corner]', $value['default']['bottom_right_corner'] );
 					} else {
 						if ( ! isset( $option_value['corner'] ) ) $option_value['corner'] = '';
 						$corner					= $option_value['corner'];
+						
+						if ( ! isset( $option_value['rounded_value'] ) ) $option_value['rounded_value'] = 3;
 						$rounded_value			= $option_value['rounded_value'];
+						
+						if ( ! isset( $option_value['top_left_corner'] ) ) $option_value['top_left_corner'] = 3;
 						$top_left_corner		= $option_value['top_left_corner'];
+						
+						if ( ! isset( $option_value['top_right_corner'] ) ) $option_value['top_right_corner'] = 3;
 						$top_right_corner		= $option_value['top_right_corner'];
+						
+						if ( ! isset( $option_value['bottom_left_corner'] ) ) $option_value['bottom_left_corner'] = 3;
 						$bottom_left_corner		= $option_value['bottom_left_corner'];
+						
+						if ( ! isset( $option_value['bottom_right_corner'] ) ) $option_value['bottom_right_corner'] = 3;
 						$bottom_right_corner	= $option_value['bottom_right_corner'];
 					}
 					
