@@ -1,8 +1,8 @@
 <?php
 function wc_email_inquiry_install(){
-	update_option('a3rev_wc_email_inquiry_version', '1.0.9.2');
-	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.8.1');
-	update_option('a3rev_wc_orders_quotes_version', '1.1.4.1');
+	update_option('a3rev_wc_email_inquiry_version', '1.0.9.3');
+	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.8.2');
+	update_option('a3rev_wc_orders_quotes_version', '1.1.4.2');
 
 	// Set Settings Default from Admin Init
 	global $wc_ei_admin_init;
@@ -75,6 +75,12 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 	add_action('woocommerce_before_add_to_cart_button', array('WC_Email_Inquiry_Hook_Filter', 'details_before_hide_add_to_cart_button'), 100 );
 	add_action('woocommerce_after_add_to_cart_button', array('WC_Email_Inquiry_Hook_Filter', 'details_after_hide_add_to_cart_button'), 1 );
 	
+	// Hide Quantity Control and Add to Cart button for Child Product of Grouped Product Type in Details Page
+	add_action('woocommerce_before_add_to_cart_form', array('WC_Email_Inquiry_Hook_Filter', 'grouped_product_hide_add_to_cart_style'), 100 );
+	add_filter('single_add_to_cart_text', array('WC_Email_Inquiry_Hook_Filter', 'grouped_product_hide_add_to_cart'), 100, 2 );
+	add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'before_grouped_product_hide_quatity_control'), 100, 3 );
+	add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'after_grouped_product_hide_quatity_control'), 1, 3 );
+	
 	// Add Email Inquiry Button on Shop page
 	$wc_email_inquiry_customize_email_button_settings = get_option( 'wc_email_inquiry_customize_email_button', array( 'inquiry_button_position' => 'below' ) );
 	$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'];
@@ -117,8 +123,8 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 		WC_Email_Inquiry_Functions::upgrade_version_1_0_9_2();
 	}
 
-	update_option('a3rev_wc_email_inquiry_version', '1.0.9.2');	
-	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.8.1');
-	update_option('a3rev_wc_orders_quotes_version', '1.1.4.1');
+	update_option('a3rev_wc_email_inquiry_version', '1.0.9.3');	
+	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.8.2');
+	update_option('a3rev_wc_orders_quotes_version', '1.1.4.2');
 
 ?>

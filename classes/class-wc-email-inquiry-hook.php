@@ -51,8 +51,9 @@ class WC_Email_Inquiry_Hook_Filter
 		global $post, $product;
 		$product_id = $product->id;
 		
-		if (WC_Email_Inquiry_Functions::check_hide_add_cart_button($product_id) )
+		if (WC_Email_Inquiry_Functions::check_hide_add_cart_button($product_id) ) {
 			ob_start();
+		}
 	}
 	
 	public static function details_after_hide_add_to_cart_button() {
@@ -70,6 +71,48 @@ class WC_Email_Inquiry_Hook_Filter
 					</div>
 					<div><input type="hidden" name="product_id" value="<?php echo $post->ID; ?>" /></div>
 				<?php
+			}
+		}
+	}
+	
+	public static function grouped_product_hide_add_to_cart_style() {
+		global $product;
+		$product_id = $product->id;
+		
+		if ( $product->product_type == 'grouped' && WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ){
+			echo '<style>body table.group_table a.button, body table.group_table a.single_add_to_cart_button, body table.group_table .quantity, table.group_table a.button, table.group_table a.single_add_to_cart_button, table.group_table .quantity { display:none !important; } </style>';
+		}
+	}
+	
+	public static function grouped_product_hide_add_to_cart( $add_to_cart='', $product_type ) {
+		global $product;
+		$product_id = $product->id;
+		
+		if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ){
+			$add_to_cart = '';
+		}
+		
+		return $add_to_cart;
+	}
+	
+	public static function before_grouped_product_hide_quatity_control( $template_name, $template_path, $located ) {
+		global $product;
+		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
+			$product_id = $product->id;
+			
+			if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ) {
+				ob_start();
+			}
+		}
+	}
+	
+	public static function after_grouped_product_hide_quatity_control( $template_name, $template_path, $located ) {
+		global $product;
+		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
+			$product_id = $product->id;
+			
+			if ( WC_Email_Inquiry_Functions::check_hide_add_cart_button( $product_id ) ) {
+				ob_end_clean();
 			}
 		}
 	}

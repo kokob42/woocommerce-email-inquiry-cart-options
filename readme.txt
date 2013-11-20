@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.5
 Tested up to: 3.7.1
-Stable tag: 1.0.9.2
+Stable tag: 1.0.9.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -175,13 +175,18 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.9.3 - 2013/11/20 =
+* Fix - add filter to 'single_add_to_cart_text' for hide Add to Cart button for Child Products in Grouped Product when Hide Add to Cart Rule is ON.
+* Fix - add action to 'woocommerce_before_template_part' and 'woocommerce_after_template_part' for hide Child Products Quantity selector in Grouped Product when Hide Add to Cart is ON.
+* Credit - Thanks to Marc Schwinges Underdog Productions South Africa for alerting us to the issue and wp-admin and ftp access to find and fix the bug. 
+
 = 1.0.9.2 - 2013/11/18 =
-* Tweak – Moved - Hide Add to Cart and Hide Price Rules and Roles to the top of the Rules and Roles menu. 
+* Tweak - Moved - Hide Add to Cart and Hide Price Rules and Roles to the top of the Rules and Roles menu. 
 * Tweak - Moved the Email Inquiry Rules & Roles settings from Rules & Roles menu to Email Inquiry menu > Settings tab.
 * Tweak - Moved the show Email Inquiry feature on Product Cards settings from Button Style tab to settings tab.
 * Tweak - Changed Product Cards activation syntax - ON is enables, OFF is disabled.
 * Tweak - Product Page Email & Cart Meta UI design upgrade. New tabs layout - Cart & Price | Email Inquiry | Read More - for ease of navigation.
-* Tweak - Added new main Menu Item – Read More with Tabs – Settings | Button Style (Active for Ultimate Inquiry Ultimate and Quotes & Orders Versions)
+* Tweak - Added new main Menu Item - Read More with Tabs - Settings | Button Style (Active for Ultimate Inquiry Ultimate and Quotes & Orders Versions)
 * Fix - Google fonts preview changes conflict.
 
 = 1.0.9.1 - 2013/11/06 =
@@ -266,6 +271,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.9.3 =
+Update your plugin now for 2 Bug fixes. Hide Grouped products Quantity selectors when hide add to cart rule is ON.
 
 = 1.0.9.2 =
 Upgrade now for 4 admin panel UI tweaks plus Product Page Meta UI redesign.
