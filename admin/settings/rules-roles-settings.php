@@ -535,16 +535,14 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
     	<tr valign="top" class="hide_addtocart_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
             <?php 
 				$hide_addtocart_blue_message = '<div><strong>'.__( 'Note', 'wc_email_inquiry' ).':</strong> '.__( "If you do not apply Rules to your role i.e. 'administrator' you will need to either log out or open the site in another browser where you are not logged in to see the Rule feature is activated.", 'wc_email_inquiry' ).'</div>
                 <div style="clear:both"></div>
                 <a class="hide_addtocart_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="hide_addtocart_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $hide_addtocart_blue_message ); 
+            	echo $this->blue_message_box( $hide_addtocart_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .hide_addtocart_yellow_message_container {
 <?php if ( $customized_settings['hide_addcartbt'] == 'no' && $customized_settings['hide_addcartbt_after_login'] == 'no' ) echo 'display: none;'; ?>
@@ -606,16 +604,14 @@ $(document).ready(function() {
     	<tr valign="top" class="hide_price_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
             <?php 
 				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Note', 'wc_email_inquiry' ).':</strong> '.__( "If you do not apply Rules to your role i.e. 'administrator' you will need to either log out or open the site in another browser where you are not logged in to see the Rule feature is activated.", 'wc_email_inquiry' ).'</div>
                 <div style="clear:both"></div>
                 <a class="hide_price_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="hide_price_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $hide_inquiry_button_blue_message ); 
+            	echo $this->blue_message_box( $hide_inquiry_button_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .hide_price_yellow_message_container {
 <?php if ( $customized_settings['hide_price'] == 'no' && $customized_settings['hide_price_after_login'] == 'no' ) echo 'display: none;'; ?>
@@ -676,16 +672,14 @@ $(document).ready(function() {
     	<tr valign="top" class="manual_quote_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
             <?php 
 				$manual_quote_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( "When you assign the Administrator Role to Manual Quotes and create a test Manual Quote Request you will get 2 Quote Request Received emails - the site admins copy and the customers copy", 'wc_email_inquiry' ).'. <strong>'.__( 'Note', 'wc_email_inquiry' ).':</strong> '.__( "The admin email shows the order sub total amount. This is not a bug. Check the customers copy and you will see it shows no prices for each product and no sub total amount.", 'wc_email_inquiry' ).'</div>
 				<div style="clear:both"></div>
                 <a class="manual_quote_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="manual_quote_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $manual_quote_blue_message ); 
+            	echo $this->blue_message_box( $manual_quote_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .manual_quote_yellow_message_container {
 <?php if ( get_option( 'wc_ei_manual_quote_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
@@ -731,16 +725,14 @@ $(document).ready(function() {
     	<tr valign="top" class="store_rule_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
             <?php 
 				$store_rule_blue_message = '<div><div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong></div><div>'.__( "* Store Rules 'add to' Buttons / function is the WooCommerce 'add to cart' buttons / function.", 'wc_email_inquiry' ).'</div><div>'.__( "* WooCommerce has 2 core Conditionals that remove the 'add to cart' button / function from any product page.", 'wc_email_inquiry' ).'</div><div>'.__( "1. IF a product has no Price entered.", 'wc_email_inquiry' ).'</div><div>'.__( "2. IF 'Inventory Management' is ON and product is 'Out of Stock'.", 'wc_email_inquiry' ).'</div><div><strong>'.__( 'Important!', 'wc_email_inquiry' ).'</strong> '.__( "If either of the above Conditional exists on a product then the Store Rule 'add to' button / function cannot show on that product.", 'wc_email_inquiry' ).'</div></div>
 				<div style="clear:both"></div>
                 <a class="store_rule_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="store_rule_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $store_rule_blue_message ); 
+            	echo $this->blue_message_box( $store_rule_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .store_rule_yellow_message_container {
 <?php if ( get_option( 'wc_ei_store_rule_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>
@@ -802,7 +794,7 @@ $(document).ready(function() {
 .yellow_message_container a {
 	text-decoration:none;	
 }
-.yellow_message_container th, .yellow_message_container td, .hide_addcartbt_after_login_container th, .hide_addcartbt_after_login_container td, .email_inquiry_hide_price_after_login_container th, .email_inquiry_hide_price_after_login_container td, .role_apply_activate_order_logged_in_container th, .role_apply_activate_order_logged_in_container td {
+.yellow_message_container th, .yellow_message_container td, .hide_addcartbt_after_login_container th, .hide_addcartbt_after_login_container td,  .email_inquiry_hide_price_after_login_container th, .email_inquiry_hide_price_after_login_container td, .role_apply_activate_order_logged_in_container th, .role_apply_activate_order_logged_in_container td {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important;
 }

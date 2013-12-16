@@ -237,7 +237,7 @@ class WC_Email_Inquiry_Functions
 	
 	public static function plugin_extension() {
 		$html = '';
-		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><img src="'.WC_EMAIL_INQUIRY_IMAGES_URL.'/a3logo.png" /></a>';
+		$html .= '<a href="http://a3rev.com/shop/" target="_blank" style="float:right;margin-top:5px; margin-left:10px;" ><div class="a3-plugin-ui-icon a3-plugin-ui-a3-rev-logo"></div></a>';
 		$html .= '<h3>'.__('Upgrades available for Extra Functionality', 'wc_email_inquiry').'</h3>';
 		$html .= '<p>'.__("<strong>NOTE:</strong> All the functions inside the Yellow border are extra functionality that is only avaiable by upgrading to one of 3 fully supported Pro Version plugins.", 'wc_email_inquiry').':</p>';
 		$html .= '<h3>* <a href="http://a3rev.com/shop/woocommerce-email-inquiry-and-cart-options/" target="_blank">'.__('WooCommerce Email Inquiry & Cart Options Pro', 'wc_email_inquiry').'</a> '.__('Features', 'wc_email_inquiry').':</h3>';

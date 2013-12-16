@@ -306,16 +306,14 @@ class WC_EI_Read_More_Global_Settings extends WC_Email_Inquiry_Admin_UI
     	<tr valign="top" class="hide_read_more_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px; max-width:100%;">
             <?php 
 				$hide_read_more_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( "The 'Read More' Button / Text Link shows on the Product Cards only.  Can be individually customized for each product from the product edit page > Email & Cart Meta > Read More tab.", 'wc_email_inquiry' ).'</div>
                 <div style="clear:both"></div>
                 <a class="hide_read_more_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="hide_read_more_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $hide_read_more_blue_message ); 
+            	echo $this->blue_message_box( $hide_read_more_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .hide_read_more_yellow_message_container {
 <?php if ( $customized_settings['show_read_more_button_before_login'] == 'no' && $customized_settings['show_read_more_button_after_login'] == 'no' ) echo 'display: none;'; ?>

@@ -329,7 +329,7 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
 				'name' 		=> __( 'Button Border', 'wc_email_inquiry' ),
 				'id' 		=> 'inquiry_button_border',
 				'type' 		=> 'border',
-				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#EE2B2B', 'corner' => 'rounded' , 'rounded_value' => 3 ),
+				'default'	=> array( 'width' => '1px', 'style' => 'solid', 'color' => '#EE2B2B', 'corner' => 'rounded' , 'top_left_corner' => 3, 'top_right_corner' => 3, 'bottom_left_corner' => 3, 'bottom_right_corner' => 3 ),
 			),
 			array(  
 				'name' 		=> __( 'Button Font', 'wc_email_inquiry' ),
@@ -420,16 +420,14 @@ class WC_EI_Button_Style_Settings extends WC_Email_Inquiry_Admin_UI
     	<tr valign="top" class="button_hyperlink_margin_blue_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px;">
             <?php 
 				$button_hyperlink_margin_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( 'If you see margin between the add to cart button and the email button before adding a value here that margin is added by your theme. Increasing the margin here will add to the themes default button margin.', 'wc_email_inquiry' ).'</div>
 				<div style="clear:both"></div>
                 <a class="button_hyperlink_margin_blue_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="button_hyperlink_margin_blue_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $button_hyperlink_margin_blue_message ); 
+            	echo $this->blue_message_box( $button_hyperlink_margin_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .button_hyperlink_margin_blue_message_container {
 <?php if ( get_option( 'wc_ei_button_hyperlink_margin_message_dontshow', 0 ) == 1 ) echo 'display: none !important;'; ?>

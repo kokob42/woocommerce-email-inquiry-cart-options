@@ -65,7 +65,7 @@ class WC_EI_Rules_Roles_Page extends WC_Email_Inquiry_Admin_UI
 				'capability'		=> 'manage_options',
 				'menu_slug'			=> $this->menu_slug,
 				'function'			=> 'wc_ei_rules_roles_page_show',
-				'icon_url'			=> WC_EMAIL_INQUIRY_IMAGES_URL. '/icon-thumb.png',
+				'icon_url'			=> '',
 				'position'			=> '30.2456',
 				'admin_url'			=> 'admin.php',
 				'callback_function' => '',

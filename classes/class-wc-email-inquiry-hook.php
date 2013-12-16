@@ -19,7 +19,7 @@
  * include_customized_style()
  * footer_print_scripts()
  * script_contact_popup()
- * admin_footer_scripts()
+ * admin_sidebar_menu_css()
  * plugin_extra_links()
  */
 class WC_Email_Inquiry_Hook_Filter
@@ -177,7 +177,10 @@ class WC_Email_Inquiry_Hook_Filter
 	public static function shop_add_email_inquiry_button_below() {
 		global $post;
 		global $product;
+		global $wc_email_inquiry_customize_email_button_settings;
 		$product_id = $product->id;
+		
+		if ( $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'] == 'above' ) return;
 			
 		if ( ($post->post_type == 'product' || $post->post_type == 'product_variation') && WC_Email_Inquiry_Functions::check_add_email_inquiry_button_on_shoppage($product_id) ) {
 			echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button($product_id);
@@ -500,6 +503,10 @@ jQuery(document).ready(function() {
     <?php
 	}
 	
+	public static function admin_sidebar_menu_css() {
+		wp_enqueue_style( 'a3rev-wc-ei-admin-sidebar-menu-style', WC_EMAIL_INQUIRY_CSS_URL . '/admin_sidebar_menu.css' );
+	}
+			
 	public static function plugin_extra_links($links, $plugin_name) {
 		if ( $plugin_name != WC_EMAIL_INQUIRY_NAME) {
 			return $links;

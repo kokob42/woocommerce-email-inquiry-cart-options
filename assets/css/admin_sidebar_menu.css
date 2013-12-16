@@ -1,0 +1,36 @@
+/*-------------------------------------------------------------------------------------------*/
+/* WP Admin */
+/*-------------------------------------------------------------------------------------------*/
+@charset "UTF-8";
+
+@font-face {
+  font-family: "a3-sidebar-menu";
+  src:url("../fonts/a3-sidebar-menu.eot");
+  src:url("../fonts/a3-sidebar-menu.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/a3-sidebar-menu.woff") format("woff"),
+    url("../fonts/a3-sidebar-menu.ttf") format("truetype"),
+    url("../fonts/a3-sidebar-menu.svg#a3-sidebar-menu") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+#toplevel_page_email-cart-options .wp-menu-image:before {
+  font-family: "a3-sidebar-menu" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  content: "\a3" !important;
+}
+
+@media screen and ( max-width: 782px ) {
+	.auto-fold #adminmenu #toplevel_page_email-cart-options a.menu-top {
+		height:auto;	
+	}
+}

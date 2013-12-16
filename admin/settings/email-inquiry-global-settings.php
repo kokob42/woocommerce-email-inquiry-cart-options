@@ -389,16 +389,14 @@ class WC_EI_Global_Settings extends WC_Email_Inquiry_Admin_UI
     	<tr valign="top" class="hide_inquiry_button_yellow_message_tr" style=" ">
 			<th scope="row" class="titledesc">&nbsp;</th>
 			<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-            <div style="width:450px; max-width:100%;">
             <?php 
 				$hide_inquiry_button_blue_message = '<div><strong>'.__( 'Tip', 'wc_email_inquiry' ).':</strong> '.__( "If a product does not have a price set (even 0) it is a function of WooCommmerce that the add to cart function is removed from the product. The Email Inquiry button hooks to that function and if it is not present the button cannot show. Also if a bespoke theme has removed the WooCommerce add to cart template and replaced it with a custom template the button cannot show on any products.", 'wc_email_inquiry' ).'</div>
                 <div style="clear:both"></div>
                 <a class="hide_inquiry_button_yellow_message_dontshow" style="float:left;" href="javascript:void(0);">'.__( "Don't show again", 'wc_email_inquiry' ).'</a>
                 <a class="hide_inquiry_button_yellow_message_dismiss" style="float:right;" href="javascript:void(0);">'.__( "Dismiss", 'wc_email_inquiry' ).'</a>
                 <div style="clear:both"></div>';
-            	echo $this->blue_message_box( $hide_inquiry_button_blue_message ); 
+            	echo $this->blue_message_box( $hide_inquiry_button_blue_message, '450px' ); 
 			?>
-            </div>
 <style>
 .a3rev_panel_container .hide_inquiry_button_yellow_message_container {
 <?php if ( $customized_settings['show_button'] == 'no' && $customized_settings['show_button_after_login'] == 'no' ) echo 'display: none;'; ?>

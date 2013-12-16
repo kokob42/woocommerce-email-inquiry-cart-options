@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.5
-Tested up to: 3.7.1
-Stable tag: 1.0.9.3
+Tested up to: 3.8.0
+Stable tag: 1.0.9.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -47,6 +47,13 @@ WooCommerce Email Inquiry & Cart Options uses the WordPress email config and req
 * Set a receiver cc email address 
 * Fully customizable Sent success message shows as a pop-up on screen after inquiry is submitted.
 * Use the WordPress text editor (WYSIWYG and HTML) to style the success message (see image under the Screenshots tab on this page). 
+
+= Mobile Responsive App style admin interface =
+
+* 100% compatible with WordPress v3.8.0 admin interface.
+* Backward compatibility to WordPress v3.5.0
+* App style admin inteface.
+* Admin interface is optimized for mobiles and tablets.
 
 = Lite Version Support =
 
@@ -175,6 +182,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.9.4 - 2013/12/16 =
+* Feature - a3rev Plugin Framework admin interface upgraded to 100% Compatibility with WordPress v3.8.0 with backward compatibility.
+* Feature - a3rev framework 100% mobile and tablet responsive, portrait and landscape viewing.
+* Tweak - Upgraded dashboard switch and slider to Vector based display that shows when WordPress version 3.8.0 is activated.
+* Tweak - Upgraded all plugin .jpg icons and images to Vector based display for full compatibility with new WordPress version.
+* Tweak - Yellow sidebar on Pro Versions Menus dose not show in Mobile screens to optimize screen space.
+* Tweak - Tested 100% compatible with WP 3.8.0
+* Fix - Upgraded array_textareas type for Padding, Margin settings on the a3rev plugin framework
+
 = 1.0.9.3 - 2013/11/20 =
 * Fix - add filter to 'single_add_to_cart_text' for hide Add to Cart button for Child Products in Grouped Product when Hide Add to Cart Rule is ON.
 * Fix - add action to 'woocommerce_before_template_part' and 'woocommerce_after_template_part' for hide Child Products Quantity selector in Grouped Product when Hide Add to Cart is ON.
@@ -251,7 +267,7 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 * Tweak - Updated the plugins support links to the new a3rev support forum.
 
 = 1.0.3 - 2013/05/04 =
-* Tweak - Moved plugin admin panel from a single tab on WooCommerce Settings to its own link ‘Email & Cart Options' on the WooCommerce wp-admin menu.
+* Tweak - Moved plugin admin panel from a single tab on WooCommerce Settings to its own link â€˜Email & Cart Options' on the WooCommerce wp-admin menu.
 * Tweak - Added main tab for Rules & Roles settings.
 * Tweak - Added Email Inquiry main tab with related sub tabs.
 * Tweak - Added when install and activate plugin link redirects to the plugins dashboard instead of the wp-plugins dashboard.
@@ -271,6 +287,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.9.4 =
+Upgrade your plugin now for a3rev Plugin Framework compatibility with the new WordPress version 3.8.0 admin UI upgrade. Admin panel full mobile and tablet responsive display.
 
 = 1.0.9.3 =
 Update your plugin now for 2 Bug fixes. Hide Grouped products Quantity selectors when hide add to cart rule is ON.
