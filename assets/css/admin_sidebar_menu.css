@@ -25,8 +25,19 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  	display:inline-block;
+  	font-size:20px;
+  	font-weight:400;
+  	height: 36px;
+	padding: 8px 0;
+	transition: all 0.1s ease-in-out 0s;
+	width: 20px;
   
   content: "\a3" !important;
+}
+#toplevel_page_email-cart-options .wp-menu-image {
+	text-align:center;
+	background:none;	
 }
 
 @media screen and ( max-width: 782px ) {

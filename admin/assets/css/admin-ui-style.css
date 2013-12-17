@@ -55,6 +55,7 @@
 
 /* Color Control */
 .a3rev_panel_container .wp-picker-holder { position:absolute; z-index: 10000; }
+.a3rev_panel_container input.wp-picker-default { height:24px !important; }
 .a3rev_panel_container .wp-color-result { top:0px; }
 
 /* Text Input Control */
@@ -538,6 +539,9 @@
 }
 
 /* Custom for each element web icons font */
+.a3-plugin-ui-delete-icon:before {
+  vertical-align:top;
+}
 .a3-plugin-ui-icon {
 	color:#46719d;
 	overflow:hidden;
