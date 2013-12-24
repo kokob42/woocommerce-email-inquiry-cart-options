@@ -3,7 +3,7 @@ Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.5
 Tested up to: 3.8.0
-Stable tag: 1.0.9.5
+Stable tag: 1.0.9.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -182,6 +182,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.0.9.6 - 2013/12/24 =
+* Tweak - a3rev Plugin Framework upgrade - all switch text show UPPERCASE
+* Tweak - Updated plugins wp-admin menu item vector image.
+
 = 1.0.9.5 - 2013/12/17 =
 * Fix - Plugins wp-admin menu icon display in all versions prior to WordPress 3.8.0.
 
@@ -290,6 +294,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.0.9.6 =
+Update to latest version of the a3rev plugin Framework. Relatively minor admin panel cosmetic tweaks. Low priority.
 
 = 1.0.9.5 =
 Upgrade now to fix the plugins wp-admin display icon in all WordPress version prior to 3.8.0

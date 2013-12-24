@@ -19,6 +19,7 @@
  * include_customized_style()
  * footer_print_scripts()
  * script_contact_popup()
+ * a3_wp_admin()
  * admin_sidebar_menu_css()
  * plugin_extra_links()
  */
@@ -501,6 +502,10 @@ jQuery(document).ready(function() {
 });	
 </script>
     <?php
+	}
+	
+	public static function a3_wp_admin() {
+		wp_enqueue_style( 'a3rev-wp-admin-style', WC_EMAIL_INQUIRY_CSS_URL . '/a3_wp_admin.css' );
 	}
 	
 	public static function admin_sidebar_menu_css() {

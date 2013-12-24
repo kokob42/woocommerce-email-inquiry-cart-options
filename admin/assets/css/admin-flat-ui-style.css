@@ -5,11 +5,17 @@
 
 .a3rev_panel_container input[type="text"], .a3rev_panel_container input[type="email"] , .a3rev_panel_container input[type="number"], .a3rev_panel_container input[type="password"] { height:auto !important; }
 
+/* Font Control */
+.a3rev_panel_container .a3rev-ui-typography-preview { height:24px; margin-top: 1px; vertical-align: top; }
+
 /* Color Control */
-.a3rev_panel_container .wp-picker-container, .a3rev_panel_container .wp-picker-container:active { vertical-align:top; }
+.a3rev_panel_container .wp-picker-container, .a3rev_panel_container .wp-picker-container:active { vertical-align:bottom; }
 .a3rev_panel_container .wp-color-result { top:1px !important; vertical-align: top !important; }
 .a3rev_panel_container input.a3rev-color-picker { font-family: open sans !important; margin-top: 1px !important;}
-.a3rev_panel_container input.wp-picker-default { margin-top: 1px !important; }
+.a3rev_panel_container input.wp-picker-default { margin-top: 1px !important; vertical-align:top; }
+
+/* Settings Preview */
+.a3rev_panel_container .a3rev-ui-settings-preview { height:24px; margin-top: 1px; vertical-align: top; }
 
 /* Border Rounded Corner Control */
 .a3rev_panel_container .a3rev-ui-border_corner-span { float:left; width:150px; }
@@ -99,7 +105,7 @@
 .a3rev_panel_container .iPhoneCheckContainer label, .a3rev_panel_container .iOSCheckContainer label {
 	white-space: nowrap;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 23px;
     font-weight: bold;
     font-family: inherit !important;
     cursor: pointer;
@@ -186,4 +192,18 @@
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow   : none !important;
 	box-shadow        : none !important;
+}
+
+/* Thickbox of Uploader */
+#media-upload .ui-sortable .media-item {
+	clear:both;	
+}
+
+@media screen and ( max-width: 782px ) {
+	#media-items {
+		width:100%;	
+	}
+	.media-item .describe input[type="text"], .media-item .describe textarea {
+		width:100%;	
+	}
 }

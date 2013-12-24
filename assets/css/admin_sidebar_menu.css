@@ -3,18 +3,6 @@
 /*-------------------------------------------------------------------------------------------*/
 @charset "UTF-8";
 
-@font-face {
-  font-family: "a3-sidebar-menu";
-  src:url("../fonts/a3-sidebar-menu.eot");
-  src:url("../fonts/a3-sidebar-menu.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/a3-sidebar-menu.woff") format("woff"),
-    url("../fonts/a3-sidebar-menu.ttf") format("truetype"),
-    url("../fonts/a3-sidebar-menu.svg#a3-sidebar-menu") format("svg");
-  font-weight: normal;
-  font-style: normal;
-
-}
-
 #toplevel_page_email-cart-options .wp-menu-image:before {
   font-family: "a3-sidebar-menu" !important;
   font-style: normal !important;
@@ -26,7 +14,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   	display:inline-block;
-  	font-size:20px;
+  	font-size:17px !important;
   	font-weight:400;
   	height: 36px;
 	padding: 8px 0;
