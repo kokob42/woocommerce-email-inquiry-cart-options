@@ -1,8 +1,8 @@
 <?php
 function wc_email_inquiry_install(){
-	update_option('a3rev_wc_email_inquiry_version', '1.0.9.6');
-	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.8.5');
-	update_option('a3rev_wc_orders_quotes_version', '1.1.4.5');
+	update_option('a3rev_wc_email_inquiry_version', '1.1.0');
+	update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.9');
+	update_option('a3rev_wc_orders_quotes_version', '1.1.5');
 
 	// Set Settings Default from Admin Init
 	global $wc_ei_admin_init;
@@ -41,6 +41,8 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 	// Need to call Admin Init to show Admin UI
 	global $wc_ei_admin_init;
 	$wc_ei_admin_init->init();
+
+	$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 		
 	// Add upgrade notice to Dashboard pages
 	add_filter( $wc_ei_admin_init->plugin_name . '_plugin_extension', array( 'WC_Email_Inquiry_Functions', 'plugin_extension' ) );
@@ -74,8 +76,8 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 	add_action('wp_ajax_nopriv_wc_email_inquiry_action', array('WC_Email_Inquiry_Hook_Filter', 'wc_email_inquiry_action') );
 	
 	// Hide Add to Cart button on Shop page
-	add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_before_hide_add_to_cart_button'), 100, 3 );
-	add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_after_hide_add_to_cart_button'), 1, 3 );
+	add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_before_hide_add_to_cart_button'), 100, 4 );
+	add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_after_hide_add_to_cart_button'), 1, 4 );
 	
 	// Hide Add to Cart button on Details page
 	add_action('woocommerce_before_add_to_cart_button', array('WC_Email_Inquiry_Hook_Filter', 'details_before_hide_add_to_cart_button'), 100 );
@@ -84,22 +86,23 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 	// Hide Quantity Control and Add to Cart button for Child Product of Grouped Product Type in Details Page
 	add_action('woocommerce_before_add_to_cart_form', array('WC_Email_Inquiry_Hook_Filter', 'grouped_product_hide_add_to_cart_style'), 100 );
 	add_filter('single_add_to_cart_text', array('WC_Email_Inquiry_Hook_Filter', 'grouped_product_hide_add_to_cart'), 100, 2 );
-	add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'before_grouped_product_hide_quatity_control'), 100, 3 );
-	add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'after_grouped_product_hide_quatity_control'), 1, 3 );
+	add_filter('woocommerce_product_single_add_to_cart_text', array('WC_Email_Inquiry_Hook_Filter', 'grouped_product_hide_add_to_cart'), 100, 2 ); // for Woo 2.1
+	add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'before_grouped_product_hide_quatity_control'), 100, 4 );
+	add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'after_grouped_product_hide_quatity_control'), 1, 4 );
 	
 	// Add Email Inquiry Button on Shop page
 	$wc_email_inquiry_customize_email_button_settings = get_option( 'wc_email_inquiry_customize_email_button', array( 'inquiry_button_position' => 'below' ) );
 	$wc_email_inquiry_button_position = $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'];
 	if ($wc_email_inquiry_button_position == 'above' )
-		add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_add_email_inquiry_button_above'), 9, 3);
+		add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'shop_add_email_inquiry_button_above'), 9, 4);
 	else
 		add_action('woocommerce_after_shop_loop_item', array('WC_Email_Inquiry_Hook_Filter', 'shop_add_email_inquiry_button_below'), 12);
 	
 	// Add Email Inquiry Button on Product Details page
 	if ($wc_email_inquiry_button_position == 'above' )
-		add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'details_add_email_inquiry_button_above'), 9, 3 );
+		add_action('woocommerce_before_template_part', array('WC_Email_Inquiry_Hook_Filter', 'details_add_email_inquiry_button_above'), 9, 4 );
 	else
-		add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'details_add_email_inquiry_button_below'), 2, 3);
+		add_action('woocommerce_after_template_part', array('WC_Email_Inquiry_Hook_Filter', 'details_add_email_inquiry_button_below'), 2, 4);
 	
 	
 	// Add meta boxes to product page
@@ -133,9 +136,9 @@ add_filter( 'plugin_row_meta', array('WC_Email_Inquiry_Hook_Filter', 'plugin_ext
 			WC_Email_Inquiry_Functions::upgrade_version_1_0_9_2();
 		}
 	
-		update_option('a3rev_wc_email_inquiry_version', '1.0.9.6');	
-		update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.8.5');
-		update_option('a3rev_wc_orders_quotes_version', '1.1.4.5');
+		update_option('a3rev_wc_email_inquiry_version', '1.1.0');	
+		update_option('a3rev_wc_email_inquiry_ultimate_version', '1.0.9');
+		update_option('a3rev_wc_orders_quotes_version', '1.1.5');
 		
 	}
 

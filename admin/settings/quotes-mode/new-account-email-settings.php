@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Orders Mode Orders Emails Settings
+WC EI Quotes Mode New Account Email Settings
 
 TABLE OF CONTENTS
 
@@ -28,13 +28,13 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
+class WC_EI_Quotes_Mode_New_Account_Email_Settings extends WC_Email_Inquiry_Admin_UI
 {
 	
 	/**
 	 * @var string
 	 */
-	private $parent_tab = 'orders-emails';
+	private $parent_tab = 'quotes-emails';
 	
 	/**
 	 * @var array
@@ -45,13 +45,13 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	 * @var string
 	 * You must change to correct option name that you are working
 	 */
-	public $option_name = 'wc_email_inquiry_order_new_account_email_settings';
+	public $option_name = 'wc_email_inquiry_quote_new_account_email_settings';
 	
 	/**
 	 * @var string
 	 * You must change to correct form key that you are working
 	 */
-	public $form_key = 'wc_email_inquiry_order_new_account_email_settings';
+	public $form_key = 'wc_email_inquiry_quote_new_account_email_settings';
 	
 	/**
 	 * @var string
@@ -69,8 +69,8 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	 */
 	public $form_messages = array();
 	
-	public $template_html = 'emails/order-new-account.php';
-	public $template_plain = 'emails/plain/order-new-account.php';
+	public $template_html = 'emails/quote-new-account.php';
+	public $template_plain = 'emails/plain/quote-new-account.php';
 	
 	/*-----------------------------------------------------------------------------------*/
 	/* __construct() */
@@ -78,12 +78,12 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
 		$this->init_form_fields();
-		//$this->subtab_init();
+		$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'Orders Emails Settings successfully saved.', 'wc_email_inquiry' ),
-				'error_message'		=> __( 'Error: Orders Emails Settings can not save.', 'wc_email_inquiry' ),
-				'reset_message'		=> __( 'Orders Emails Settings successfully reseted.', 'wc_email_inquiry' ),
+				'success_message'	=> __( 'Quotes New Account Email Settings successfully saved.', 'wc_email_inquiry' ),
+				'error_message'		=> __( 'Error: Quotes New Account Email Settings can not save.', 'wc_email_inquiry' ),
+				'reset_message'		=> __( 'Quotes New Account Email Settings successfully reseted.', 'wc_email_inquiry' ),
 			);
 			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
@@ -152,9 +152,9 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	public function subtab_data() {
 		
 		$subtab_data = array( 
-			'name'				=> 'orders-emails',
-			'label'				=> __( 'Orders Emails', 'wc_email_inquiry' ),
-			'callback_function'	=> 'wc_ei_orders_mode_orders_emails_settings_form',
+			'name'				=> 'new-account',
+			'label'				=> __( 'New Account', 'wc_email_inquiry' ),
+			'callback_function'	=> 'wc_ei_quotes_mode_new_account_email_settings_form',
 		);
 		
 		if ( $this->subtab_data ) return $this->subtab_data;
@@ -192,71 +192,43 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Init all fields of this form */
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
-		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
-		
-		global $wp_roles;
-		if ( ! isset( $wp_roles ) ) {
-			$wp_roles = new WP_Roles();
-		}
-		$roles = $wp_roles->get_names();
-		unset( $roles['manual_quote'] );
-		unset( $roles['auto_quote'] );
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
-		
-			array(
-            	'name' 		=> __( "'Pending Order' Email", 'wc_email_inquiry' ),
-				'desc'		=> sprintf( __("When the order is submitted a WooCommerce 'Pending Order' email is auto sent to the customer. Customize that template on <a href='%s'>WooCommerce Emails</a>.", 'wc_email_inquiry'), ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? admin_url( 'admin.php?page=woocommerce_settings&tab=email&section=WC_Email_Inquiry_Customer_Pending_Order', 'relative' ) : admin_url( 'admin.php?page=wc-settings&tab=email&section=wc_email_inquiry_customer_pending_order', 'relative' ) ) ),
-                'type' 		=> 'heading',
-           	),
-			
-			array(
-            	'name' 		=> __( "New Account Role", 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( "Set Role for New Acccount", 'wc_email_inquiry' ),
-				'id' 		=> 'order_new_account_role',
-				'css' 		=> 'min-width:300px;',
-				'type' 		=> 'select',
-				'default'	=> 'customer',
-				'options'	=> $roles,
-			),
 			
 			array(
             	'name' 		=> __( "New User Account Email", 'wc_email_inquiry' ),
-				'desc'		=> __( "A new user account is created (if none exists) when a order request is submitted. Customize the New user account notification email that is auto sent to the user.", 'wc_email_inquiry' ),
-				'id'		=> 'order_new_account_email_table',
+				'desc'		=> __( "A new user account is created (if none exists) when a quote request is submitted. Customize the New user account notification email that is auto sent to the user.", 'wc_email_inquiry' ),
+				'id'		=> 'quote_new_account_email_table',
                 'type' 		=> 'heading',
            	),
 			array(  
 				'name' 		=> __( 'Email Subject', 'wc_email_inquiry' ),
 				'desc' 		=> __( "Defaults to <code>Your account on {blogname}</code>.", 'wc_email_inquiry' ),
-				'id' 		=> 'order_new_account_email_subject',
+				'id' 		=> 'quote_new_account_email_subject',
 				'type' 		=> 'text',
 				'default'	=> __( 'Your account on {blogname}', 'wc_email_inquiry' ),
 			),
 			array(  
 				'name' 		=> __( 'Email Heading', 'wc_email_inquiry' ),
 				'desc' 		=> __( "Defaults to <code>Welcome to {blogname}</code>.", 'wc_email_inquiry' ),
-				'id' 		=> 'order_new_account_email_heading',
+				'id' 		=> 'quote_new_account_email_heading',
 				'type' 		=> 'text',
 				'default'	=> __( 'Welcome to {blogname}', 'wc_email_inquiry' ),
 			),
 			array(  
 				'name' 		=> __( 'Email Content', 'wc_email_inquiry' ),
-				'id' 		=> 'wc_email_inquiry_order_new_account_email_content',
+				'id' 		=> 'wc_email_inquiry_quote_new_account_email_content',
 				'type' 		=> 'wp_editor',
-				'textarea_rows'	=> 4,
+				'textarea_rows'	=> 10,
 				'default'	=> __( '<p>Hello {first_name},</p><p>Your login link and credentials are:</p><p>{account_url}</p><p>Username: {username}<br />Password: {password}</p><p>Please login and change the WordPress generated password to something you can remember.</p>', 'wc_email_inquiry' ),
 				'separate_option'	=> true,
 			),
 			array(  
 				'name' 		=> __( 'Email Type', 'wc_email_inquiry' ),
 				'desc' 		=> __( "Choose which format of email to send", 'wc_email_inquiry' ),
-				'class'		=> 'order_new_account_email_type',
-				'id' 		=> 'order_new_account_email_type',
+				'class'		=> 'quote_new_account_email_type',
+				'id' 		=> 'quote_new_account_email_type',
 				'type' 		=> 'onoff_radio',
 				'default'	=> 'html',
 				'onoff_options' => array(
@@ -375,23 +347,23 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 (function($) {
 $(document).ready(function() {
 	$('.template_plain, .template_html').show();
-	if ( $("input.order_new_account_email_type:checked").val() != 'multipart' && $("input.order_new_account_email_type:checked").val() != 'html' ) {
+	if ( $("input.quote_new_account_email_type:checked").val() != 'multipart' && $("input.quote_new_account_email_type:checked").val() != 'html' ) {
 		$('.template_html').hide();
 	}
 	
-	if ( $("input.order_new_account_email_type:checked").val() != 'multipart' && $("input.order_new_account_email_type:checked").val() != 'plain' ) {
+	if ( $("input.quote_new_account_email_type:checked").val() != 'multipart' && $("input.quote_new_account_email_type:checked").val() != 'plain' ) {
 		$('.template_plain').hide();
 	}
-	$(document).on( "a3rev-ui-onoff_radio-switch", '.order_new_account_email_type', function( event, value, status ) {
+	$(document).on( "a3rev-ui-onoff_radio-switch", '.quote_new_account_email_type', function( event, value, status ) {
 		if ( value == 'multipart' && status == 'true' ) {
-			$('.template_plain, .template_html').show( 'slow' );
+			$('.template_plain, .template_html').slideDown();
 		} else if ( value == 'html' && status == 'true' ) {
-			$('.template_html').show( 'slow' );
-			$('.template_plain').hide( 'slow' );
+			$('.template_html').slideDown();
+			$('.template_plain').slideUp();
 		}
 		else if ( value == 'plain' && status == 'true' ) {
-			$('.template_plain').show( 'slow' );
-			$('.template_html').hide( 'slow' );
+			$('.template_plain').slideDown();
+			$('.template_html').slideUp();
 		}
 	});
 				
@@ -428,16 +400,16 @@ $(document).ready(function() {
 	}
 }
 
-global $wc_ei_orders_mode_orders_emails_settings;
-$wc_ei_orders_mode_orders_emails_settings = new WC_EI_Orders_Mode_Orders_Emails_Settings();
+global $wc_ei_quotes_mode_new_account_email_settings;
+$wc_ei_quotes_mode_new_account_email_settings = new WC_EI_Quotes_Mode_New_Account_Email_Settings();
 
 /** 
- * wc_ei_orders_mode_orders_emails_settings_form()
+ * wc_ei_quotes_mode_new_account_email_settings_form()
  * Define the callback function to show subtab content
  */
-function wc_ei_orders_mode_orders_emails_settings_form() {
-	global $wc_ei_orders_mode_orders_emails_settings;
-	$wc_ei_orders_mode_orders_emails_settings->settings_form();
+function wc_ei_quotes_mode_new_account_email_settings_form() {
+	global $wc_ei_quotes_mode_new_account_email_settings;
+	$wc_ei_quotes_mode_new_account_email_settings->settings_form();
 }
 
 ?>

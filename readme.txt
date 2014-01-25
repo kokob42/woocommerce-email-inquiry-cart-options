@@ -2,8 +2,8 @@
 Contributors: a3rev, A3 Revolution Software Development team
 Tags: WooCommerce, WooCommerce Email Inquiry, WooCommerce Catalog Visibility, WooCommerce add to cart, WooCommerce Brochure Page, WooCommerce product Emails
 Requires at least: 3.5
-Tested up to: 3.8.0
-Stable tag: 1.0.9.6
+Tested up to: 3.8.1
+Stable tag: 1.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -182,6 +182,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
  
 == Changelog ==
 
+= 1.1.0 - 2014/01/25 =
+* Feature - Upgraded for 100% compatibility with WooCommerce Version 2.1 with backward compatibility to Version 2.0
+* Feature - Added all required code so plugin can work with WooCommerce Version 2.1 refactored code.
+* Tweak - Added Custom encode to prevent email clients automatically adding <a> tag to URL's in form message.
+* Tweak - Edited Grid View text on admin panel to Product Card for consistency.
+* Tweak - Added description text to the top of each Pro Version yellow border section
+* Tweak - Tested for compatibility with WordPress version 3.8.1
+* Fix - Email Inquiry sending duplicate emails on themes that have script that duplicate the click event
+
 = 1.0.9.6 - 2013/12/24 =
 * Tweak - a3rev Plugin Framework upgrade - all switch text show UPPERCASE
 * Tweak - Updated plugins wp-admin menu item vector image.
@@ -294,6 +303,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Upgrade now for full compatibility with soon to be released WooCommerce Version 2.1 and just released WordPress version 3.8.1. Includes full backward compatibly with versions 2.0 to 2.0.20 plus 1 bug fix.
 
 = 1.0.9.6 =
 Update to latest version of the a3rev plugin Framework. Relatively minor admin panel cosmetic tweaks. Low priority.

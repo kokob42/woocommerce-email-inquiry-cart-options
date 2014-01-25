@@ -25,8 +25,8 @@
  */
 class WC_Email_Inquiry_Hook_Filter
 {
-	
-	public static function shop_before_hide_add_to_cart_button($template_name, $template_path, $located) {
+		
+	public static function shop_before_hide_add_to_cart_button($template_name, $template_path, $located, $args ) {
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
@@ -37,7 +37,7 @@ class WC_Email_Inquiry_Hook_Filter
 		}
 	}
 	
-	public static function shop_after_hide_add_to_cart_button($template_name, $template_path, $located) {
+	public static function shop_after_hide_add_to_cart_button($template_name, $template_path, $located, $args ) {
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
@@ -96,7 +96,7 @@ class WC_Email_Inquiry_Hook_Filter
 		return $add_to_cart;
 	}
 	
-	public static function before_grouped_product_hide_quatity_control( $template_name, $template_path, $located ) {
+	public static function before_grouped_product_hide_quatity_control( $template_name, $template_path, $located, $args ) {
 		global $product;
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
 			$product_id = $product->id;
@@ -107,7 +107,7 @@ class WC_Email_Inquiry_Hook_Filter
 		}
 	}
 	
-	public static function after_grouped_product_hide_quatity_control( $template_name, $template_path, $located ) {
+	public static function after_grouped_product_hide_quatity_control( $template_name, $template_path, $located, $args ) {
 		global $product;
 		if ( $template_name == 'single-product/add-to-cart/quantity.php' ) {
 			$product_id = $product->id;
@@ -125,7 +125,7 @@ class WC_Email_Inquiry_Hook_Filter
 		
 		$expand_text = '';
 		$inner_form = '';
-		$email_inquiry_button_class = 'wc_email_inquiry_popup_button';
+		$email_inquiry_button_class = 'wc_email_inquiry_popup_button wc_email_inquiry_button_closed';
 				
 		$wc_email_inquiry_button_type = $wc_email_inquiry_customize_email_button['inquiry_button_type'];
 		
@@ -163,7 +163,7 @@ class WC_Email_Inquiry_Hook_Filter
 		return $button_ouput . $inner_form;
 	}
 	
-	public static function shop_add_email_inquiry_button_above($template_name, $template_path, $located) {
+	public static function shop_add_email_inquiry_button_above($template_name, $template_path, $located, $args) {
 		global $post;
 		global $product;
 		if ($template_name == 'loop/add-to-cart.php') {
@@ -182,13 +182,13 @@ class WC_Email_Inquiry_Hook_Filter
 		$product_id = $product->id;
 		
 		if ( $wc_email_inquiry_customize_email_button_settings['inquiry_button_position'] == 'above' ) return;
-			
+		 
 		if ( ($post->post_type == 'product' || $post->post_type == 'product_variation') && WC_Email_Inquiry_Functions::check_add_email_inquiry_button_on_shoppage($product_id) ) {
 			echo WC_Email_Inquiry_Hook_Filter::add_email_inquiry_button($product_id);
 		}
 	}
 	
-	public static function details_add_email_inquiry_button_above($template_name, $template_path, $located) {
+	public static function details_add_email_inquiry_button_above($template_name, $template_path, $located, $args) {
 		global $post;
 		global $product;
 		if (in_array($template_name, array('single-product/add-to-cart/simple.php', 'single-product/add-to-cart/grouped.php', 'single-product/add-to-cart/external.php', 'single-product/add-to-cart/variable.php'))) {
@@ -200,7 +200,7 @@ class WC_Email_Inquiry_Hook_Filter
 		}
 	}
 	
-	public static function details_add_email_inquiry_button_below($template_name, $template_path, $located){
+	public static function details_add_email_inquiry_button_below($template_name, $template_path, $located, $args){
 		global $post;
 		global $product;
 		if (in_array($template_name, array('single-product/add-to-cart/simple.php', 'single-product/add-to-cart/grouped.php', 'single-product/add-to-cart/external.php', 'single-product/add-to-cart/variable.php'))) {
@@ -312,7 +312,7 @@ class WC_Email_Inquiry_Hook_Filter
 		global $wc_email_inquiry_global_settings;
 		global $wc_email_inquiry_customize_email_popup;
 		global $wc_email_inquiry_contact_form_settings;
-		$current_db_version = get_option( 'woocommerce_db_version', null );
+		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		
 		wp_enqueue_script('jquery');
@@ -332,7 +332,7 @@ class WC_Email_Inquiry_Hook_Filter
 		global $wc_email_inquiry_contact_form_settings;
 		
 		
-		$current_db_version = get_option( 'woocommerce_db_version', null );
+		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 		$wc_email_inquiry_popup = wp_create_nonce("wc_email_inquiry_popup");
 		$wc_email_inquiry_action = wp_create_nonce("wc_email_inquiry_action");
 	?>
@@ -398,6 +398,11 @@ class WC_Email_Inquiry_Hook_Filter
 		});
 		
 		$(document).on("click", ".wc_email_inquiry_form_button", function(){
+			if ( $(this).hasClass('wc_email_inquiry_sending') ) {
+				return false;
+			}
+			$(this).addClass('wc_email_inquiry_sending');
+			
 			var product_id = $(this).attr("product_id");
 			var your_name = $("#your_name_"+product_id).val();
 			var your_email = $("#your_email_"+product_id).val();
@@ -422,10 +427,10 @@ class WC_Email_Inquiry_Hook_Filter
 				wc_email_inquiry_have_error = true;
 			}
 			if (wc_email_inquiry_have_error) {
+				$(this).removeClass('wc_email_inquiry_sending');
 				alert(wc_email_inquiry_error);
 				return false;
 			}
-			$(this).attr("disabled", "disabled");
 			$("#wc_email_inquiry_loading_"+product_id).show();
 			
 			var data = {

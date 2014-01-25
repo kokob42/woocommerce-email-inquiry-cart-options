@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Orders Mode Orders Emails Settings
+WC EI Orders Mode New Account Email Settings
 
 TABLE OF CONTENTS
 
@@ -28,7 +28,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
+class WC_EI_Orders_Mode_New_Account_Email_Settings extends WC_Email_Inquiry_Admin_UI
 {
 	
 	/**
@@ -78,16 +78,16 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
 		$this->init_form_fields();
-		//$this->subtab_init();
+		$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'Orders Emails Settings successfully saved.', 'wc_email_inquiry' ),
-				'error_message'		=> __( 'Error: Orders Emails Settings can not save.', 'wc_email_inquiry' ),
-				'reset_message'		=> __( 'Orders Emails Settings successfully reseted.', 'wc_email_inquiry' ),
+				'success_message'	=> __( 'New Account Email Settings successfully saved.', 'wc_email_inquiry' ),
+				'error_message'		=> __( 'Error: New Account Email Settings can not save.', 'wc_email_inquiry' ),
+				'reset_message'		=> __( 'New Account Email Settings successfully reseted.', 'wc_email_inquiry' ),
 			);
 			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
-				
+		
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
 				
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
@@ -127,7 +127,7 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 		
 		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, true, true );
 	}
-		
+	
 	/*-----------------------------------------------------------------------------------*/
 	/* get_settings()
 	/* Get settings with function called from Admin Interface */
@@ -152,9 +152,9 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	public function subtab_data() {
 		
 		$subtab_data = array( 
-			'name'				=> 'orders-emails',
-			'label'				=> __( 'Orders Emails', 'wc_email_inquiry' ),
-			'callback_function'	=> 'wc_ei_orders_mode_orders_emails_settings_form',
+			'name'				=> 'new-account',
+			'label'				=> __( 'New Account', 'wc_email_inquiry' ),
+			'callback_function'	=> 'wc_ei_orders_mode_new_account_email_settings_form',
 		);
 		
 		if ( $this->subtab_data ) return $this->subtab_data;
@@ -192,7 +192,6 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Init all fields of this form */
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
-		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 		
 		global $wp_roles;
 		if ( ! isset( $wp_roles ) ) {
@@ -204,12 +203,6 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
-		
-			array(
-            	'name' 		=> __( "'Pending Order' Email", 'wc_email_inquiry' ),
-				'desc'		=> sprintf( __("When the order is submitted a WooCommerce 'Pending Order' email is auto sent to the customer. Customize that template on <a href='%s'>WooCommerce Emails</a>.", 'wc_email_inquiry'), ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? admin_url( 'admin.php?page=woocommerce_settings&tab=email&section=WC_Email_Inquiry_Customer_Pending_Order', 'relative' ) : admin_url( 'admin.php?page=wc-settings&tab=email&section=wc_email_inquiry_customer_pending_order', 'relative' ) ) ),
-                'type' 		=> 'heading',
-           	),
 			
 			array(
             	'name' 		=> __( "New Account Role", 'wc_email_inquiry' ),
@@ -428,16 +421,16 @@ $(document).ready(function() {
 	}
 }
 
-global $wc_ei_orders_mode_orders_emails_settings;
-$wc_ei_orders_mode_orders_emails_settings = new WC_EI_Orders_Mode_Orders_Emails_Settings();
+global $wc_ei_orders_mode_new_account_email_settings;
+$wc_ei_orders_mode_new_account_email_settings = new WC_EI_Orders_Mode_New_Account_Email_Settings();
 
 /** 
- * wc_ei_orders_mode_orders_emails_settings_form()
+ * wc_ei_orders_mode_new_account_email_settings_form()
  * Define the callback function to show subtab content
  */
-function wc_ei_orders_mode_orders_emails_settings_form() {
-	global $wc_ei_orders_mode_orders_emails_settings;
-	$wc_ei_orders_mode_orders_emails_settings->settings_form();
+function wc_ei_orders_mode_new_account_email_settings_form() {
+	global $wc_ei_orders_mode_new_account_email_settings;
+	$wc_ei_orders_mode_new_account_email_settings->settings_form();
 }
 
 ?>

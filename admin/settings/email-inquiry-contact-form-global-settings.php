@@ -178,10 +178,21 @@ class WC_EI_Contact_Form_Settings extends WC_Email_Inquiry_Admin_UI
 	public function settings_form() {
 		global $wc_ei_admin_interface;
 		
+		add_filter( $this->plugin_name . '_pro_version_name', array( $this, 'get_ultimate_version_name' ) );
+		add_filter( $this->plugin_name . '_pro_plugin_page_url', array( $this, 'get_ultimate_page_url' ) );
+		
 		$output = '';
 		$output .= $wc_ei_admin_interface->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
 		
 		return $output;
+	}
+	
+	public function get_ultimate_version_name( $pro_version_name ) {
+		return __( 'Email & Cart Pro Version', 'wc_email_inquiry' );
+	}
+	
+	public function get_ultimate_page_url( $pro_plugin_page_url ) {
+		return $this->profirst_plugin_page_url;
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -284,7 +295,7 @@ class WC_EI_Contact_Form_Settings extends WC_Email_Inquiry_Admin_UI
 				),			
 			),
 			array(  
-				'name' 		=> __( 'Grid View', 'wc_email_inquiry' ),
+				'name' 		=> __( 'Product Card', 'wc_email_inquiry' ),
 				'id' 		=> 'defaul_category_page_open_form_type',
 				'type' 		=> 'onoff_radio',
 				'default' 	=> 'popup',

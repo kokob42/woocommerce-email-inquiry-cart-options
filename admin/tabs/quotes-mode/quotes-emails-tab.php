@@ -103,7 +103,9 @@ class WC_EI_Quotes_Mode_Quotes_Emails_Tab extends WC_Email_Inquiry_Admin_UI
 	public function settings_include() {
 		
 		// Includes Settings file
-		include_once( $this->admin_plugin_dir() . '/settings/quotes-mode/quotes-emails-settings.php' );
+		include_once( $this->admin_plugin_dir() . '/settings/quotes-mode/new-account-email-settings.php' );
+		include_once( $this->admin_plugin_dir() . '/settings/quotes-mode/processing-quote-email-settings.php' );
+		include_once( $this->admin_plugin_dir() . '/settings/quotes-mode/send-quote-email-settings.php' );
 		
 	}
 	
@@ -111,16 +113,12 @@ class WC_EI_Quotes_Mode_Quotes_Emails_Tab extends WC_Email_Inquiry_Admin_UI
 	/* tab_manager() */
 	/* Call tab layout from Admin Init 
 	/*-----------------------------------------------------------------------------------*/
-	public function tab_manager() {
-		global $wc_ei_quotes_mode_quotes_emails_settings;
+	public function tab_manager() {				
+		global $wc_ei_admin_init;
 		
 		$this->plugin_extension_start();
-		$wc_ei_quotes_mode_quotes_emails_settings->settings_form();
+		$wc_ei_admin_init->admin_settings_tab( $this->parent_page, $this->tab_data() );
 		$this->plugin_extension_end();
-		
-		//global $wc_ei_admin_init;
-		
-		//$wc_ei_admin_init->admin_settings_tab( $this->parent_page, $this->tab_data() );
 		
 	}
 }

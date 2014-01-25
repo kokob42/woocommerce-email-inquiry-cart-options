@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Quotes Mode Global Settings
+WC EI Orders Mode Pending Order Email Settings
 
 TABLE OF CONTENTS
 
@@ -28,13 +28,13 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Quotes_Mode_Global_Settings extends WC_Email_Inquiry_Admin_UI
+class WC_EI_Orders_Mode_Pending_Order_Email_Settings extends WC_Email_Inquiry_Admin_UI
 {
 	
 	/**
 	 * @var string
 	 */
-	private $parent_tab = 'settings';
+	private $parent_tab = 'orders-emails';
 	
 	/**
 	 * @var array
@@ -51,13 +51,13 @@ class WC_EI_Quotes_Mode_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	 * @var string
 	 * You must change to correct form key that you are working
 	 */
-	public $form_key = 'wc_email_inquiry_quotes_mode_global_settings';
+	public $form_key = 'wc_email_inquiry_order_pending_order_email_settings';
 	
 	/**
 	 * @var string
 	 * You can change the order show of this sub tab in list sub tabs
 	 */
-	private $position = 1;
+	private $position = 2;
 	
 	/**
 	 * @var array
@@ -68,29 +68,27 @@ class WC_EI_Quotes_Mode_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	 * @var array
 	 */
 	public $form_messages = array();
-	
+		
 	/*-----------------------------------------------------------------------------------*/
 	/* __construct() */
 	/* Settings Constructor */
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
 		$this->init_form_fields();
-		//$this->subtab_init();
+		$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'Quotes Mode Settings successfully saved.', 'wc_email_inquiry' ),
-				'error_message'		=> __( 'Error: Quotes Mode Settings can not save.', 'wc_email_inquiry' ),
-				'reset_message'		=> __( 'Quotes Mode Settings successfully reseted.', 'wc_email_inquiry' ),
+				'success_message'	=> __( 'Pending Order Email Settings successfully saved.', 'wc_email_inquiry' ),
+				'error_message'		=> __( 'Error: Pending Order Email Settings can not save.', 'wc_email_inquiry' ),
+				'reset_message'		=> __( 'Pending Order Email Settings successfully reseted.', 'wc_email_inquiry' ),
 			);
 			
-		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
-				
-		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
+		//add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 				
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
-		
 		add_action( $this->plugin_name . '-'. $this->form_key.'_settings_start', array( $this, 'pro_fields_before' ) );
-		add_action( $this->plugin_name . '-'. $this->form_key.'_settings_end', array( $this, 'pro_fields_after' ) );
+		add_action( $this->plugin_name . '-'. $this->form_key.'_settings_end', array( $this, 'pro_fields_after' ), 11 );
+		
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -111,16 +109,6 @@ class WC_EI_Quotes_Mode_Global_Settings extends WC_Email_Inquiry_Admin_UI
 		global $wc_ei_admin_interface;
 		
 		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
-	}
-	
-	/*-----------------------------------------------------------------------------------*/
-	/* reset_default_settings()
-	/* Reset default settings with function called from Admin Interface */
-	/*-----------------------------------------------------------------------------------*/
-	public function reset_default_settings() {
-		global $wc_ei_admin_interface;
-		
-		$wc_ei_admin_interface->reset_settings( $this->form_fields, $this->option_name, true, true );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -147,9 +135,9 @@ class WC_EI_Quotes_Mode_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	public function subtab_data() {
 		
 		$subtab_data = array( 
-			'name'				=> 'global-settings',
-			'label'				=> __( 'Settings', 'wc_email_inquiry' ),
-			'callback_function'	=> 'wc_ei_quotes_mode_global_settings_form',
+			'name'				=> 'pending-order',
+			'label'				=> __( 'Pending Order', 'wc_email_inquiry' ),
+			'callback_function'	=> 'wc_ei_orders_mode_pending_order_email_settings_form',
 		);
 		
 		if ( $this->subtab_data ) return $this->subtab_data;
@@ -188,36 +176,31 @@ class WC_EI_Quotes_Mode_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
 		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
-		
+	
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 		
 			array(
-            	'name' 		=> __( 'Quote Mode Payment Gateway', 'wc_email_inquiry' ),
-				'desc'		=> ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? sprintf( __('Quotes Mode payment gateway is automatically activated when the feature is activated. Go to <a href="%s">WooCommerce Payment Gateways</a> to customize.', 'wc_email_inquiry'), admin_url( 'admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Email_Inquiry_Gateway_Quotes', 'relative' ) ) : sprintf( __('Quotes Mode payment gateway is automatically activated when the feature is activated. Go to <a href="%s">WooCommerce Checkout</a> to customize.', 'wc_email_inquiry'), admin_url( 'admin.php?page=wc-settings&tab=checkout&section=wc_email_inquiry_gateway_quotes', 'relative' ) ) ),
-                'type' 		=> 'heading',
-           	),
-			
-			array(
-            	'name' 		=> __( 'Shipping', 'wc_email_inquiry' ),
-				'desc'		=> sprintf( __( 'The Shipping Options set in <a href="%s">WooCommerce Shipping</a> apply to all Quotes Mode templates.', 'wc_email_inquiry'), ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? admin_url( 'admin.php?page=woocommerce_settings&tab=shipping', 'relative' ) : admin_url( 'admin.php?page=wc-settings&tab=shipping', 'relative' ) ) ),
+            	'name' 		=> __( "'Pending Order' Email", 'wc_email_inquiry' ),
+				'desc'		=> sprintf( __("When the order is submitted a WooCommerce 'Pending Order' email is auto sent to the customer. Customize that template on <a href='%s'>WooCommerce Emails</a>.", 'wc_email_inquiry'), ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? admin_url( 'admin.php?page=woocommerce_settings&tab=email&section=WC_Email_Inquiry_Customer_Pending_Order', 'relative' ) : admin_url( 'admin.php?page=wc-settings&tab=email&section=wc_email_inquiry_customer_pending_order', 'relative' ) ) ),
                 'type' 		=> 'heading',
            	),
 			
         ));
 	}
+	
 }
 
-global $wc_ei_quotes_mode_global_settings;
-$wc_ei_quotes_mode_global_settings = new WC_EI_Quotes_Mode_Global_Settings();
+global $wc_ei_orders_mode_pending_order_email_settings;
+$wc_ei_orders_mode_pending_order_email_settings = new WC_EI_Orders_Mode_Pending_Order_Email_Settings();
 
 /** 
- * wc_ei_quotes_mode_global_settings_form()
+ * wc_ei_orders_mode_pending_order_email_settings_form()
  * Define the callback function to show subtab content
  */
-function wc_ei_quotes_mode_global_settings_form() {
-	global $wc_ei_quotes_mode_global_settings;
-	$wc_ei_quotes_mode_global_settings->settings_form();
+function wc_ei_orders_mode_pending_order_email_settings_form() {
+	global $wc_ei_orders_mode_pending_order_email_settings;
+	$wc_ei_orders_mode_pending_order_email_settings->settings_form();
 }
 
 ?>

@@ -187,13 +187,14 @@ class WC_EI_Orders_Mode_Global_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Init all fields of this form */
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
+		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 		
 			array(
             	'name' 		=> __( 'Order Mode Payment Gateway', 'wc_email_inquiry' ),
-				'desc'		=> sprintf( __('Orders Mode payment gateway is automatically activated when the feature is activated. Go to <a href="%s">WooCommerce Payment Gateways</a> to customize.', 'wc_email_inquiry'), admin_url( 'admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Email_Inquiry_Gateway_Orders', 'relative' ) ),
+				'desc'		=> ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? sprintf( __('Orders Mode payment gateway is automatically activated when the feature is activated. Go to <a href="%s">WooCommerce Payment Gateways</a> to customize.', 'wc_email_inquiry'), admin_url( 'admin.php?page=woocommerce_settings&tab=payment_gateways&section=WC_Email_Inquiry_Gateway_Orders', 'relative' ) ) : sprintf( __('Orders Mode payment gateway is automatically activated when the feature is activated. Go to <a href="%s">WooCommerce Checkout</a> to customize.', 'wc_email_inquiry'), admin_url( 'admin.php?page=wc-settings&tab=checkout&section=wc_email_inquiry_gateway_orders', 'relative' ) ) ),
                 'type' 		=> 'heading',
            	),
 			

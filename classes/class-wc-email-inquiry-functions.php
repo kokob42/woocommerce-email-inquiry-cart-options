@@ -188,7 +188,13 @@ class WC_Email_Inquiry_Functions
 			$content = str_replace('[your_phone]', $your_phone, $content);
 			$content = str_replace('[product_name]', $product_name, $content);
 			$content = str_replace('[product_url]', $product_url, $content);
-			$content = str_replace('[your_message]', wpautop($your_message), $content);
+			$your_message = str_replace( '://', ':&#173;­//', $your_message );
+			$your_message = str_replace( '.com', '&#173;.com', $your_message );
+			$your_message = str_replace( '.net', '&#173;.net', $your_message );
+			$your_message = str_replace( '.info', '&#173;.info', $your_message );
+			$your_message = str_replace( '.org', '&#173;.org', $your_message );
+			$your_message = str_replace( '.au', '&#173;.au', $your_message );
+			$content = str_replace('[your_message]', wpautop( $your_message ), $content);
 			
 			$content = apply_filters('wc_email_inquiry_inquiry_content', $content);
 			

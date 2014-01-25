@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
 <?php
 /*-----------------------------------------------------------------------------------
-WC EI Orders Mode Orders Emails Settings
+WC EI Quotes Mode Send Quote Email Settings
 
 TABLE OF CONTENTS
 
@@ -28,13 +28,13 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
+class WC_EI_Quotes_Mode_Send_Quote_Email_Settings extends WC_Email_Inquiry_Admin_UI
 {
 	
 	/**
 	 * @var string
 	 */
-	private $parent_tab = 'orders-emails';
+	private $parent_tab = 'quotes-emails';
 	
 	/**
 	 * @var array
@@ -45,19 +45,19 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	 * @var string
 	 * You must change to correct option name that you are working
 	 */
-	public $option_name = 'wc_email_inquiry_order_new_account_email_settings';
+	public $option_name = 'wc_email_inquiry_quote_send_quote_email_settings';
 	
 	/**
 	 * @var string
 	 * You must change to correct form key that you are working
 	 */
-	public $form_key = 'wc_email_inquiry_order_new_account_email_settings';
+	public $form_key = 'wc_email_inquiry_quote_send_quote_email_settings';
 	
 	/**
 	 * @var string
 	 * You can change the order show of this sub tab in list sub tabs
 	 */
-	private $position = 1;
+	private $position = 3;
 	
 	/**
 	 * @var array
@@ -69,8 +69,8 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	 */
 	public $form_messages = array();
 	
-	public $template_html = 'emails/order-new-account.php';
-	public $template_plain = 'emails/plain/order-new-account.php';
+	public $template_html = 'emails/send-quote.php';
+	public $template_plain = 'emails/plain/send-quote.php';
 	
 	/*-----------------------------------------------------------------------------------*/
 	/* __construct() */
@@ -78,16 +78,16 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
 		$this->init_form_fields();
-		//$this->subtab_init();
+		$this->subtab_init();
 		
 		$this->form_messages = array(
-				'success_message'	=> __( 'Orders Emails Settings successfully saved.', 'wc_email_inquiry' ),
-				'error_message'		=> __( 'Error: Orders Emails Settings can not save.', 'wc_email_inquiry' ),
-				'reset_message'		=> __( 'Orders Emails Settings successfully reseted.', 'wc_email_inquiry' ),
+				'success_message'	=> __( 'Send Quote Email Settings successfully saved.', 'wc_email_inquiry' ),
+				'error_message'		=> __( 'Error: Send Quote Email Settings can not save.', 'wc_email_inquiry' ),
+				'reset_message'		=> __( 'Send Quote Email Settings successfully reseted.', 'wc_email_inquiry' ),
 			);
 			
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
-				
+		
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'reset_default_settings' ) );
 				
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
@@ -137,7 +137,7 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 		
 		$wc_ei_admin_interface->get_settings( $this->form_fields, $this->option_name );
 	}
-		
+	
 	/**
 	 * subtab_data()
 	 * Get SubTab Data
@@ -152,9 +152,9 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	public function subtab_data() {
 		
 		$subtab_data = array( 
-			'name'				=> 'orders-emails',
-			'label'				=> __( 'Orders Emails', 'wc_email_inquiry' ),
-			'callback_function'	=> 'wc_ei_orders_mode_orders_emails_settings_form',
+			'name'				=> 'send-quote',
+			'label'				=> __( 'Send Quote', 'wc_email_inquiry' ),
+			'callback_function'	=> 'wc_ei_quotes_mode_send_quote_email_settings_form',
 		);
 		
 		if ( $this->subtab_data ) return $this->subtab_data;
@@ -192,71 +192,44 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 	/* Init all fields of this form */
 	/*-----------------------------------------------------------------------------------*/
 	public function init_form_fields() {
-		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
-		
-		global $wp_roles;
-		if ( ! isset( $wp_roles ) ) {
-			$wp_roles = new WP_Roles();
-		}
-		$roles = $wp_roles->get_names();
-		unset( $roles['manual_quote'] );
-		unset( $roles['auto_quote'] );
 		
   		// Define settings			
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
-		
-			array(
-            	'name' 		=> __( "'Pending Order' Email", 'wc_email_inquiry' ),
-				'desc'		=> sprintf( __("When the order is submitted a WooCommerce 'Pending Order' email is auto sent to the customer. Customize that template on <a href='%s'>WooCommerce Emails</a>.", 'wc_email_inquiry'), ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? admin_url( 'admin.php?page=woocommerce_settings&tab=email&section=WC_Email_Inquiry_Customer_Pending_Order', 'relative' ) : admin_url( 'admin.php?page=wc-settings&tab=email&section=wc_email_inquiry_customer_pending_order', 'relative' ) ) ),
-                'type' 		=> 'heading',
-           	),
 			
 			array(
-            	'name' 		=> __( "New Account Role", 'wc_email_inquiry' ),
-                'type' 		=> 'heading',
-           	),
-			array(  
-				'name' 		=> __( "Set Role for New Acccount", 'wc_email_inquiry' ),
-				'id' 		=> 'order_new_account_role',
-				'css' 		=> 'min-width:300px;',
-				'type' 		=> 'select',
-				'default'	=> 'customer',
-				'options'	=> $roles,
-			),
-			
-			array(
-            	'name' 		=> __( "New User Account Email", 'wc_email_inquiry' ),
-				'desc'		=> __( "A new user account is created (if none exists) when a order request is submitted. Customize the New user account notification email that is auto sent to the user.", 'wc_email_inquiry' ),
-				'id'		=> 'order_new_account_email_table',
+            	'name' 		=> __( "Send Quote Email", 'wc_email_inquiry' ),
+				'desc'		=> sprintf( __( "Manual Quote Rule auto creates the Quote Request as 'quote' order status. <a href='%s'>On any Order</a> with 'quote' status you can edit prices, shipping, tax, add a personalized customer note and email the completed quote to the customer. The email uses this template.", 'wc_email_inquiry' ), admin_url( 'edit.php?post_type=shop_order', 'relative' ) ),
+				'id'		=> 'quote_send_quote_email_table',
                 'type' 		=> 'heading',
            	),
 			array(  
 				'name' 		=> __( 'Email Subject', 'wc_email_inquiry' ),
-				'desc' 		=> __( "Defaults to <code>Your account on {blogname}</code>.", 'wc_email_inquiry' ),
-				'id' 		=> 'order_new_account_email_subject',
+				'desc' 		=> __( "Defaults to <code>[default_value]</code>.", 'wc_email_inquiry' ),
+				'id' 		=> 'email_subject',
 				'type' 		=> 'text',
-				'default'	=> __( 'Your account on {blogname}', 'wc_email_inquiry' ),
+				'default'	=> __( 'Quote Request - Pricing', 'wc_email_inquiry' ),
 			),
 			array(  
 				'name' 		=> __( 'Email Heading', 'wc_email_inquiry' ),
-				'desc' 		=> __( "Defaults to <code>Welcome to {blogname}</code>.", 'wc_email_inquiry' ),
-				'id' 		=> 'order_new_account_email_heading',
+				'desc' 		=> __( "Defaults to <code>[default_value]</code>.", 'wc_email_inquiry' ),
+				'id' 		=> 'email_heading',
 				'type' 		=> 'text',
-				'default'	=> __( 'Welcome to {blogname}', 'wc_email_inquiry' ),
+				'default'	=> __( 'Quote Request - Pricing', 'wc_email_inquiry' ),
 			),
 			array(  
-				'name' 		=> __( 'Email Content', 'wc_email_inquiry' ),
-				'id' 		=> 'wc_email_inquiry_order_new_account_email_content',
+				'name' 		=> __( 'Message Content', 'wc_email_inquiry' ),
+				'id' 		=> 'quote_send_quote_email_description',
 				'type' 		=> 'wp_editor',
-				'textarea_rows'	=> 4,
-				'default'	=> __( '<p>Hello {first_name},</p><p>Your login link and credentials are:</p><p>{account_url}</p><p>Username: {username}<br />Password: {password}</p><p>Please login and change the WordPress generated password to something you can remember.</p>', 'wc_email_inquiry' ),
+				'desc_tip'	=> __( 'The message you create here is hard coded into the top of all Submit Quote Emails. It is your Quote introduction, explanation. Add a personalized order / customer note on the Send Quote function and it will show under this message and above the quote.', 'wc_email_inquiry' ),
+				'textarea_rows'	=> 10,
+				'default'	=> '',
 				'separate_option'	=> true,
 			),
 			array(  
 				'name' 		=> __( 'Email Type', 'wc_email_inquiry' ),
 				'desc' 		=> __( "Choose which format of email to send", 'wc_email_inquiry' ),
-				'class'		=> 'order_new_account_email_type',
-				'id' 		=> 'order_new_account_email_type',
+				'class'		=> 'send_quote_email_type',
+				'id' 		=> 'email_type',
 				'type' 		=> 'onoff_radio',
 				'default'	=> 'html',
 				'onoff_options' => array(
@@ -320,17 +293,17 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 					$local_file = get_stylesheet_directory() . '/woocommerce/' . $this->$template;
 					$core_file 	= WC_EMAIL_INQUIRY_TEMPLATE_PATH . '/' . $this->$template;
 					?>
-					<div class="template <?php echo $template; ?>">
+					<div class="template send_quote_<?php echo $template; ?>">
 
 						<h4><?php echo wp_kses_post( $title ); ?></h4>
 
 						<?php if ( file_exists( $local_file ) ) : ?>
 
 							<p>
-								<a href="#" class="button toggle_editor"></a>
+								<a href="#" class="button send_quote_toggle_editor"></a>
 
 								<?php if ( is_writable( $local_file ) ) : ?>
-									<a href="<?php echo remove_query_arg( array( 'move_template', 'saved' ), add_query_arg( 'delete_template', $template ) ); ?>" class="delete_template button"><?php _e( 'Delete template file', 'woocommerce' ); ?></a>
+									<a href="<?php echo remove_query_arg( array( 'send_quote_move_template', 'saved' ), add_query_arg( 'send_quote_delete_template', $template ) ); ?>" class="send_quote_delete_template button"><?php _e( 'Delete template file', 'woocommerce' ); ?></a>
 								<?php endif; ?>
 
 								<?php printf( __( 'This template has been overridden by your theme and can be found in: <code>%s</code>.', 'woocommerce' ), 'yourtheme/woocommerce/' . $this->$template ); ?>
@@ -345,10 +318,10 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 						<?php elseif ( file_exists( $core_file ) ) : ?>
 
 							<p>
-								<a href="#" class="button toggle_editor"></a>
+								<a href="#" class="button send_quote_toggle_editor"></a>
 
 								<?php if ( ( is_dir( get_stylesheet_directory() . '/woocommerce/emails/' ) && is_writable( get_stylesheet_directory() . '/woocommerce/emails/' ) ) || is_writable( get_stylesheet_directory() ) ) : ?>
-									<a href="<?php echo remove_query_arg( array( 'delete_template', 'saved' ), add_query_arg( 'move_template', $template ) ); ?>" class="button"><?php _e( 'Copy file to theme', 'woocommerce' ); ?></a>
+									<a href="<?php echo remove_query_arg( array( 'send_quote_delete_template', 'saved' ), add_query_arg( 'send_quote_move_template', $template ) ); ?>" class="button"><?php _e( 'Copy file to theme', 'woocommerce' ); ?></a>
 								<?php endif; ?>
 
 								<?php printf( __( 'To override and edit this email template copy <code>%s</code> to your theme folder: <code>%s</code>.', 'woocommerce' ), plugin_basename( $core_file ) , 'yourtheme/woocommerce/' . $this->$template ); ?>
@@ -374,31 +347,31 @@ class WC_EI_Orders_Mode_Orders_Emails_Settings extends WC_Email_Inquiry_Admin_UI
 <script>
 (function($) {
 $(document).ready(function() {
-	$('.template_plain, .template_html').show();
-	if ( $("input.order_new_account_email_type:checked").val() != 'multipart' && $("input.order_new_account_email_type:checked").val() != 'html' ) {
-		$('.template_html').hide();
+	$('.send_quote_template_plain, .send_quote_template_html').show();
+	if ( $("input.send_quote_email_type:checked").val() != 'multipart' && $("input.send_quote_email_type:checked").val() != 'html' ) {
+		$('.send_quote_template_html').hide();
 	}
 	
-	if ( $("input.order_new_account_email_type:checked").val() != 'multipart' && $("input.order_new_account_email_type:checked").val() != 'plain' ) {
-		$('.template_plain').hide();
+	if ( $("input.send_quote_email_type:checked").val() != 'multipart' && $("input.send_quote_email_type:checked").val() != 'plain' ) {
+		$('.send_quote_template_plain').hide();
 	}
-	$(document).on( "a3rev-ui-onoff_radio-switch", '.order_new_account_email_type', function( event, value, status ) {
+	$(document).on( "a3rev-ui-onoff_radio-switch", '.send_quote_email_type', function( event, value, status ) {
 		if ( value == 'multipart' && status == 'true' ) {
-			$('.template_plain, .template_html').show( 'slow' );
+			$('.send_quote_template_plain, .send_quote_template_html').slideDown();
 		} else if ( value == 'html' && status == 'true' ) {
-			$('.template_html').show( 'slow' );
-			$('.template_plain').hide( 'slow' );
+			$('.send_quote_template_html').slideDown();
+			$('.send_quote_template_plain').slideUp();
 		}
 		else if ( value == 'plain' && status == 'true' ) {
-			$('.template_plain').show( 'slow' );
-			$('.template_html').hide( 'slow' );
+			$('.send_quote_template_plain').slideDown();
+			$('.send_quote_template_html').slideUp();
 		}
 	});
 				
 				var view = '<?php echo esc_js( __( 'View template', 'woocommerce' ) ) ?>';
 				var hide = '<?php echo esc_js( __( 'Hide template', 'woocommerce' ) ) ?>';
 
-				$('a.toggle_editor').text( view ).toggle( function() {
+				$('a.send_quote_toggle_editor').text( view ).toggle( function() {
 					$( this ).text( hide ).closest('.template').find('.editor').slideToggle();
 					return false;
 				}, function() {
@@ -406,7 +379,7 @@ $(document).ready(function() {
 					return false;
 				} );
 
-				$('a.delete_template').click(function(){
+				$('a.send_quote_delete_template').click(function(){
 					var answer = confirm('<?php echo esc_js( __( 'Are you sure you want to delete this template file?', 'woocommerce' ) ) ?>');
 
 					if (answer)
@@ -428,16 +401,16 @@ $(document).ready(function() {
 	}
 }
 
-global $wc_ei_orders_mode_orders_emails_settings;
-$wc_ei_orders_mode_orders_emails_settings = new WC_EI_Orders_Mode_Orders_Emails_Settings();
+global $wc_ei_quotes_mode_send_quote_email_settings;
+$wc_ei_quotes_mode_send_quote_email_settings = new WC_EI_Quotes_Mode_Send_Quote_Email_Settings();
 
 /** 
- * wc_ei_orders_mode_orders_emails_settings_form()
+ * wc_ei_quotes_mode_send_quote_email_settings_form()
  * Define the callback function to show subtab content
  */
-function wc_ei_orders_mode_orders_emails_settings_form() {
-	global $wc_ei_orders_mode_orders_emails_settings;
-	$wc_ei_orders_mode_orders_emails_settings->settings_form();
+function wc_ei_quotes_mode_send_quote_email_settings_form() {
+	global $wc_ei_quotes_mode_send_quote_email_settings;
+	$wc_ei_quotes_mode_send_quote_email_settings->settings_form();
 }
 
 ?>

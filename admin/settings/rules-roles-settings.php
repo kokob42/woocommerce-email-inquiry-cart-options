@@ -106,8 +106,24 @@ class WC_EI_Rules_Roles_Settings extends WC_Email_Inquiry_Admin_UI
 		add_action( $this->plugin_name . '-' . trim( $this->form_key ) . '_before_settings_save', array( $this, 'before_settings_save' ) );
 		
 		// Add yellow border for pro fields
-		add_action( $this->plugin_name . '_settings_pro_hide_price_before', array( $this, 'pro_fields_before' ) );
+		add_action( $this->plugin_name . '_settings_pro_hide_price_before', array( $this, 'show_pro_fields' ) );
+		add_action( $this->plugin_name . '_settings_pro_global_reset_after', array( $this, 'pro_fields_after' ) );
+		add_action( $this->plugin_name . '_settings_pro_store_rules_before', array( $this, 'pro_fields_before' ) );
 		add_action( $this->plugin_name . '_settings_pro_add_to_order_after', array( $this, 'pro_fields_after' ) );
+	}
+	
+	public function show_pro_fields() {
+		$upgrade_top_message = sprintf( '<div class="pro_feature_top_message">' 
+			. __( 'Settings inside this yellow border are %s Features.', 'wc_email_inquiry' ) 
+			. '<br />' 
+			. __( 'Upgrade to the <a href="%s" target="_blank">%s</a> to activate these settings.', 'wc_email_inquiry' ) 
+			. '</div>'
+			, __( 'Email & Cart Pro Version', 'wc_email_inquiry' ) 
+			,  $this->profirst_plugin_page_url
+			, __( 'Email & Cart Pro Version', 'wc_email_inquiry' ) 
+		);
+		
+		echo apply_filters( $this->plugin_name . '_pro_fields_before', '<div class="pro_feature_fields" style="margin-bottom:10px">'. $upgrade_top_message );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/

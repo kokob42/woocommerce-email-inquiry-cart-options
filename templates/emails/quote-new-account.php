@@ -2,8 +2,8 @@
 /**
  * Customer new account email
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates/Emails
+ * @author 		A3rev
+ * @package 	woocommerce-email-inquiry-ultimate/templates/emails
  * @version     1.6.4
  */
 

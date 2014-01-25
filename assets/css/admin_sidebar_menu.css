@@ -28,8 +28,15 @@
 	background:none;	
 }
 
+.wc_ei_tab_bar .chosen-container {
+	width:300px !important;	
+}
+
 @media screen and ( max-width: 782px ) {
 	.auto-fold #adminmenu #toplevel_page_email-cart-options a.menu-top {
 		height:auto;	
+	}
+	.wc_ei_tab_bar .chosen-container {
+		width:100% !important;	
 	}
 }
